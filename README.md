@@ -46,3 +46,6 @@ After the merge the feature branch can be deleted from Bitbucket in the web GUI.
 - https://pre-commit.com/
 - https://black.readthedocs.io/
 
+### Documentation ###
+- http://www.sphinx-doc.org/en/stable/usage/quickstart.html
+- http://www.sphinx-doc.org/en/1.6/tutorial.html
