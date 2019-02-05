@@ -14,7 +14,7 @@ We will use a git branching model called gitflow.
 If you are lazy there is a git extension that enable commands that does every part of the workflow with just one command.
 
 #### Guide ####
-A guide to
+A short guide to gitflow. See links for more info.
 
 ##### 1. Create feature branch #####
 ```
