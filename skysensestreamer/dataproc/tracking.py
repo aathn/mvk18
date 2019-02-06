@@ -34,5 +34,5 @@ def extrapolate (positions, times):
         raise ValueError("Position array must be n x 3!")
 
     direction, intercept = la.lstsq(
-        np.hstack([times, ones(len(times))]), positions, rcond = None)[0]
+        np.hstack([times, np.ones(len(times))]), positions, rcond = None)[0]
     return lambda t: intercept + t*direction
