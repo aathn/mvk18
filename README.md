@@ -42,6 +42,9 @@ After the merge the feature branch can be deleted from Bitbucket in the web GUI.
 - https://www.atlassian.com/git/tutorials/making-a-pull-request
 - https://www.atlassian.com/git/tutorials/comparing-workflows
 
+### Project Folder Layout ###
+- https://docs.python-guide.org/writing/structure/
+
 ### Code Formatting ###
 - https://pre-commit.com/
 - https://black.readthedocs.io/
