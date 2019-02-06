@@ -11,10 +11,11 @@ import numpy as np
 import numpy.linalg as la
 
 
-def to_polar(position):
+def to_polar(camera, position):
     """
-    to_polar(position)
+    to_polar(camera, position)
 
+    camera: object recording the location of the camera (tentative)
     position: 3 x 1 numpy array or list [latitude, longitude, altitude]
 
     Computes the angles that the camera should face in order to capture an
@@ -25,12 +26,15 @@ def to_polar(position):
     """
 
     if not isinstance(np.ndarray, position):
-        raise TypeError("Expected position as np array [lat, long, alt]!")
+        try:
+            position = np.array(position)
+        except:
+            raise TypeError("Input must be in np array compatible format!")
     if not position.shape[0] == 3:
-        raise ValueError("Expected position as np array [lat, long, alt]!")
+        raise ValueError("Expected position as [lat, long, alt]!")
 
     delta = position - camera.position  # delta = [dx, dy, dz]
-    flat_distance = la.norm(delta[0:2])
+    flat_distance = la.norm(delta[:-1])
 
     hrs_angle = np.pi / 2
     if delta[0] != 0:
