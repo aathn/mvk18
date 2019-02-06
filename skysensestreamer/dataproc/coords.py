@@ -1,35 +1,27 @@
 """ coords.py
 
-Denna fil är del av projektet fr24/mvk18.
-Skapad 2019-02-06 av Anders Ågren Thuné.
-Uppdaterad 2019-02-06 av Anders Ågren Thuné.
+This file is part of the project fr24/mvk18.
+Created 2019-02-06 by Anders Ågren Thuné.
+Last updated 2019-02-06 by Anders Ågren Thuné.
 
-Den här filen innehåller funktioner för bearbetning av koordinatdata.
+This file contains functions for processing of coordinate data.
 """
 
 import numpy as np
 import numpy.linalg as la
 
-def to_polar (position):
+
+def to_polar(position):
     """
-    En funktion för att omvandla ett flygplans position till den vinkel som kameran
-    ska riktas åt för att filma planet.
+    to_polar(position)
 
-    Positioner ges av tredimensionella vektorer: (latitud, longitud, altitud).
-    Om vi har positionen för skysense/kameran och ett flygplan, kan vi beräkna
-    den horisontella och vertikala vinkeln kameran behöver vrida sig (polära
-    koordinater). En naiv men förhoppningsvis fungerande lösning är att först
-    räkna ut en cartesian vektor som pekar från kamera till flygplanet, genom
-    att subtrahera kamerans positionsvektor från flyplanets.
+    position: 3 x 1 numpy array or list [latitude, longitude, altitude]
 
-    Med våra nya polära koordinater relativa till kameran, bör det vara enkelt att
-    flytta servon i rätt riktning. Förutsatt att servon står plant och inte lutar,
-    krävs det bara att översätta horisontella vinkeln relativt servons
-    utgångsvinkel, vilket görs genom att subtrahera utgångsvinkeln till resultatet.
+    Computes the angles that the camera should face in order to capture an
+    airplane at the given position.
 
-    Kod skriven av Anders Ågren Thuné baserad på utkast av
-    Theo Puranen Åhfeldt.
-
+    Code written by Anders Ågren Thuné based on a draft by Theo Puranen Åhfeldt.
+    (https://docs.google.com/document/d/1MtJNY73QoCYKpOv9H7nnySst_zIJB9eUzAs19oHi3uQ)
     """
 
     if not isinstance(np.ndarray, position):
@@ -37,21 +29,21 @@ def to_polar (position):
     if not position.shape[0] == 3:
         raise ValueError("Expected position as np array [lat, long, alt]!")
 
-    delta = position - camera.position # delta = [dx, dy, dz]
+    delta = position - camera.position  # delta = [dx, dy, dz]
     flat_distance = la.norm(delta[0:2])
 
-    hrs_angle = np.pi/2
+    hrs_angle = np.pi / 2
     if delta[0] != 0:
-        hrs_angle = np.arctan(delta[1]/delta[0])
-        if  delta[0] < 0:
+        hrs_angle = np.arctan(delta[1] / delta[0])
+        if delta[0] < 0:
             hrs_angle += np.pi
     elif delta[1] < 0:
-        hrs_angle = -np.pi/2
+        hrs_angle = -np.pi / 2
 
-    vrt_angle = np.pi/2
+    vrt_angle = np.pi / 2
     if delta[1] != 0:
-        vrt_angle = np.arctan(delta[2]/flat_distance)
+        vrt_angle = np.arctan(delta[2] / flat_distance)
     elif delta[2] < 0:
-        vrt_angle = -np.pi/2
+        vrt_angle = -np.pi / 2
 
     return (hrs_angle, vrt_angle)
