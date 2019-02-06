@@ -4,7 +4,7 @@ Denna fil är del av projektet fr24/mvk18.
 Skapad 2019-02-06 av Anders Ågren Thuné.
 Uppdaterad 2019-02-06 av Anders Ågren Thuné.
 
-Den här filen innehåller funktioner för hantering av data i polära koordinater.
+Den här filen innehåller funktioner för bearbetning av koordinatdata.
 """
 
 import numpy as np
