@@ -1,9 +1,4 @@
-""" tracking.py
-
-This file is part of the project fr24/mvk18.
-Created 2019-02-06 by Anders Ågren Thuné.
-Last updated 2019-02-06 by Anders Ågren Thuné.
-
+"""
 This file contains functions for controlling how the camera should prioritize
 tracking different planes, handling of sight and extrapolation of airplane
 positions.
