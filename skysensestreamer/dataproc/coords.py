@@ -6,20 +6,16 @@ import numpy as np
 import numpy.linalg as la
 
 
-def to_polar(camera, position):
+def to_polar(camera, position: np.ndarray) -> (float, float):
+    """ Compute the angle that the camera should face to capture a plane
+
+    Based on a `draft <https://docs.google.com/document/d/1MtJNY73QoCYKpOv9H7nnySst_zIJB9eUzAs19oHi3uQ)>`_ by Theo Puranen Åhfeldt.
+
+    :param camera: object recording the location of the camera (tentative)
+    :param position: 1 x 3 numpy array or list [latitude, longitude, altitude]
+    :returns: horizontal and vertical angles for the camera to face
+
     """
-    to_polar(camera, position)
-
-    camera: object recording the location of the camera (tentative)
-    position: 3 x 1 numpy array or list [latitude, longitude, altitude]
-
-    Computes the angles that the camera should face in order to capture an
-    airplane at the given position.
-
-    Code written by Anders Ågren Thuné based on a draft by Theo Puranen Åhfeldt.
-    (https://docs.google.com/document/d/1MtJNY73QoCYKpOv9H7nnySst_zIJB9eUzAs19oHi3uQ)
-    """
-
     if not isinstance(np.ndarray, position):
         try:
             position = np.array(position)
