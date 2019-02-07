@@ -9,9 +9,12 @@ with their extrapolated position and visibility status.
 
 import numpy as np
 import numpy.linalg as la
+from typing import Callable
 
 
-def extrapolate(positions, times):
+def extrapolate(
+    positions: np.ndarray, times: np.ndarray
+) -> Callable[[float], np.ndarray]:
     """Extrapolate flight positions based on previous data
 
     Produce a function giving the extrapolated position for a given time,
@@ -21,7 +24,6 @@ def extrapolate(positions, times):
     :param positions: n x 3 array of positional data
     :param times: n x 1 array of times belonging to the positions
     :returns: function producing the position at time t
-    :rtype: lambda (float -> np.ndarray)
 
     """
     if not (isinstance(np.ndarray, positions) and isinstance(np.ndarray, times)):
