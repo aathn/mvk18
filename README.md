@@ -60,8 +60,9 @@ We use docstrings formatted in reStructuredText. See [PEP-287] and [this guide][
 [rst docstrings]: http://daouzli.com/blog/docstring.html#restructuredtext
 
 #### Typehints ####
-Instead of notating function parameter and return types in the docstring, Python 3.5+ supports typehints which [this Sphinx extension][typehint extension] can read and display in the Sphinx documantation. We will try to use this as often as it's deemed useful.
+Instead of notating function parameter and return types in the docstring, Python 3.5+ supports [typehints] which [this Sphinx extension][typehint extension] can read and display in the Sphinx documantation. We will try to use this as often as it's deemed useful.
 
+[typehints]: https://www.python.org/dev/peps/pep-0484/
 [typehint extension]: https://github.com/agronholm/sphinx-autodoc-typehints
 
 ### Documentation ###
