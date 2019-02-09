@@ -46,8 +46,23 @@ After the merge the feature branch can be deleted from Bitbucket in the web GUI.
 - https://docs.python-guide.org/writing/structure/
 
 ### Code Formatting ###
-- https://pre-commit.com/
-- https://black.readthedocs.io/
+#### Auto formatting ####
+Using an auto formatter shifts focus from code style discussions to discussions on how to actually solve problems.
+We use the [black] auto formatter and [pre-commit] on our local machines to ensure well-formatted code. See links for usage guide.
+
+[black]: https://black.readthedocs.io/
+[pre-commit]: https://pre-commit.com/
+
+#### Docstrings ####
+We use docstrings formatted in reStructuredText. See [PEP-287] and [this guide][rst docstrings] for more info on that.
+
+[PEP-287]: https://www.python.org/dev/peps/pep-0287/
+[rst docstrings]: http://daouzli.com/blog/docstring.html#restructuredtext
+
+#### Typehints ####
+Instead of notating function parameter and return types in the docstring, Python 3.5+ supports typehints which [this Sphinx extension][typehint extension] can read and display in the Sphinx documantation. We will try to use this as often as it's deemed useful.
+
+[typehint extension]: https://github.com/agronholm/sphinx-autodoc-typehints
 
 ### Documentation ###
 - http://www.sphinx-doc.org/en/stable/usage/quickstart.html
