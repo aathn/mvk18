@@ -54,7 +54,7 @@ We use the [black] auto formatter and [pre-commit] on our local machines to ensu
 [pre-commit]: https://pre-commit.com/
 
 #### Docstrings ####
-We use docstrings formatted in reStructuredText. See [PEP-287] and [this guide][rst docstrings] for more info on that.
+We use docstrings formatted in reStructuredText. See [PEP-287] for details or [this summary][rst docstrings] for shorter info.
 
 [PEP-287]: https://www.python.org/dev/peps/pep-0287/
 [rst docstrings]: http://daouzli.com/blog/docstring.html#restructuredtext
