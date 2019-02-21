@@ -17,7 +17,9 @@ def angles_toward(self, target: GPSCoords) -> float:
     The implementation is based on this `post <https://gis.stackexchange.com/questions/58923/calculate-view-angle>`_.
 
     :param target: GPS coordinates for the target point.
-    :returns: The vertical bearing in radians (0, pi), 0 is straight up and pi straight down.
+    :returns: The angles in the direction of the target, in radians. The vertical angle
+              is in the range (0, pi), 0 is straight up and pi straight down.
+              The horizontal angle is in the range (-pi/2, 3pi/2).
     """
 
     self_ecef = self.get_ecef()
