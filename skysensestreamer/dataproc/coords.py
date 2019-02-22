@@ -12,14 +12,15 @@ polar_radius = 20855486.5
 
 
 def angles_toward(self, target: GPSCoords) -> float:
-    """ Calculate the horizontal and vertical bearings between self and the target point.
+    """ Calculate the angles and distance from self to target.
 
-    The implementation is based on this `post <https://gis.stackexchange.com/questions/58923/calculate-view-angle>`_.
+    The implementation is based on this `post <https://gis.stackexchange.com/questions/58923/calculate-view-angle>`_, with modifications for the azimuth calculation.
 
     :param target: GPS coordinates for the target point.
-    :returns: The angles in the direction of the target, in radians. The vertical angle
+    :returns: The angles in radians and distance in feet. The vertical angle
               is in the range (0, pi), 0 is straight up and pi straight down.
-              The horizontal angle is in the range (-pi/2, 3pi/2).
+              The horizontal angle is in the range (-pi/2, 3pi/2), going from
+              East to East in counter clockwise direction.
     """
 
     self_ecef = self.get_ecef()
@@ -35,13 +36,16 @@ def angles_toward(self, target: GPSCoords) -> float:
     )
     level_east = np.array(-self_ecef[1], self_ecef[0], 0.0)
 
-    cos_azimuth = level_north.dot(delta) / (la.norm(level_north) * delta_norm)
-    sin_azimuth = level_east.dot(delta) / (la.norm(level_east) * delta_norm)
-    horizontal = np.atan(sin_azimuth / cos_azimuth)
+    north_proj = level_north.dot(delta) / la.norm(level_north)
+    east_proj = level_east.dot(delta) / la.norm(level_east)
+    if np.isclose(north_proj, 0):
+        horizontal = np.pi / 2
+    else:
+        horizontal = np.atan(east_proj / north_proj)
     if self.lat < target.lat:
         horizontal += np.pi
 
-    return AngularCoords(vertical, horizontal)
+    return AngularCoords(vertical, horizontal, delta_norm)
 
 
 def get_ecef(self) -> np.ndarray:
