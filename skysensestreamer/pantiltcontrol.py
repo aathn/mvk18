@@ -6,7 +6,7 @@ import maestro
 import math
 
 
-def _to_pan_value(angle, target_range):
+def _to_pan_value(angle: float, target_range: (int, int)) -> int:
     """
     Converts an angle to a corresponding value read by the Maetstro.
 
@@ -26,7 +26,7 @@ def _to_pan_value(angle, target_range):
     return int((delta_y / delta_x) * angle + target_range[0])
 
 
-def _to_tilt_value(angle, target_range):
+def _to_tilt_value(angle : float, target_range : (int, int)) -> int:
     """
     Converts an angle to a corresponding value read by the Maetstro.
 
