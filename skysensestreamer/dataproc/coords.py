@@ -11,7 +11,7 @@ equatorial_radius = 20925646.3
 polar_radius = 20855486.5
 
 
-def angles_toward(self, target: GPSCoords) -> float:
+def to_local(self, target: GPSCoords) -> LocalCoords:
     """ Calculate the angles and distance from self to target.
 
     The implementation is based on this `post <https://gis.stackexchange.com/questions/58923/calculate-view-angle>`_, with modifications for the azimuth calculation.
@@ -45,7 +45,7 @@ def angles_toward(self, target: GPSCoords) -> float:
     if self.lat < target.lat:
         horizontal += np.pi
 
-    return AngularCoords(vertical, horizontal, delta_norm)
+    return LocalCoords(vertical, horizontal, delta_norm)
 
 
 def get_ecef(self) -> np.ndarray:
