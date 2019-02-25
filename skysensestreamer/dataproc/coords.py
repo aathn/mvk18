@@ -11,7 +11,7 @@ equatorial_radius = 20925646.3
 polar_radius = 20855486.5
 
 
-class LocalCoords:
+class LocalCoord:
     def __init__(self, azimuth, altitude_angle, distance):
         self.azimuth = azimuth
         self.altitude_angle = altitude_angle
@@ -47,13 +47,13 @@ class LocalCoords:
         self.__distance = np.abs(distance)
 
 
-class GPSCoords:
+class GPSCoord:
     def __init__(self, latitude, longitude, altitude):
         self.latitude = latitude
         self.longitude = longitude
         self.altitude = altitude
 
-    def to_local(self, target: GPSCoords) -> LocalCoords:
+    def to_local(self, target: GPSCoord) -> LocalCoord:
         """ Calculate the angles and distance from self to target.
 
         The implementation is based on this `post <https://gis.stackexchange.com/questions/58923/calculate-view-angle>`_, with modifications for the azimuth calculation.
@@ -87,9 +87,9 @@ class GPSCoords:
         if self.latitude < target.latitude:
             horizontal += np.pi
 
-        return LocalCoords(vertical, horizontal, delta_norm)
+        return LocalCoord(vertical, horizontal, delta_norm)
 
-    def get_ecef(self: GPSCoords) -> np.ndarray:
+    def get_ecef(self: GPSCoord) -> np.ndarray:
         """ Get the ECEF (earth-centered, earth-fixed) coordinates of self (as described `here <https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates>`_).
 
         :returns: self in ECEF coordinates
