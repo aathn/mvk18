@@ -17,6 +17,35 @@ class LocalCoords:
         self.altitude_angle = altitude_angle
         self.distance = distance
 
+    @property
+    def azimuth(self):
+        return self.__azimuth
+
+    @azimuth.setter
+    def azimuth(self, azimuth):
+        self.__azimuth = azimuth % (2 * np.pi)
+
+    @property
+    def altitude_angle(self):
+        return self.__altitude_angle
+
+    @altitude_angle.setter
+    def altitude_angle(self, altitude_angle):
+        if altitude_angle < 0:
+            self.__altitude_angle = 0
+        elif altitude_angle > np.pi:
+            self.__altitude_angle = np.pi
+        else:
+            self.__altitude_angle = altitude_angle
+
+    @property
+    def distance(self):
+        return self.__distance
+
+    @distance.setter
+    def distance(self, distance):
+        self.__distance = np.abs(distance)
+
 
 class GPSCoords:
     def __init__(self, latitude, longitude, altitude):
