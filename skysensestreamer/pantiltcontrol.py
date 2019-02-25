@@ -26,7 +26,7 @@ def _to_pan_value(angle: float, target_range: (int, int)) -> int:
     return int((delta_y / delta_x) * angle + target_range[0])
 
 
-def _to_tilt_value(angle : float, target_range : (int, int)) -> int:
+def _to_tilt_value(angle: float, target_range: (int, int)) -> int:
     """
     Converts an angle to a corresponding value read by the Maetstro.
 
