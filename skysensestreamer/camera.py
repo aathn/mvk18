@@ -39,9 +39,9 @@ class View:
 class Airplane:
     max_timestamped_positions = 3
 
-    def __init__(self,):
+    def __init__(self):
         self.id = None
         self.timestamped_positions: Deque[Tuple[int, GPSCoord]] = deque(
-            [], max_timestamped_positions
+            [], self.max_timestamped_positions
         )
         """A deque of tuples which consists of a timestamp and a GPSCoord."""
