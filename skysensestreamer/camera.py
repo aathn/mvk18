@@ -4,7 +4,7 @@ from typing import NewType, Tuple
 
 
 Angle = NewType("Angle", float)
-"""Typedefinition mostly for simple documentation with type hints."""
+"""Type definition mostly for simple documentation with type hints."""
 
 
 class Camera:
