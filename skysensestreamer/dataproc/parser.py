@@ -4,7 +4,7 @@ This function parses JSON flight data to and returns the data as python dictiona
 import json
 
 
-def data_parser(source_file: str) -> dict:
+def parse(source_file: str) -> dict:
     """
     Parses the string from the file specified stripping the text before and
     after actual JSON data. Returns a dict with the data in the file.
