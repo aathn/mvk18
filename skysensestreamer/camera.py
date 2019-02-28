@@ -32,9 +32,6 @@ class View:
         self.left_bound: Angle = left_bound
         self.right_bound: Angle = right_bound
 
-    def in_view(localcoord: LocalCoord) -> bool:
-        pass
-
 
 class Airplane:
     max_timestamped_positions = 3
@@ -45,3 +42,6 @@ class Airplane:
             [], self.max_timestamped_positions
         )
         """A deque of tuples which consists of a timestamp and a GPSCoord."""
+
+    def in_view(self, view: View) -> bool:
+        pass
