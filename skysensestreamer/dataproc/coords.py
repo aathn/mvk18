@@ -69,7 +69,7 @@ class GPSCoord:
         delta = self_ecef - target.get_ecef()
         delta_norm = la.norm(delta)
 
-        vertical = np.acos(self_ecef.dot(delta) / (la.norm(self_ecef) * delta_norm))
+        vertical = np.arccos(self_ecef.dot(delta) / (la.norm(self_ecef) * delta_norm))
 
         level_north = np.array(
             -self_ecef[0] * self_ecef[2],
@@ -83,7 +83,7 @@ class GPSCoord:
         if np.isclose(north_proj, 0):
             horizontal = np.pi / 2
         else:
-            horizontal = np.atan(east_proj / north_proj)
+            horizontal = np.arctan(east_proj / north_proj)
         if self.latitude < target.latitude:
             horizontal += np.pi
 
