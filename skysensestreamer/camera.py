@@ -2,7 +2,7 @@ from dataproc.coords import LocalCoord, GPSCoord
 import dataproc.util as util
 from time import time
 from collections import deque
-from typing import NewType, Tuple, Deque, Callable
+from typing import NewType, Tuple, Deque
 
 
 Angle = NewType("Angle", float)
