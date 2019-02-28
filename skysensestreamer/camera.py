@@ -60,12 +60,11 @@ class Airplane:
         self._update_extrapolation()
 
     def _update_extrapolation(self) -> Callable[[int], GPSCoord]:
-        time_pos_array = np.array(
-            [
-                [time, coord.latitude, coord.longitude, coord.altitude]
-                for time, coord in self.timestamped_positions
-            ]
-        )
+        time_pos_array = [
+            [time, coord.latitude, coord.longitude, coord.altitude]
+            for time, coord in self.timestamped_positions
+        ]
+
         extrapolate_array = util.extrapolate(
             time_pos_array[:, 0], time_pos_array[:, 1:]
         )
