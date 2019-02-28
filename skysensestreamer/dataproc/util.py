@@ -1,10 +1,6 @@
 """
-This file contains functions for controlling how the camera should prioritize
-tracking different planes, handling of sight and extrapolation of airplane
-positions.
-
-We might want to make a class keeping a list of airplanes within reach along
-with their extrapolated position and visibility status.
+This file contains utility functions for data processing, including
+extrapolation of airplane positions.
 """
 
 import numpy as np

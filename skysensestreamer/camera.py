@@ -1,5 +1,5 @@
 from dataproc.coords import LocalCoord, GPSCoord
-import dataproc.tracking as tr
+import dataproc.util as util
 from collections import deque
 from typing import NewType, Tuple, Deque, Callable
 
@@ -54,5 +54,5 @@ class Airplane:
                 for time, coord in self.timestamped_positions
             ]
         )
-        extrapolate_array = tr.extrapolate(timecoords[:, 0], timecoords[:, 1:])
+        extrapolate_array = util.extrapolate(timecoords[:, 0], timecoords[:, 1:])
         return lambda t: GPSCoord.from_ndarray(extrapolate_array(t))
