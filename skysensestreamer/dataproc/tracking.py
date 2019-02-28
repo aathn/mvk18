@@ -14,7 +14,7 @@ from typing import Callable
 
 def extrapolate(
     positions: np.ndarray, times: np.ndarray
-) -> Callable[[float], np.ndarray]:
+) -> Callable[[int], np.ndarray]:
     """Extrapolate flight positions based on previous data
 
     Produce a function giving the extrapolated position for a given time,

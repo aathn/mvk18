@@ -1,6 +1,7 @@
 from dataproc.coords import LocalCoord, GPSCoord
+import dataproc.tracking as tr
 from collections import deque
-from typing import NewType, Tuple, Deque
+from typing import NewType, Tuple, Deque, Callable
 
 
 Angle = NewType("Angle", float)
@@ -45,3 +46,13 @@ class Airplane:
 
     def in_view(self, view: View) -> bool:
         pass
+
+    def extrapolate(self) -> Callable[[int], GPSCoord]:
+        timecoords = np.array(
+            [
+                [time, coord.latitude, coord.longitude, coord.altitude]
+                for time, coord in self.timestamped_positions
+            ]
+        )
+        extrapolate_array = tr.extrapolate(timecoords[:, 0], timecoords[:, 1:])
+        return lambda t: GPSCoord(extrapolate_array(t))
