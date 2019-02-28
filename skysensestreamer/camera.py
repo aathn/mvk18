@@ -61,8 +61,8 @@ class Airplane:
 
     def _update_extrapolation(self):
         time_pos_array = [
-            [time, coord.latitude, coord.longitude, coord.altitude]
-            for time, coord in self.timestamped_positions
+            [time_, coord.latitude, coord.longitude, coord.altitude]
+            for time_, coord in self.timestamped_positions
         ]
 
         extrapolate_array = util.extrapolate(
