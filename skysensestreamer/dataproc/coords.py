@@ -2,7 +2,7 @@
 This file contains functions for processing of coordinate data.
 """
 
-from __future import annotations
+from __future__ import annotations
 import numpy as np
 import numpy.linalg as la
 
