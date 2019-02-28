@@ -57,9 +57,9 @@ class Airplane:
     def append_position(self, time: int, new_pos: GPSCoord):
         """Append a position to the timestamped positions and update the extrapolation"""
         self.timestamped_positions.append(new_pos)
-        self.update_extrapolation()
+        self._update_extrapolation()
 
-    def update_extrapolation(self) -> Callable[[int], GPSCoord]:
+    def _update_extrapolation(self) -> Callable[[int], GPSCoord]:
         """Update the extrapolation function based on the current position list"""
         timecoords = np.array(
             [
