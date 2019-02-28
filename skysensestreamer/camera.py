@@ -1,6 +1,6 @@
 from dataproc.coords import LocalCoord, GPSCoord
 from collections import deque
-from typing import NewType, Tuple
+from typing import NewType, Tuple, Deque
 
 
 Angle = NewType("Angle", float)
