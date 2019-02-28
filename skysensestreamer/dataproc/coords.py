@@ -72,11 +72,13 @@ class GPSCoord:
         vertical = np.arccos(self_ecef.dot(delta) / (la.norm(self_ecef) * delta_norm))
 
         level_north = np.array(
-            -self_ecef[0] * self_ecef[2],
-            -self_ecef[1] * self_ecef[2],
-            self_ecef[0] ** 2 + self_ecef[1] ** 2,
+            [
+                -self_ecef[0] * self_ecef[2],
+                -self_ecef[1] * self_ecef[2],
+                self_ecef[0] ** 2 + self_ecef[1] ** 2,
+            ]
         )
-        level_east = np.array(-self_ecef[1], self_ecef[0], 0.0)
+        level_east = np.array([-self_ecef[1], self_ecef[0], 0.0])
 
         north_proj = level_north.dot(delta) / la.norm(level_north)
         east_proj = level_east.dot(delta) / la.norm(level_east)
