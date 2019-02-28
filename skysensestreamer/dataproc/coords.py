@@ -62,7 +62,7 @@ class GPSCoord:
         :returns: The angles in radians and distance in feet. The vertical angle
                   is in the range (0, pi), 0 is straight up and pi straight down.
                   The horizontal angle is in the range (-pi/2, 3pi/2), going from
-                  East to East in counter clockwise direction.
+                  west to west in clockwise direction.
         """
 
         self_ecef = self.get_ecef()
@@ -89,7 +89,7 @@ class GPSCoord:
 
         return LocalCoord(vertical, horizontal, delta_norm)
 
-    def get_ecef(self: GPSCoord) -> np.ndarray:
+    def get_ecef(self) -> np.ndarray:
         """ Get the ECEF (earth-centered, earth-fixed) coordinates of self (as described `here <https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates>`_).
 
         :returns: self in ECEF coordinates
