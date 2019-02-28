@@ -3,6 +3,7 @@ import skysensestreamer.pantiltcontrol as ptc
 import unittest
 import math
 import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 
@@ -19,13 +20,22 @@ class PanTiltTests(unittest.TestCase):
 
     def test_angle_zero(self):
         lower_bound = 80
-        self.assertEquals(ptc._to_pan_value(0, (lower_bound, lower_bound + 10)), lower_bound)
-        self.assertEquals(ptc._to_tilt_value(0, (lower_bound, lower_bound + 10)), lower_bound)
+        self.assertEquals(
+            ptc._to_pan_value(0, (lower_bound, lower_bound + 10)), lower_bound
+        )
+        self.assertEquals(
+            ptc._to_tilt_value(0, (lower_bound, lower_bound + 10)), lower_bound
+        )
 
     def test_pan_angle_pi(self):
         upper_bound = 100
-        self.assertEquals(ptc._to_pan_value(math.pi, (upper_bound - 10, upper_bound)), upper_bound)
+        self.assertEquals(
+            ptc._to_pan_value(math.pi, (upper_bound - 10, upper_bound)), upper_bound
+        )
 
     def test_tilt_angle_pi_half(self):
         upper_bound = 100
-        self.assertEquals(ptc._to_tilt_value(math.pi / 2, (upper_bound - 10, upper_bound)), upper_bound)
+        self.assertEquals(
+            ptc._to_tilt_value(math.pi / 2, (upper_bound - 10, upper_bound)),
+            upper_bound,
+        )

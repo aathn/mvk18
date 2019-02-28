@@ -1,5 +1,5 @@
 """
-This module defines an object used to control the pan/tilt plattform.
+This module defines an object used to control the pan/tilt platform.
 Many parts of the code are currently subject to change.
 """
 import maestro
@@ -35,7 +35,7 @@ def _to_tilt_value(angle: float, target_range: (int, int)) -> int:
     :type angle: float
     :type target_range: (int, int)
     :returns: a target value for the Maestro
-    :rtye: int
+    :rtype: int
 
     """
     if angle > math.pi / 2 or angle < 0:
@@ -62,7 +62,7 @@ class Controller:
         self.servo.setSpeed(1, 0)
 
     def set_position(self, pan_angle, tilt_angle):
-        """ Sets the plattform to the specified angles.
+        """ Sets the platform to the specified angles.
 
         :param pan_angle: an angle in the range [0,π]
         :param tilt_angle: an angle in the range [0,π/2]
