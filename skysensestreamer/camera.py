@@ -54,9 +54,9 @@ class Airplane:
         """Return the current estimation of self's position"""
         return self.extrapolation(time())
 
-    def append_position(self, time: int, new_pos: GPSCoord):
+    def append_position(self, new_time: int, new_pos: GPSCoord):
         """Append a position to the timestamped positions and update the extrapolation"""
-        self.timestamped_positions.append(new_pos)
+        self.timestamped_positions.append((new_time, new_pos))
         self._update_extrapolation()
 
     def _update_extrapolation(self) -> Callable[[int], GPSCoord]:
