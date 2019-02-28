@@ -66,6 +66,6 @@ class Airplane:
         ]
 
         extrapolate_array = util.extrapolate(
-            time_pos_array[:, 0], time_pos_array[:, 1:]
+            time_pos_array[:][0], time_pos_array[:][1:]
         )
         self.extrapolation = lambda t: GPSCoord(*extrapolate_array(t))
