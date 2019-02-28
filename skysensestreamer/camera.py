@@ -1,5 +1,6 @@
 from dataproc.coords import LocalCoord, GPSCoord
 import dataproc.util as util
+from time import time
 from collections import deque
 from typing import NewType, Tuple, Deque, Callable
 
@@ -47,6 +48,11 @@ class Airplane:
 
     def in_view(self, view: View) -> bool:
         pass
+
+    @property
+    def position(self) -> GPSCoord:
+        """Return the current estimation of self's position"""
+        return self.extrapolation(time())
 
     def append_position(self, time: int, new_pos: GPSCoord):
         """Append a position to the timestamped positions and update the extrapolation"""
