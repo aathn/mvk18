@@ -59,7 +59,7 @@ class Airplane:
         self.timestamped_positions.append((new_time, new_pos))
         self._update_extrapolation()
 
-    def _update_extrapolation(self) -> Callable[[int], GPSCoord]:
+    def _update_extrapolation(self) -> Callable[[float], GPSCoord]:
         time_pos_array = [
             [time, coord.latitude, coord.longitude, coord.altitude]
             for time, coord in self.timestamped_positions
