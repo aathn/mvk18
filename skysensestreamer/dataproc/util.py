@@ -5,10 +5,10 @@ extrapolation of airplane positions.
 
 import numpy as np
 import numpy.linalg as la
-from typing import Callable, Union
+from typing import Callable, Union, List
 
-Vec = Union[list[float], np.ndarray]
-Mat = Union[list[list[float]], np.ndarray]
+Vec = Union[List[float], np.ndarray]
+Mat = Union[List[List[float]], np.ndarray]
 
 
 def extrapolate(times: Vec, positions: Mat) -> Callable[[float], np.ndarray]:
