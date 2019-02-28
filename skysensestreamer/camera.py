@@ -1,7 +1,8 @@
 from dataproc.coords import LocalCoord, GPSCoord
 import dataproc.util as util
+from time import time
 from collections import deque
-from typing import NewType, Tuple, Deque, Callable
+from typing import NewType, Tuple, Deque
 
 
 Angle = NewType("Angle", float)
@@ -39,6 +40,7 @@ class Airplane:
 
     def __init__(self):
         self.id = None
+        self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
         self.timestamped_positions: Deque[Tuple[int, GPSCoord]] = deque(
             [], self.max_timestamped_positions
         )
@@ -47,12 +49,23 @@ class Airplane:
     def in_view(self, view: View) -> bool:
         pass
 
-    def extrapolate(self) -> Callable[[int], GPSCoord]:
-        timecoords = np.array(
-            [
-                [time, coord.latitude, coord.longitude, coord.altitude]
-                for time, coord in self.timestamped_positions
-            ]
+    @property
+    def position(self) -> GPSCoord:
+        """Return the current estimation of self's position"""
+        return self.extrapolation(time())
+
+    def append_position(self, new_time: int, new_pos: GPSCoord):
+        """Append a position to the timestamped positions and update the extrapolation"""
+        self.timestamped_positions.append((new_time, new_pos))
+        self._update_extrapolation()
+
+    def _update_extrapolation(self):
+        time_pos_array = [
+            [time_, coord.latitude, coord.longitude, coord.altitude]
+            for time_, coord in self.timestamped_positions
+        ]
+
+        extrapolate_array = util.extrapolate(
+            time_pos_array[:][0], time_pos_array[:][1:]
         )
-        extrapolate_array = util.extrapolate(timecoords[:, 0], timecoords[:, 1:])
-        return lambda t: GPSCoord(*extrapolate_array(t))
+        self.extrapolation = lambda t: GPSCoord(*extrapolate_array(t))
