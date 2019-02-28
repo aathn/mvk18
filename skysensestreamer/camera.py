@@ -39,6 +39,7 @@ class Airplane:
 
     def __init__(self):
         self.id = None
+        self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
         self.timestamped_positions: Deque[Tuple[int, GPSCoord]] = deque(
             [], self.max_timestamped_positions
         )
@@ -47,7 +48,13 @@ class Airplane:
     def in_view(self, view: View) -> bool:
         pass
 
-    def extrapolate(self) -> Callable[[int], GPSCoord]:
+    def append_position(self, time: int, new_pos: GPSCoord):
+        """Append a position to the timestamped positions and update the extrapolation"""
+        self.timestamped_positions.append(new_pos)
+        self.update_extrapolation()
+
+    def update_extrapolation(self) -> Callable[[int], GPSCoord]:
+        """Update the extrapolation function based on the current position list"""
         timecoords = np.array(
             [
                 [time, coord.latitude, coord.longitude, coord.altitude]
@@ -55,4 +62,4 @@ class Airplane:
             ]
         )
         extrapolate_array = util.extrapolate(timecoords[:, 0], timecoords[:, 1:])
-        return lambda t: GPSCoord(*extrapolate_array(t))
+        self.extrapolation = lambda t: GPSCoord(*extrapolate_array(t))
