@@ -55,4 +55,4 @@ class Airplane:
             ]
         )
         extrapolate_array = tr.extrapolate(timecoords[:, 0], timecoords[:, 1:])
-        return lambda t: GPSCoord(extrapolate_array(t))
+        return lambda t: GPSCoord.from_ndarray(extrapolate_array(t))
