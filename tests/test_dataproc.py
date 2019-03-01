@@ -1,4 +1,4 @@
-import skysensestreamer.dataproc.util as util
+from skysensestreamer.dataproc import util
 import unittest
 import numpy as np
 
