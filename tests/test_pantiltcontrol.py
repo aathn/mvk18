@@ -1,10 +1,5 @@
-import os
 import unittest
 import math
-import sys
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 import skysensestreamer.pantiltcontrol as ptc
 
 

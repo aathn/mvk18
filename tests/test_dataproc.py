@@ -1,9 +1,4 @@
-import os
-import sys
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-import skysensestreamer.dataproc.util as util
+from skysensestreamer.dataproc import util
 import unittest
 import numpy as np
 
