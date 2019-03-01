@@ -41,5 +41,6 @@ class PanTiltTests(unittest.TestCase):
             upper_bound,
         )
 
+
 if __name__ == "__main__":
     unittest.main()
