@@ -1,5 +1,5 @@
-from dataproc.coords import LocalCoord, GPSCoord
-import dataproc.util as util
+from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
+import skysensestreamer.dataproc.util as util
 from time import time
 from collections import deque
 from typing import NewType, Tuple, Deque
