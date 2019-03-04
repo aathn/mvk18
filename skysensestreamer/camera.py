@@ -8,6 +8,8 @@ from typing import NewType, Tuple, Deque
 Angle = NewType("Angle", float)
 """Type definition mostly for simple documentation with type hints."""
 
+Number = Union[int, float]
+
 
 class Camera:
     """A class that handles the camera and its pan/tilt device."""
@@ -41,7 +43,7 @@ class Airplane:
     def __init__(self):
         self.id = None
         self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
-        self.timestamped_positions: Deque[Tuple[int, GPSCoord]] = deque(
+        self.timestamped_positions: Deque[Tuple[Number, GPSCoord]] = deque(
             [], self.max_timestamped_positions
         )
         """A deque of tuples which consists of a timestamp and a GPSCoord."""
@@ -54,7 +56,7 @@ class Airplane:
         """Return the current estimation of self's position"""
         return self.extrapolation(time())
 
-    def append_position(self, new_time: int, new_pos: GPSCoord):
+    def append_position(self, new_time: Number, new_pos: GPSCoord):
         """Append a position to the timestamped positions and update the extrapolation"""
         self.timestamped_positions.append((new_time, new_pos))
         self._update_extrapolation()
