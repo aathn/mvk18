@@ -1,10 +1,5 @@
-import os
 import unittest
 import math
-import sys
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 import skysensestreamer.pantiltcontrol as ptc
 
 
@@ -40,6 +35,7 @@ class PanTiltTests(unittest.TestCase):
             ptc._to_tilt_value(math.pi / 2, (upper_bound - 10, upper_bound)),
             upper_bound,
         )
+
 
 if __name__ == "__main__":
     unittest.main()

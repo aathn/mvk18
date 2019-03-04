@@ -1,11 +1,6 @@
-import os
-import sys
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-import skysensestreamer.dataproc.util as util
-import skysensestreamer.dataproc.coords as coords
+from skysensestreamer.dataproc import coords
 from skysensestreamer.dataproc.coords import GPSCoord
+from skysensestreamer.dataproc import util
 
 import unittest
 import numpy as np

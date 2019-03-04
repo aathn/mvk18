@@ -1,5 +1,5 @@
-from dataproc.coords import LocalCoord, GPSCoord
-import dataproc.util as util
+from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
+from skysensestreamer.dataproc import util
 from time import time
 from collections import deque
 from typing import NewType, Tuple, Deque
@@ -60,12 +60,11 @@ class Airplane:
         self._update_extrapolation()
 
     def _update_extrapolation(self):
-        time_pos_array = [
-            [time_, coord.latitude, coord.longitude, coord.altitude]
-            for time_, coord in self.timestamped_positions
-        ]
+        times = []
+        positions = []
+        for time_, coord in self.timestamped_positions:
+            times.append(time_)
+            positions.append([coord.latitude, coord.longitude, coord.altitude])
 
-        extrapolate_array = util.extrapolate(
-            time_pos_array[:][0], time_pos_array[:][1:]
-        )
+        extrapolate_array = util.extrapolate(times, positions)
         self.extrapolation = lambda t: GPSCoord(*extrapolate_array(t))
