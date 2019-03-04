@@ -67,7 +67,7 @@ class GPSCoord:
         """
 
         self_ecef = self.get_ecef()
-        delta = self_ecef - target.get_ecef()
+        delta = target.get_ecef() - self_ecef
         delta_norm = la.norm(delta)
 
         vertical = np.arccos(self_ecef.dot(delta) / (la.norm(self_ecef) * delta_norm))
@@ -87,10 +87,11 @@ class GPSCoord:
             horizontal = np.pi / 2
         else:
             horizontal = np.arctan(east_proj / north_proj)
-        if self.latitude < target.latitude:
+
+        if self.latitude > target.latitude:
             horizontal += np.pi
 
-        return LocalCoord(vertical, horizontal, delta_norm)
+        return LocalCoord(horizontal, vertical, delta_norm)
 
     def get_ecef(self) -> np.ndarray:
         """ Get the ECEF (earth-centered, earth-fixed) coordinates of self (as described `here <https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates>`_).
@@ -112,6 +113,6 @@ def _prime_vertical_radius_of_curvature(phi: float) -> float:
     :param phi: The angle for which to calculate the radius of curvature
     :returns: The prime vertical radius of curvature
     """
-    return np.sqrt(
+    return equatorial_radius / np.sqrt(
         1 - (1 - polar_radius ** 2 / equatorial_radius ** 2) * np.sin(phi) ** 2
     )
