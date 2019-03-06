@@ -1,15 +1,8 @@
 import unittest
-import os
-import sys
+from skysensestreamer import parser
 
-sys.path.insert(
-    0,
-    os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "../skysensestreamer/dataproc")
-    ),
-)
 
-import parser
+data_dir = "tests/parse_data"
 
 
 class ParserTests(unittest.TestCase):
@@ -301,10 +294,10 @@ class ParserTests(unittest.TestCase):
                 "TWY977",
             ],
         }
-        self.assertEqual(parser.parse("test_flights"), flights)
+        self.assertEqual(parser.parse("{}/test_flights".format(data_dir)), flights)
 
     def test_empty_json(self):
-        self.assertEqual(parser.parse("test_empty"), {})
+        self.assertEqual(parser.parse("{}/test_empty".format(data_dir)), {})
 
     def test_one_flight(self):
         flight = {
@@ -328,7 +321,7 @@ class ParserTests(unittest.TestCase):
                 "",
             ]
         }
-        self.assertEqual(parser.parse("test_one_flight"), flight)
+        self.assertEqual(parser.parse("{}/test_one_flight".format(data_dir)), flight)
 
 
 if __name__ == "__main__":
