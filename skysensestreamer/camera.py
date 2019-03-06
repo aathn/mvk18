@@ -38,7 +38,7 @@ class View:
 class Airplane:
     max_timestamped_positions = 3
 
-    def __init__(self, plane_id):
+    def __init__(self, plane_id=None):
         self.id = plane_id
         self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
         self.timestamped_positions: Deque[Tuple[int, GPSCoord]] = deque(
