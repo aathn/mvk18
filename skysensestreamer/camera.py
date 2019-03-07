@@ -2,7 +2,7 @@ from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
 from skysensestreamer.dataproc import util
 from time import time
 from collections import deque
-from typing import NewType, Tuple, Deque
+from typing import NewType, Tuple, Deque, Union
 
 
 Angle = NewType("Angle", float)
