@@ -19,18 +19,55 @@ class AirplaneTests(unittest.TestCase):
         self.time3int = int(self.time3)
         self.coord3 = GPSCoord(22, 22, 900)
 
-    def test_airplane_single_position_extrapolation_is_constant(self):
+    def test_single_position_extrapolation_is_constant(self):
         self.airplane.append_position(self.time1int, self.coord1)
 
         self.assertEqual(self.airplane.extrapolation(self.time2), self.coord1)
         self.assertEqual(self.airplane.extrapolation(self.time3), self.coord1)
 
-    def test_airplane_append_linear_positions_returns_GPSCoord(self):
+    def test_extrapolation_varies_according_to_input_time(self):
+        time4 = 1551369827.156829
+        time5 = 1554999021.789043
+
         self.airplane.append_position(self.time1int, self.coord1)
         self.airplane.append_position(self.time2int, self.coord2)
         self.airplane.append_position(self.time3int, self.coord3)
 
-        self.assertIsInstance(self.airplane.extrapolation(self.time4), GPSCoord)
+        print(
+            "Diff:",
+            self.airplane.extrapolation(time4),
+            self.airplane.extrapolation(time5),
+        )
+
+        self.assertNotEqual(
+            self.airplane.extrapolation(time4), self.airplane.extrapolation(time5)
+        )
+
+    def test_append_linear_positions_returns_correctly_extrapolated_coord(self):
+        time_given_linear_extrapolation = 1551365125.156895
+        coord_assumed_linear_extrapolation = GPSCoord(23, 23, 1000)
+
+        self.airplane.append_position(self.time1int, self.coord1)
+        self.airplane.append_position(self.time2int, self.coord2)
+        self.airplane.append_position(self.time3int, self.coord3)
+
+        print("Len: ", len(self.airplane.timestamped_positions))
+
+        extrapolated_coord = self.airplane.extrapolation(
+            time_given_linear_extrapolation
+        )
+
+        print(extrapolated_coord)
+
+        self.assertAlmostEqual(
+            extrapolated_coord.latitude, coord_assumed_linear_extrapolation.latitude
+        )
+        self.assertAlmostEqual(
+            extrapolated_coord.longitude, coord_assumed_linear_extrapolation.longitude
+        )
+        self.assertAlmostEqual(
+            extrapolated_coord.altitude, coord_assumed_linear_extrapolation.altitude
+        )
 
 
 if __name__ == "__main__":
