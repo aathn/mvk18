@@ -62,11 +62,18 @@ class Airplane:
         self._update_extrapolation()
 
     def _update_extrapolation(self):
+        """Updates self.extrapolation by extrapolating with the current self.timestamped_positions as input.
+
+        If the number of timestamped_positions is one we update it with that position as a constant.
+        """
         times = []
         positions = []
         for time_, coord in self.timestamped_positions:
             times.append(time_)
             positions.append([coord.latitude, coord.longitude, coord.altitude])
 
-        extrapolate_array = util.extrapolate(times, positions)
-        self.extrapolation = lambda t: GPSCoord(*extrapolate_array(t))
+        if len(times) == 1:
+            self.extrapolation = lambda t: self.timestamped_positions[0][1]
+        else:
+            extrapolate_array = util.extrapolate(times, positions)
+            self.extrapolation = lambda t: GPSCoord(*extrapolate_array(t))
