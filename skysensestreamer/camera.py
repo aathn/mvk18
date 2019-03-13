@@ -3,6 +3,7 @@ from skysensestreamer.dataproc import util
 from time import time
 from collections import deque
 from typing import NewType, Tuple, Deque, Union
+from math import pi
 
 
 Angle = NewType("Angle", float)
@@ -19,6 +20,12 @@ class Camera:
         self.tracked_airplane = None
         self.direction = None
         self.airplanes = []
+
+    def to_servo(self, lc: LocalCoord):
+        """Converts LocalCoords to angles for the servo controller"""
+        pan = self.direction - lc.azimuth
+        tilt = pi / 2 - lc.altitude_angle
+        return (pan, tilt)
 
 
 class View:
