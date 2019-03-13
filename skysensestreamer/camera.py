@@ -40,7 +40,7 @@ class View:
 class Airplane:
     max_timestamped_positions = 3
 
-    def __init__(self, init_time=time()):
+    def __init__(self, init_time: Number = time()):
         self.id = None
         self.init_time = init_time
         """Time of initialization for the Airplane object"""
