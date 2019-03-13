@@ -54,6 +54,21 @@ class GPSCoord:
         self.longitude = longitude
         self.altitude = altitude
 
+    def __eq__(self, other: GPSCoord):
+        return (
+            self.latitude == other.latitude
+            and self.longitude == other.longitude
+            and self.altitude == other.altitude
+        )
+
+    def __ne__(self, other: GPSCoord):
+        return not self.__eq__(other)
+
+    def __repr__(self):
+        return "GPSCoord({}, {}, {})".format(
+            self.latitude, self.longitude, self.altitude
+        )
+
     def to_local(self, target: GPSCoord) -> LocalCoord:
         """ Calculate the angles and distance from self to target.
 

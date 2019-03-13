@@ -2,11 +2,13 @@ from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
 from skysensestreamer.dataproc import util
 from time import time
 from collections import deque
-from typing import NewType, Tuple, Deque
+from typing import NewType, Tuple, Deque, Union
 
 
 Angle = NewType("Angle", float)
 """Type definition mostly for simple documentation with type hints."""
+
+Number = Union[int, float]
 
 
 class Camera:
@@ -41,7 +43,7 @@ class Airplane:
     def __init__(self):
         self.id = None
         self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
-        self.timestamped_positions: Deque[Tuple[int, GPSCoord]] = deque(
+        self.timestamped_positions: Deque[Tuple[Number, GPSCoord]] = deque(
             [], self.max_timestamped_positions
         )
         """A deque of tuples which consists of a timestamp and a GPSCoord."""
@@ -54,17 +56,24 @@ class Airplane:
         """Return the current estimation of self's position"""
         return self.extrapolation(time())
 
-    def append_position(self, new_time: int, new_pos: GPSCoord):
+    def append_position(self, new_time: Number, new_pos: GPSCoord):
         """Append a position to the timestamped positions and update the extrapolation"""
         self.timestamped_positions.append((new_time, new_pos))
         self._update_extrapolation()
 
     def _update_extrapolation(self):
+        """Updates self.extrapolation by extrapolating with the current self.timestamped_positions as input.
+
+        If the number of timestamped_positions is one we update it with that position as a constant.
+        """
         times = []
         positions = []
         for time_, coord in self.timestamped_positions:
             times.append(time_)
             positions.append([coord.latitude, coord.longitude, coord.altitude])
 
-        extrapolate_array = util.extrapolate(times, positions)
-        self.extrapolation = lambda t: GPSCoord(*extrapolate_array(t))
+        if len(times) == 1:
+            self.extrapolation = lambda t: self.timestamped_positions[0][1]
+        else:
+            extrapolate_array = util.extrapolate(times, positions)
+            self.extrapolation = lambda t: GPSCoord(*extrapolate_array(t))
