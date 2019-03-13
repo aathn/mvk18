@@ -3,14 +3,14 @@ This function parses JSON flight data to and returns the data as python dictiona
 """
 import json
 from typing import Dict, List
-from enum import Enum
+from enum import IntEnum
 from os import stat
 from time import sleep
 from skysensestreamer.dataproc.coords import GPSCoord
 from skysensestreamer.camera import Camera, Airplane
 
 
-class DataIndices(Enum):
+class DataIndices(IntEnum):
     LAT = 1
     LONG = 2
     ALT = 4
