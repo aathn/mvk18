@@ -39,7 +39,9 @@ def append_pos_to_plane(data: List, plane: Airplane):
     :param plane: A plane to add the position to
 
     """
-    new_coord = GPSCoord(data[DataIndices.LAT, DataIndices.LONG, DataIndices.ALT])
+    new_coord = GPSCoord(
+        data[DataIndices.LAT], data[DataIndices.LONG], data[DataIndices.ALT]
+    )
     plane.append_position(data[DataIndices.TIME], new_coord)
 
 

@@ -1,12 +1,16 @@
 import unittest
 from skysensestreamer import parser
+from skysensestreamer.camera import Camera
 
 
 data_dir = "tests/parse_data"
 
 
 class ParserTests(unittest.TestCase):
-    def test_many_flights(self):
+    def setUp(self):
+        self.camera = Camera()
+
+    def test_parse_many_flights(self):
         flights = {
             "x406f70": [
                 "406F70",
@@ -296,10 +300,10 @@ class ParserTests(unittest.TestCase):
         }
         self.assertEqual(parser.parse("{}/test_flights".format(data_dir)), flights)
 
-    def test_empty_json(self):
+    def test_parse_empty_json(self):
         self.assertEqual(parser.parse("{}/test_empty".format(data_dir)), {})
 
-    def test_one_flight(self):
+    def test_parse_one_flight(self):
         flight = {
             "x47956b": [
                 "47956B",
@@ -322,6 +326,40 @@ class ParserTests(unittest.TestCase):
             ]
         }
         self.assertEqual(parser.parse("{}/test_one_flight".format(data_dir)), flight)
+
+    def test_update_one_flight(self):
+        parser.update_airplanes(self.camera, "{}/test_one_flight".format(data_dir))
+        self.assertEqual(len(self.camera.airplanes), 1)
+        plane = self.camera.airplanes[0]
+        self.assertEqual(plane.id, "x47956b")
+        self.assertEqual(len(plane.timestamped_positions), 1)
+        timestamp = plane.timestamped_positions[0][0]
+        position = plane.timestamped_positions[0][1]
+        self.assertEqual(timestamp, 1550677075)
+        self.assertEqual(position.latitude, 59.5348)
+        self.assertEqual(position.longitude, 17.5763)
+        self.assertEqual(position.altitude, 4975)
+
+    def test_update_flights_twice(self):
+        parser.update_airplanes(self.camera, "{}/test_one_flight".format(data_dir))
+        parser.update_airplanes(self.camera, "{}/test_two_flights".format(data_dir))
+        self.assertEqual(len(self.camera.airplanes), 2)
+        updated_plane = self.camera.airplanes[0]
+        new_plane = self.camera.airplanes[1]
+        self.assertEqual(updated_plane.id, "x47956b")
+        self.assertEqual(new_plane.id, "x406f70")
+        self.assertEqual(len(updated_plane.timestamped_positions), 2)
+        timestamp = updated_plane.timestamped_positions[1][0]
+        position = updated_plane.timestamped_positions[1][1]
+        self.assertEqual(timestamp, 1550677080)
+        self.assertEqual(position.latitude, 60.5348)
+        self.assertEqual(position.longitude, 18.0763)
+
+    def test_update_remove_flights(self):
+        parser.update_airplanes(self.camera, "{}/test_one_flight".format(data_dir))
+        parser.update_airplanes(self.camera, "{}/test_two_flights".format(data_dir))
+        parser.update_airplanes(self.camera, "{}/test_empty".format(data_dir))
+        self.assertEqual(len(self.camera.airplanes), 0)
 
 
 if __name__ == "__main__":
