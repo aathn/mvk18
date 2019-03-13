@@ -18,12 +18,13 @@ class Camera:
     def __init__(self):
         self.gps_position = None
         self.tracked_airplane = None
+        # direction represents the compass angle that the pan/tilt plattform has its right side facing
         self.direction = None
         self.airplanes = []
 
     def to_servo(self, lc: LocalCoord):
         """Converts LocalCoords to angles for the servo controller"""
-        pan = self.direction - lc.azimuth
+        pan = (self.direction - lc.azimuth) % (2 * pi)
         tilt = pi / 2 - lc.altitude_angle
         return (pan, tilt)
 
