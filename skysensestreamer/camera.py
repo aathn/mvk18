@@ -18,8 +18,8 @@ class Camera:
     def __init__(self):
         self.gps_position = None
         self.tracked_airplane = None
-        # direction represents the compass angle that the pan/tilt plattform has its right side facing
         self.direction = None
+        """The compass angle that the pan/tilt plattform has its right side facing."""
         self.airplanes = []
 
     def to_servo(self, lc: LocalCoord):
