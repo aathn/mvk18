@@ -19,7 +19,7 @@ class Camera:
         self.gps_position = None
         self.tracked_airplane = None
         self.direction = None
-        """The compass angle that the pan/tilt plattform has its right side facing."""
+        """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
         self.airplanes = []
 
     def to_servo(self, lc: LocalCoord) -> (Angle, Angle):
