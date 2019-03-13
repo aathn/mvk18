@@ -70,7 +70,7 @@ class GPSCoord:
         )
 
     def to_local(self, target: GPSCoord) -> LocalCoord:
-        """ Calculate the angles and distance from self to target.
+        """Calculate the angles and distance from self to target.
 
         The implementation is based on this `post <https://gis.stackexchange.com/questions/58923/calculate-view-angle>`_, with modifications for the azimuth calculation.
 
@@ -109,7 +109,7 @@ class GPSCoord:
         return LocalCoord(horizontal, vertical, delta_norm)
 
     def get_ecef(self) -> np.ndarray:
-        """ Get the ECEF (earth-centered, earth-fixed) coordinates of self (as described `here <https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates>`_).
+        """Get the ECEF (earth-centered, earth-fixed) coordinates of self (as described `here <https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates>`_).
 
         :returns: self in ECEF coordinates
         """
@@ -123,7 +123,7 @@ class GPSCoord:
 
 
 def _prime_vertical_radius_of_curvature(phi: float) -> float:
-    """ Helper for the ECEF function.
+    """Helper for the ECEF function.
 
     :param phi: The angle for which to calculate the radius of curvature
     :returns: The prime vertical radius of curvature
