@@ -23,7 +23,11 @@ class Camera:
         self.airplanes = []
 
     def to_servo(self, lc: LocalCoord) -> (Angle, Angle):
-        """Converts LocalCoords to angles for the servo controller"""
+        """Converts LocalCoords to angles for the servo controller
+
+        :param lc: The local coord to be converted.
+        :returns: A tuple containing a pan and a tilt angle.
+        """
         pan = (self.direction - lc.azimuth) % (2 * pi)
         tilt = pi / 2 - lc.altitude_angle
         return (pan, tilt)
