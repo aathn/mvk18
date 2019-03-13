@@ -27,7 +27,7 @@ class AirplaneTests(unittest.TestCase):
 
     def test_extrapolation_varies_according_to_input_time(self):
         time4 = 1551369827.156829
-        time5 = 1554999021.789043
+        time5 = 1551361021.789043
 
         self.airplane.append_position(self.time1int, self.coord1)
         self.airplane.append_position(self.time2int, self.coord2)
@@ -38,7 +38,7 @@ class AirplaneTests(unittest.TestCase):
         )
 
     def test_append_linear_positions_returns_correctly_extrapolated_coord(self):
-        time_given_linear_extrapolation = 1551365125.156895
+        time_given_linear_extrapolation = 1551365025.156895
         coord_assumed_linear_extrapolation = GPSCoord(23, 23, 1000)
 
         self.airplane.append_position(self.time1int, self.coord1)
