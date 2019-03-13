@@ -22,7 +22,7 @@ class Camera:
         """The compass angle that the pan/tilt plattform has its right side facing."""
         self.airplanes = []
 
-    def to_servo(self, lc: LocalCoord):
+    def to_servo(self, lc: LocalCoord) -> (Angle, Angle):
         """Converts LocalCoords to angles for the servo controller"""
         pan = (self.direction - lc.azimuth) % (2 * pi)
         tilt = pi / 2 - lc.altitude_angle
