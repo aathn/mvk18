@@ -33,12 +33,6 @@ class AirplaneTests(unittest.TestCase):
         self.airplane.append_position(self.time2int, self.coord2)
         self.airplane.append_position(self.time3int, self.coord3)
 
-        print(
-            "Diff:",
-            self.airplane.extrapolation(time4),
-            self.airplane.extrapolation(time5),
-        )
-
         self.assertNotEqual(
             self.airplane.extrapolation(time4), self.airplane.extrapolation(time5)
         )
@@ -51,13 +45,9 @@ class AirplaneTests(unittest.TestCase):
         self.airplane.append_position(self.time2int, self.coord2)
         self.airplane.append_position(self.time3int, self.coord3)
 
-        print("Len: ", len(self.airplane.timestamped_positions))
-
         extrapolated_coord = self.airplane.extrapolation(
             time_given_linear_extrapolation
         )
-
-        print(extrapolated_coord)
 
         self.assertAlmostEqual(
             extrapolated_coord.latitude, coord_assumed_linear_extrapolation.latitude
