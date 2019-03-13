@@ -3,12 +3,12 @@ This function parses JSON flight data to and returns the data as python dictiona
 """
 import json
 from typing import Dict, List
-from enum import Enum
+from enum import IntEnum
 from skysensestreamer.dataproc.coords import GPSCoord
 from skysensestreamer.camera import Camera, Airplane
 
 
-class DataIndices(Enum):
+class DataIndices(IntEnum):
     LAT = 1
     LONG = 2
     ALT = 4
@@ -37,7 +37,9 @@ def append_pos_to_plane(data: List, plane: Airplane):
     :param plane: A plane to add the position to
 
     """
-    new_coord = GPSCoord(data[DataIndices.LAT, DataIndices.LONG, DataIndices.ALT])
+    new_coord = GPSCoord(
+        data[DataIndices.LAT], data[DataIndices.LONG], data[DataIndices.ALT]
+    )
     plane.append_position(data[DataIndices.TIME], new_coord)
 
 
