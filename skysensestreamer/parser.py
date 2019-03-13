@@ -4,6 +4,8 @@ This function parses JSON flight data to and returns the data as python dictiona
 import json
 from typing import Dict, List
 from enum import Enum
+from os import stat
+from time import sleep
 from skysensestreamer.dataproc.coords import GPSCoord
 from skysensestreamer.camera import Camera, Airplane
 
@@ -56,3 +58,18 @@ def update_airplanes(camera: Camera, source_file: str):
         new_planes.append(new_plane)
 
     camera.airplanes = new_planes
+
+
+def keep_planes_updated(camera: Camera, source_file: str):
+    """Updates the planes in camera class when new information is available
+
+    :param camera: Camera class that stores the plane information
+    :param source_file: A file with JSON airplane data
+    """
+    modified_time = 0
+    while True:
+        new_time = stat(source_file).st_mtime
+        if new_time != modified_time:
+            modified_time = new_time
+            update_airplanes(camera, source_file)
+        sleep(1)
