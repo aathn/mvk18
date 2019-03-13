@@ -40,8 +40,10 @@ class View:
 class Airplane:
     max_timestamped_positions = 3
 
-    def __init__(self):
+    def __init__(self, init_time: Number = time()):
         self.id = None
+        self.init_time = init_time
+        """Time of initialization for the Airplane object"""
         self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
         self.timestamped_positions: Deque[Tuple[Number, GPSCoord]] = deque(
             [], self.max_timestamped_positions
@@ -65,15 +67,19 @@ class Airplane:
         """Updates self.extrapolation by extrapolating with the current self.timestamped_positions as input.
 
         If the number of timestamped_positions is one we update it with that position as a constant.
+        :code:`self.init_time` is subtracted from the times in order to avoid handling huge numbers, 
+        which causes problems in the extrapolation function.
         """
         times = []
         positions = []
         for time_, coord in self.timestamped_positions:
-            times.append(time_)
+            times.append(time_ - self.init_time)
             positions.append([coord.latitude, coord.longitude, coord.altitude])
 
         if len(times) == 1:
             self.extrapolation = lambda t: self.timestamped_positions[0][1]
         else:
             extrapolate_array = util.extrapolate(times, positions)
-            self.extrapolation = lambda t: GPSCoord(*extrapolate_array(t))
+            self.extrapolation = lambda t: GPSCoord(
+                *extrapolate_array(t - self.init_time)
+            )
