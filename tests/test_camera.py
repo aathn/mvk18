@@ -5,7 +5,8 @@ from skysensestreamer.dataproc.coords import GPSCoord
 
 class AirplaneTests(unittest.TestCase):
     def setUp(self):
-        self.airplane = Airplane()
+        init_time = 1551365000.156895
+        self.airplane = Airplane(init_time)
 
         self.time1 = 1551365010.156895
         self.time1int = int(self.time1)
@@ -38,7 +39,7 @@ class AirplaneTests(unittest.TestCase):
         )
 
     def test_append_linear_positions_returns_correctly_extrapolated_coord(self):
-        time_given_linear_extrapolation = 1551365025.156895
+        time_given_linear_extrapolation = 1551365025.0
         coord_assumed_linear_extrapolation = GPSCoord(23, 23, 1000)
 
         self.airplane.append_position(self.time1int, self.coord1)
