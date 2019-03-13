@@ -113,12 +113,16 @@ class GPSCoord:
 
         :returns: self in ECEF coordinates
         """
-        n_phi = _prime_vertical_radius_of_curvature(self.latitude)
-        x = (n_phi + self.altitude) * np.cos(self.latitude) * np.cos(self.longitude)
-        y = (n_phi + self.altitude) * np.cos(self.latitude) * np.sin(self.longitude)
+        radian_lat = self.latitude * np.pi / 180
+        radian_long = self.longitude * np.pi / 180
+        radian_alt = self.altitude * np.pi / 180
+
+        n_phi = _prime_vertical_radius_of_curvature(radian_lat)
+        x = (n_phi + radian_alt) * np.cos(radian_lat) * np.cos(radian_long)
+        y = (n_phi + radian_alt) * np.cos(radian_lat) * np.sin(radian_long)
         z = (
-            (polar_radius ** 2 / equatorial_radius ** 2) * n_phi + self.altitude
-        ) * np.sin(self.latitude)
+            (polar_radius ** 2 / equatorial_radius ** 2) * n_phi + radian_alt
+        ) * np.sin(radian_lat)
         return np.array([x, y, z])
 
 
