@@ -70,7 +70,7 @@ class GPSCoord:
         )
 
     def to_local(self, target: GPSCoord) -> LocalCoord:
-        """ Calculate the angles and distance from self to target.
+        """Calculate the angles and distance from self to target.
 
         The implementation is based on this `post <https://gis.stackexchange.com/questions/58923/calculate-view-angle>`_, with modifications for the azimuth calculation.
 
@@ -109,21 +109,25 @@ class GPSCoord:
         return LocalCoord(horizontal, vertical, delta_norm)
 
     def get_ecef(self) -> np.ndarray:
-        """ Get the ECEF (earth-centered, earth-fixed) coordinates of self (as described `here <https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates>`_).
+        """Get the ECEF (earth-centered, earth-fixed) coordinates of self (as described `here <https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#From_geodetic_to_ECEF_coordinates>`_).
 
         :returns: self in ECEF coordinates
         """
-        n_phi = _prime_vertical_radius_of_curvature(self.latitude)
-        x = (n_phi + self.altitude) * np.cos(self.latitude) * np.cos(self.longitude)
-        y = (n_phi + self.altitude) * np.cos(self.latitude) * np.sin(self.longitude)
+        radian_lat = self.latitude * np.pi / 180
+        radian_long = self.longitude * np.pi / 180
+        radian_alt = self.altitude * np.pi / 180
+
+        n_phi = _prime_vertical_radius_of_curvature(radian_lat)
+        x = (n_phi + radian_alt) * np.cos(radian_lat) * np.cos(radian_long)
+        y = (n_phi + radian_alt) * np.cos(radian_lat) * np.sin(radian_long)
         z = (
-            (polar_radius ** 2 / equatorial_radius ** 2) * n_phi + self.altitude
-        ) * np.sin(self.latitude)
+            (polar_radius ** 2 / equatorial_radius ** 2) * n_phi + radian_alt
+        ) * np.sin(radian_lat)
         return np.array([x, y, z])
 
 
 def _prime_vertical_radius_of_curvature(phi: float) -> float:
-    """ Helper for the ECEF function.
+    """Helper for the ECEF function.
 
     :param phi: The angle for which to calculate the radius of curvature
     :returns: The prime vertical radius of curvature
