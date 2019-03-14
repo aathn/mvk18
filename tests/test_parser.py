@@ -3,6 +3,7 @@ from skysensestreamer import parser
 from skysensestreamer.camera import Camera
 from threading import Thread, Condition
 from time import sleep
+from os import remove
 
 
 data_dir = "tests/parse_data"
@@ -397,6 +398,7 @@ class ParserTests(unittest.TestCase):
             cond.notify()
 
         parser_thread.join()
+        remove(filename)
 
 
 if __name__ == "__main__":
