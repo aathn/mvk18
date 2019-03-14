@@ -6,7 +6,7 @@ from skysensestreamer.dataproc.coords import GPSCoord
 class AirplaneTests(unittest.TestCase):
     def setUp(self):
         init_time = 1551365000.156895
-        self.airplane = Airplane(init_time)
+        self.airplane = Airplane(None, init_time)
 
         self.time1 = 1551365010.156895
         self.time1int = int(self.time1)
