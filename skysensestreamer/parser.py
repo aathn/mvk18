@@ -5,9 +5,9 @@ import json
 from typing import Dict, List
 from enum import IntEnum
 from os import stat
-from time import sleep
 from skysensestreamer.dataproc.coords import GPSCoord
 from skysensestreamer.camera import Camera, Airplane
+from threading import Condition
 
 
 class DataIndices(IntEnum):
@@ -62,16 +62,28 @@ def update_airplanes(camera: Camera, source_file: str):
     camera.airplanes = new_planes
 
 
-def keep_planes_updated(camera: Camera, source_file: str):
+def keep_planes_updated(
+    camera: Camera, source_file: str, update_interval: int, cond: Condition
+):
     """Updates the planes in camera class when new information is available
+    
+    Start this using something like:
+    :code:`p = threading.Thread(target = keep_planes_updated, args = (camera, source_file, 1.0, cond))`
+
+    End the thread using :code:`cond.notify()`, after acquiring `cond`.
 
     :param camera: Camera class that stores the plane information
     :param source_file: A file with JSON airplane data
+    :param update_interval: The time between checking the status of the file
+    :param cond: A Condition used to exclusively access camera and determine when to stop looping
+
     """
     modified_time = 0
-    while True:
-        new_time = stat(source_file).st_mtime
-        if new_time != modified_time:
-            modified_time = new_time
-            update_airplanes(camera, source_file)
-        sleep(1)
+    with cond:
+        while True:
+            new_time = stat(source_file).st_mtime
+            if new_time != modified_time:
+                modified_time = new_time
+                update_airplanes(camera, source_file)
+            if cond.wait(update_interval):
+                break
