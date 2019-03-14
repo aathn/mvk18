@@ -1,6 +1,8 @@
 import unittest
 from skysensestreamer import parser
 from skysensestreamer.camera import Camera
+from threading import Thread, Condition
+from time import sleep
 
 
 data_dir = "tests/parse_data"
@@ -360,6 +362,41 @@ class ParserTests(unittest.TestCase):
         parser.update_airplanes(self.camera, "{}/test_two_flights".format(data_dir))
         parser.update_airplanes(self.camera, "{}/test_empty".format(data_dir))
         self.assertEqual(len(self.camera.airplanes), 0)
+
+    def test_keep_planes_updated(self):
+        filename = "{}/test_keep_planes_updated".format(data_dir)
+        with open("{}/test_one_flight".format(data_dir), "r") as file:
+            one_flight_string = file.read()
+        with open("{}/test_two_flights".format(data_dir), "r") as file:
+            two_flights_string = file.read()
+
+        with open(filename, "w+") as file:
+            file.write("{}")
+
+        interval = 0.25
+        cond = Condition()
+        parser_thread = Thread(
+            target=parser.keep_planes_updated,
+            args=(self.camera, filename, interval - 0.05, cond),
+        )
+        parser_thread.start()
+
+        with open(filename, "w") as file:
+            file.write(one_flight_string)
+
+        sleep(interval)
+        with cond:
+            self.assertEqual(len(self.camera.airplanes), 1)
+
+        with open(filename, "w") as file:
+            file.write(two_flights_string)
+
+        sleep(interval)
+        with cond:
+            self.assertEqual(len(self.camera.airplanes), 2)
+            cond.notify()
+
+        parser_thread.join()
 
 
 if __name__ == "__main__":
