@@ -52,12 +52,12 @@ class View:
     def contains(self, position: LocalCoord) -> bool:
         """Returns True if the position is within the view."""
         position_in_view = False
-        if self.upper_bound < position.altitude_angle < self.lower_bound:
-            if self.left_bound < position.azimuth < self.right_bound:
+        if self.upper_bound <= position.altitude_angle <= self.lower_bound:
+            if self.left_bound <= position.azimuth <= self.right_bound:
                 position_in_view = True
-            elif self.left_bound > self.right_bound and (
-                self.left_bound < position.azimuth
-                or position.azimuth < self.right_bound
+            elif self.left_bound >= self.right_bound and (
+                self.left_bound <= position.azimuth
+                or position.azimuth <= self.right_bound
             ):
                 position_in_view = True
         return position_in_view
