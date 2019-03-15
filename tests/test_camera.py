@@ -1,8 +1,36 @@
 import unittest
-from skysensestreamer.camera import Airplane, Camera
+from skysensestreamer.camera import Airplane, Camera, View
 from skysensestreamer.dataproc.coords import GPSCoord, LocalCoord
 from math import pi
 
+
+class ViewTests(unittest.TestCase):
+    def setUp(self):
+        self.view1 = View(0.5, 1.5, 1, 3)
+        self.view2 = View(1, 3, 5, 2)
+        self.full_view = View(0, pi, 0, 0)
+        self.pos0 = LocalCoord(0, 1.5, 0)
+        self.pos1 = LocalCoord(0.5, 3, 0)
+        self.pos2 = LocalCoord(2, 5.5, 0)
+        self.pos3 = LocalCoord(1.4, 1.5, 0)
+
+    def test_contains_returns_true_for_positions_it_does_contain(self):
+        self.assertTrue(self.view1.contains(self.pos1))
+        self.assertTrue(self.view2.contains(self.pos2))
+        self.assertTrue(self.view1.contains(self.pos3))
+        self.assertTrue(self.view2.contains(self.pos3))
+
+    def test_contains_returns_false_for_positions_it_does_not_contain(self):
+        self.assertFalse(self.view1.contains(self.pos2))
+        self.assertFalse(self.view2.contains(self.pos1))
+        self.assertFalse(self.view1.contains(self.pos0))
+        self.assertFalse(self.view1.contains(self.pos0))
+
+    def test_full_view_contains_everything(self):
+        self.assertTrue(self.full_view.contains(self.pos0))
+        self.assertTrue(self.full_view.contains(self.pos1))
+        self.assertTrue(self.full_view.contains(self.pos2))
+        self.assertTrue(self.full_view.contains(self.pos3))
 
 class CameraTests(unittest.TestCase):
     def setUp(self):
