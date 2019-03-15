@@ -32,9 +32,23 @@ class View:
         right_bound: Angle,
     ):
         self.upper_bound: Angle = upper_bound
+        """Should be less than lower_bound."""
         self.lower_bound: Angle = lower_bound
         self.left_bound: Angle = left_bound
         self.right_bound: Angle = right_bound
+
+    def contains(self, position: LocalCoord) -> bool:
+        """Returns True if the position is within the view."""
+        position_in_view = False
+        if self.upper_bound < position.altitude_angle < self.lower_bound:
+            if self.left_bound < position.azimuth < self.right_bound:
+                position_in_view = True
+            elif self.left_bound > self.right_bound and (
+                self.left_bound < position.azimuth
+                or position.azimuth < self.right_bound
+            ):
+                position_in_view = True
+        return position_in_view
 
 
 class Airplane:
