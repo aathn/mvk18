@@ -19,14 +19,25 @@ Number = Union[int, float]
 class Camera:
     """A class that handles the camera and its pan/tilt device."""
 
-    def __init__(self, lock: Lock):
+    def __init__(self):
         self.gps_position = None
         self.tracked_airplane = None
         self.view = None
         self.direction = None
         """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
+        self.airplane_lock = Lock()
+        """Used to provide exclusive access to the airplanes list"""
         self.airplanes = []
-        self.lock = lock
+
+    @property
+    def airplanes(self) -> List[Airplane]:
+        with self.airplane_lock:
+            return self.__airplanes
+
+    @airplanes.setter
+    def airplanes(self, planes: List[Airplanes]):
+        with self.airplane_lock:
+            self.__airplanes = planes
 
     def _to_servo(self, lc: LocalCoord) -> (Angle, Angle):
         """Converts LocalCoords to angles for the servo controller.

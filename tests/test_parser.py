@@ -379,7 +379,7 @@ class ParserTests(unittest.TestCase):
         lock = Lock()
         parser_thread = Thread(
             target=parser.keep_planes_updated,
-            args=(self.camera, filename, interval - 0.05, stop_flag, lock),
+            args=(self.camera, filename, interval - 0.05, stop_flag),
         )
         parser_thread.start()
 

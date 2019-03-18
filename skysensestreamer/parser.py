@@ -78,12 +78,12 @@ def update_airplanes(camera: Camera, source_file: str):
 
 
 def keep_planes_updated(
-    camera: Camera, source_file: str, update_interval: int, stop_flag: Event, lock: Lock
+    camera: Camera, source_file: str, update_interval: int, stop_flag: Event
 ):
     """Updates the planes in camera class when new information is available
     
     Start this using something like:
-    :code:`p = threading.Thread(target = keep_planes_updated, args = (camera, source_file, 1.0, stop_flag, lock))`
+    :code:`p = threading.Thread(target = keep_planes_updated, args = (camera, source_file, 1.0, stop_flag))`
 
     End the thread using :code:`stop_flag.set()`.
 
@@ -98,6 +98,5 @@ def keep_planes_updated(
         new_time = stat(source_file).st_mtime
         if new_time != modified_time:
             modified_time = new_time
-            with lock:
-                update_airplanes(camera, source_file)
+            update_airplanes(camera, source_file)
         sleep(update_interval)
