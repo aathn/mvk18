@@ -5,6 +5,8 @@ from time import time
 from collections import deque
 from typing import NewType, Tuple, Deque, Union
 from math import pi
+import signal
+import subprocess
 
 
 Angle = NewType("Angle", float)
@@ -42,6 +44,65 @@ class Camera:
         """
         plane_local = self.gps_position.to_local(plane.position)
         return self.view.contains(plane_local)
+
+
+class FFmpegHandler:
+    """A class that handles ffmpeg streaming from a USB web cam.
+
+	The FFmpegHandler object can start and stop a stream to a certain url.
+	Always make sure to stop the previous stream before starting a new one.
+	"""
+
+    def __init__(self):
+        self.process = None
+        self.streaming = False
+
+    def start_stream(
+        self,
+        url: str,
+        input_device: str = '"0"',
+        format: str = "avfoundation",
+        resolution: str = "640x480",
+        bitrate: str = "1000k",
+    ):
+        """
+        Start a process that streams video from USB web cam to url specified.
+
+		:param url: The url or output where streaming data is sent to.
+		:param input_device: The USB-camera from which to stream. Default "0"
+        :param format: The input format, may differ on different operating systems. Default avfoundation.
+		:param resolution: The resolution of the streamed video. Default "640x480"
+		:param bitrate: The bitrate of the streamed video. Default "1000k"
+		"""
+
+        if self.streaming:
+            return  # Return if stream is already running
+
+        cmd = (
+            "ffmpeg -f "
+            + format
+            + " -framerate 30 -video_size "
+            + resolution
+            + " -pix_fmt uyvy422"
+            + " -i "
+            + input_device
+            + " -f mpegts -codec:v mpeg1video -s "
+            + resolution
+            + " -b:v "
+            + bitrate
+            + " -bf 0 "
+            + url
+        )
+        self.process = subprocess.Popen(
+            "exec " + cmd, stdout=subprocess.PIPE, shell=True
+        )
+        self.streaming = True
+
+    def stop_stream(self):
+        """Stop streaming process."""
+        self.process.send_signal(signal.SIGINT)
+        self.process.wait()
+        self.streaming = False
 
 
 class View:
@@ -104,7 +165,7 @@ class Airplane:
         """Updates self.extrapolation by extrapolating with the current self.timestamped_positions as input.
 
         If the number of timestamped_positions is one we update it with that position as a constant.
-        :code:`self.init_time` is subtracted from the times in order to avoid handling huge numbers, 
+        :code:`self.init_time` is subtracted from the times in order to avoid handling huge numbers,
         which causes problems in the extrapolation function.
         """
         times = []
