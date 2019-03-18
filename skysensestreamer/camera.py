@@ -1,3 +1,4 @@
+from __future__ import annotations
 from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
 from skysensestreamer.dataproc import util
 from time import time

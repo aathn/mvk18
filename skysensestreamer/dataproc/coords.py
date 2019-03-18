@@ -108,7 +108,7 @@ class GPSCoord:
         else:
             horizontal = np.arctan(east_proj / north_proj)
 
-        if self.latitude > target.latitude:
+        if north_proj < 0 or (east_proj < 0 and north_proj == 0):
             horizontal += np.pi
 
         return LocalCoord(horizontal, vertical, delta_norm)

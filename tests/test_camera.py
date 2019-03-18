@@ -74,6 +74,16 @@ class CameraTests(unittest.TestCase):
         (pan3, _) = self.camera.to_servo(self.local_coord3)
         self.assertAlmostEqual(pan3, pi)
 
+    def test_can_see_correct_for_plane_in_view(self):
+        self.camera.view = View(0, pi, 0, pi)
+        self.camera.gps_position = GPSCoord(0, 0, 0)
+        plane_east = Airplane()
+        plane_east.append_position(0, GPSCoord(0, 10, 0))
+        plane_west = Airplane()
+        plane_west.append_position(0, GPSCoord(0, -10, 0))
+        self.assertTrue(self.camera.can_see(plane_east))
+        self.assertFalse(self.camera.can_see(plane_west))
+
 
 class AirplaneTests(unittest.TestCase):
     def setUp(self):
