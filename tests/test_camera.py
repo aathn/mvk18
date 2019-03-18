@@ -42,36 +42,36 @@ class CameraTests(unittest.TestCase):
 
     def test_correct_tilt_angle_conversion(self):
         self.camera.direction = 0
-        (_, tilt1) = self.camera.to_servo(self.local_coord1)
+        (_, tilt1) = self.camera._to_servo(self.local_coord1)
         self.assertAlmostEqual(tilt1, pi / 2)
-        (_, tilt2) = self.camera.to_servo(self.local_coord2)
+        (_, tilt2) = self.camera._to_servo(self.local_coord2)
         self.assertAlmostEqual(tilt2, 0)
-        (_, tilt3) = self.camera.to_servo(self.local_coord3)
+        (_, tilt3) = self.camera._to_servo(self.local_coord3)
         self.assertAlmostEqual(tilt3, pi / 3)
 
     def test_correct_pan_angle_conversion_when_camera_direction_is_zero(self):
         self.camera.direction = 0
-        (pan1, _) = self.camera.to_servo(self.local_coord1)
+        (pan1, _) = self.camera._to_servo(self.local_coord1)
         self.assertAlmostEqual(pan1, 0)
-        (pan2, _) = self.camera.to_servo(self.local_coord2)
+        (pan2, _) = self.camera._to_servo(self.local_coord2)
         self.assertAlmostEqual(pan2, 3 * pi / 2)
-        (pan3, _) = self.camera.to_servo(self.local_coord3)
+        (pan3, _) = self.camera._to_servo(self.local_coord3)
         self.assertAlmostEqual(pan3, pi / 2)
 
     def test_correct_pan_angle_conversion_when_camera_direction_is_pi(self):
         self.camera.direction = pi
-        (pan1, _) = self.camera.to_servo(self.local_coord1)
+        (pan1, _) = self.camera._to_servo(self.local_coord1)
         self.assertAlmostEqual(pan1, pi)
-        (pan2, _) = self.camera.to_servo(self.local_coord2)
+        (pan2, _) = self.camera._to_servo(self.local_coord2)
         self.assertAlmostEqual(pan2, pi / 2)
 
     def test_correct_pan_angle_conversion_when_camera_direction_is_pi_half(self):
         self.camera.direction = pi / 2
-        (pan1, _) = self.camera.to_servo(self.local_coord1)
+        (pan1, _) = self.camera._to_servo(self.local_coord1)
         self.assertAlmostEqual(pan1, pi / 2)
-        (pan2, _) = self.camera.to_servo(self.local_coord2)
+        (pan2, _) = self.camera._to_servo(self.local_coord2)
         self.assertAlmostEqual(pan2, 0)
-        (pan3, _) = self.camera.to_servo(self.local_coord3)
+        (pan3, _) = self.camera._to_servo(self.local_coord3)
         self.assertAlmostEqual(pan3, pi)
 
     def test_can_see_correct_for_plane_in_view(self):
