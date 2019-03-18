@@ -19,8 +19,8 @@ class Camera:
     def __init__(self):
         self.gps_position = None
         self.tracked_airplane = None
-        self.direction = None
         self.view = None
+        self.direction = None
         """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
         self.airplanes = []
 
@@ -54,8 +54,7 @@ class View:
         left_bound: Angle,
         right_bound: Angle,
     ):
-        self.upper_bound: Angle = upper_bound
-        """Should be less than lower_bound."""
+        self.upper_bound: Angle = upper_bound  # Should be less than lower_bound
         self.lower_bound: Angle = lower_bound
         self.left_bound: Angle = left_bound
         self.right_bound: Angle = right_bound
