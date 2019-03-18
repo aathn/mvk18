@@ -32,6 +32,15 @@ class Camera:
         tilt = pi / 2 - lc.altitude_angle
         return (pan, tilt)
 
+    def can_see(self, plane: Airplane) -> bool:
+        """Check if the camera can see a plane
+
+        :param plane: The plane to check
+        :returns: True if plane is in view of the camera
+        """
+        plane_local = self.gps_position.to_local(plane.position)
+        return self.view.contains(plane_local)
+
 
 class View:
     """A class that represents the view for a camera. Used to filter out visible planes."""
@@ -79,9 +88,6 @@ class Airplane:
             [], self.max_timestamped_positions
         )
         """A deque of tuples which consists of a timestamp and a GPSCoord."""
-
-    def in_view(self, view: View) -> bool:
-        pass
 
     @property
     def position(self) -> GPSCoord:
