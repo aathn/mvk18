@@ -19,6 +19,7 @@ class Camera:
         self.gps_position = None
         self.tracked_airplane = None
         self.direction = None
+        self.view = None
         """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
         self.airplanes = []
 
