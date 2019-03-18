@@ -12,6 +12,8 @@ from time import sleep
 
 
 class DataIndices(IntEnum):
+    """Enumeration for elements in JSON data"""
+
     LAT = 1
     LONG = 2
     ALT = 4
@@ -47,6 +49,18 @@ def append_pos_to_plane(data: List, plane: Airplane):
 
 
 def update_airplanes(camera: Camera, source_file: str):
+    """Update a camera's airplane list
+    
+    Replaces the current airplane list with an updated one based on
+    source_file. Airplanes not present in source_file are
+    removed. Airplanes present in source_file but not the existing
+    list are created and added to the new list. Existing airplanes
+    present in the source file are updated and added to the new list.
+    
+    :param camera: The Camera object to be updated
+    :param source_file: Source file to read data from
+
+    """
     new_data = parse(source_file)
     new_planes = []
     for plane in camera.airplanes:
