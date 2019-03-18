@@ -3,6 +3,7 @@ from skysensestreamer.dataproc import util
 from time import time
 from collections import deque
 from typing import NewType, Tuple, Deque, Union
+from threading import Lock
 from math import pi
 
 
@@ -15,12 +16,13 @@ Number = Union[int, float]
 class Camera:
     """A class that handles the camera and its pan/tilt device."""
 
-    def __init__(self):
+    def __init__(self, lock: Lock):
         self.gps_position = None
         self.tracked_airplane = None
         self.direction = None
         """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
         self.airplanes = []
+        self.lock = lock
 
     def to_servo(self, lc: LocalCoord) -> (Angle, Angle):
         """Converts LocalCoords to angles for the servo controller
@@ -32,6 +34,27 @@ class Camera:
         tilt = pi / 2 - lc.altitude_angle
         return (pan, tilt)
 
+    def start(self):
+        """"""
+        stream_handler = FFmpegHandler()
+        while True:
+            self._search_for_airplane()
+            stream_handler.start_stream()
+            self._follow_airplane()
+            stream_handler.stop_stream()
+
+    def _follow_airplane(self):
+        
+
+    def _search_for_airplane(self):
+        while True:
+            visible = self._get_visible()
+            if len(visible) > 0:
+                self.tracked_airplane = visible[0]
+                break
+            
+    def _get_visible(self):
+        return filter(airplanes, lambda x: x.in_view(self.view))
 
 class View:
     """A class that represents the view for a camera. Used to filter out visible planes."""
