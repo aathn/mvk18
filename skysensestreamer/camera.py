@@ -52,8 +52,8 @@ class View:
 class Airplane:
     max_timestamped_positions = 3
 
-    def __init__(self, init_time: Number = time()):
-        self.id = None
+    def __init__(self, plane_id=None, init_time: Number = time()):
+        self.id = plane_id
         self.init_time = init_time
         """Time of initialization for the Airplane object"""
         self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
