@@ -50,7 +50,11 @@ class View:
         self.right_bound: Angle = right_bound
 
     def contains(self, position: LocalCoord) -> bool:
-        """Returns True if the position is within the view."""
+        """Returns True if the position is within the view.
+
+        :param position: The position to check
+        :returns: Whether position is in view
+        """
         position_in_view = False
         if self.upper_bound <= position.altitude_angle <= self.lower_bound:
             if self.left_bound <= position.azimuth <= self.right_bound:
