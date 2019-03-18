@@ -2,7 +2,7 @@
 This module defines an object used to control the pan/tilt platform.
 Many parts of the code are currently subject to change.
 """
-import skysensestreamer.maestro
+from skysensestreamer import maestro
 import math
 
 
