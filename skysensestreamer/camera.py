@@ -1,9 +1,10 @@
 from __future__ import annotations
 from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
 from skysensestreamer.dataproc import util
-from time import time
+from skysensestreamer.pantiltcontrol import Controller
+from time import time, sleep
 from collections import deque
-from typing import NewType, Tuple, Deque, Union
+from typing import NewType, Tuple, Deque, Union, List
 from threading import Lock
 from math import pi
 import signal
@@ -14,6 +15,11 @@ Angle = NewType("Angle", float)
 """Type definition mostly for simple documentation with type hints."""
 
 Number = Union[int, float]
+
+SERVO_UPDATE_DELAY = 0.5
+"""The delay between servo updates when tracking a plane"""
+CAMERA_SEARCH_DELAY = 1
+"""The delay between polls to the airplane list when waiting for a plane to track"""
 
 
 class Camera:
@@ -27,6 +33,7 @@ class Camera:
         """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
         self.airplane_lock = Lock()
         """Used to provide exclusive access to the airplanes list"""
+        self.controller = Controller()
         self.airplanes = []
 
     @property
@@ -50,16 +57,20 @@ class Camera:
         return (pan, tilt)
 
     def start(self):
-        """"""
+        """Start tracking, filming and streaming airplanes."""
         stream_handler = FFmpegHandler()
         while True:
             self._search_for_airplane()
             stream_handler.start_stream()
-            self._follow_airplane()
+            self._follow_tracked_plane()
             stream_handler.stop_stream()
 
-    def _follow_airplane(self):
-        
+    def _follow_tracked_plane(self):
+        while self.can_see(self.tracked_airplane):
+            localcoord = self.gps_position.to_local(tracked_airplane.position)
+            pan_angle, tilt_angle = self._to_servo(localcoord)
+            self.controller.set_position(pan_angle, tilt_angle)
+            sleep(SERVO_UPDATE_DELAY)
 
     def _search_for_airplane(self):
         while True:
@@ -67,9 +78,10 @@ class Camera:
             if len(visible) > 0:
                 self.tracked_airplane = visible[0]
                 break
-            
+            sleep(CAMERA_SEARCH_DELAY)
+
     def _get_visible(self):
-        return filter(airplanes, lambda x: x.in_view(self.view))
+        return filter(self.can_see, self.airplanes)
 
     def can_see(self, plane: Airplane) -> bool:
         """Check if the camera can see a plane
@@ -95,8 +107,8 @@ class FFmpegHandler:
     def start_stream(
         self,
         url: str,
-        input_device: str = '"0"',
-        format: str = "avfoundation",
+        input_device: str = '"0"',  # TODO: should be "/dev/video0" on skysense
+        format: str = "avfoundation",  # TODO: should be "v4l2" on skysense
         resolution: str = "640x480",
         bitrate: str = "1000k",
     ):
