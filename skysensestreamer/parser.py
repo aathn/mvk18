@@ -7,7 +7,7 @@ from enum import IntEnum
 from os import stat
 from skysensestreamer.dataproc.coords import GPSCoord
 from skysensestreamer.camera import Camera, Airplane
-from threading import Event
+from threading import Event, Lock
 from time import sleep
 
 
@@ -64,12 +64,12 @@ def update_airplanes(camera: Camera, source_file: str):
 
 
 def keep_planes_updated(
-    camera: Camera, source_file: str, update_interval: int, stop_flag: Event
+    camera: Camera, source_file: str, update_interval: int, stop_flag: Event, lock: Lock
 ):
     """Updates the planes in camera class when new information is available
     
     Start this using something like:
-    :code:`p = threading.Thread(target = keep_planes_updated, args = (camera, source_file, 1.0, stop_flag))`
+    :code:`p = threading.Thread(target = keep_planes_updated, args = (camera, source_file, 1.0, stop_flag, lock))`
 
     End the thread using :code:`stop_flag.set()`.
 
@@ -84,5 +84,6 @@ def keep_planes_updated(
         new_time = stat(source_file).st_mtime
         if new_time != modified_time:
             modified_time = new_time
-            update_airplanes(camera, source_file)
+            with lock:
+                update_airplanes(camera, source_file)
         sleep(update_interval)

@@ -1,7 +1,7 @@
 import unittest
 from skysensestreamer import parser
 from skysensestreamer.camera import Camera
-from threading import Thread, Event
+from threading import Thread, Event, Lock
 from time import sleep
 from os import remove
 
@@ -375,10 +375,11 @@ class ParserTests(unittest.TestCase):
             file.write("{}")
 
         interval = 0.25
-        event = Event()
+        stop_flag = Event()
+        lock = Lock()
         parser_thread = Thread(
             target=parser.keep_planes_updated,
-            args=(self.camera, filename, interval - 0.05, event),
+            args=(self.camera, filename, interval - 0.05, stop_flag, lock),
         )
         parser_thread.start()
 
@@ -386,14 +387,17 @@ class ParserTests(unittest.TestCase):
             file.write(one_flight_string)
 
         sleep(interval)
-        self.assertEqual(len(self.camera.airplanes), 1)
+        with lock:
+            self.assertEqual(len(self.camera.airplanes), 1)
 
         with open(filename, "w") as file:
             file.write(two_flights_string)
 
         sleep(interval)
-        self.assertEqual(len(self.camera.airplanes), 2)
-        event.set()
+        with lock:
+            self.assertEqual(len(self.camera.airplanes), 2)
+
+        stop_flag.set()
 
         parser_thread.join()
         remove(filename)
