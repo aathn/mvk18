@@ -1,3 +1,4 @@
+from __future__ import annotations
 from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
 from skysensestreamer.dataproc import util
 from time import time
@@ -18,6 +19,7 @@ class Camera:
     def __init__(self):
         self.gps_position = None
         self.tracked_airplane = None
+        self.view = None
         self.direction = None
         """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
         self.airplanes = []
@@ -32,6 +34,15 @@ class Camera:
         tilt = pi / 2 - lc.altitude_angle
         return (pan, tilt)
 
+    def can_see(self, plane: Airplane) -> bool:
+        """Check if the camera can see a plane
+
+        :param plane: The plane to check
+        :returns: True if plane is in view of the camera
+        """
+        plane_local = self.gps_position.to_local(plane.position)
+        return self.view.contains(plane_local)
+
 
 class View:
     """A class that represents the view for a camera. Used to filter out visible planes."""
@@ -43,10 +54,27 @@ class View:
         left_bound: Angle,
         right_bound: Angle,
     ):
-        self.upper_bound: Angle = upper_bound
+        self.upper_bound: Angle = upper_bound  # Should be less than lower_bound
         self.lower_bound: Angle = lower_bound
         self.left_bound: Angle = left_bound
         self.right_bound: Angle = right_bound
+
+    def contains(self, position: LocalCoord) -> bool:
+        """Returns True if the position is within the view.
+
+        :param position: The position to check
+        :returns: Whether position is in view
+        """
+        position_in_view = False
+        if self.upper_bound <= position.altitude_angle <= self.lower_bound:
+            if self.left_bound <= position.azimuth <= self.right_bound:
+                position_in_view = True
+            elif self.left_bound >= self.right_bound and (
+                self.left_bound <= position.azimuth
+                or position.azimuth <= self.right_bound
+            ):
+                position_in_view = True
+        return position_in_view
 
 
 class Airplane:
@@ -61,9 +89,6 @@ class Airplane:
             [], self.max_timestamped_positions
         )
         """A deque of tuples which consists of a timestamp and a GPSCoord."""
-
-    def in_view(self, view: View) -> bool:
-        pass
 
     @property
     def position(self) -> GPSCoord:

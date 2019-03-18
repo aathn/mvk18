@@ -15,7 +15,9 @@ polar_radius = 20855486.5
 class LocalCoord:
     def __init__(self, azimuth, altitude_angle, distance):
         self.azimuth = azimuth
+        """The angle in radians one should turn clockwise from north, to face the object."""
         self.altitude_angle = altitude_angle
+        """The angle in radians one should look down from straight up, to face the object."""
         self.distance = distance
 
     @property
@@ -24,6 +26,7 @@ class LocalCoord:
 
     @azimuth.setter
     def azimuth(self, azimuth):
+        """Formats equivalent angles to be in the range 0-2π."""
         self.__azimuth = azimuth % (2 * np.pi)
 
     @property
@@ -32,6 +35,7 @@ class LocalCoord:
 
     @altitude_angle.setter
     def altitude_angle(self, altitude_angle):
+        """Sets altitude_angle to the nearest angle in the range 0-π."""
         if altitude_angle < 0:
             self.__altitude_angle = 0
         elif altitude_angle > np.pi:
@@ -45,6 +49,7 @@ class LocalCoord:
 
     @distance.setter
     def distance(self, distance):
+        """Sets distance to be an absolute value (always positive)."""
         self.__distance = np.abs(distance)
 
 
@@ -99,11 +104,14 @@ class GPSCoord:
         north_proj = level_north.dot(delta) / la.norm(level_north)
         east_proj = level_east.dot(delta) / la.norm(level_east)
         if np.isclose(north_proj, 0):
-            horizontal = np.pi / 2
+            if east_proj < 0:
+                horizontal = -np.pi / 2
+            else:
+                horizontal = np.pi / 2
         else:
             horizontal = np.arctan(east_proj / north_proj)
 
-        if self.latitude > target.latitude:
+        if north_proj < 0:
             horizontal += np.pi
 
         return LocalCoord(horizontal, vertical, delta_norm)

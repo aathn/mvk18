@@ -1,7 +1,36 @@
 import unittest
-from skysensestreamer.camera import Airplane, Camera
+from skysensestreamer.camera import Airplane, Camera, View
 from skysensestreamer.dataproc.coords import GPSCoord, LocalCoord
 from math import pi
+
+
+class ViewTests(unittest.TestCase):
+    def setUp(self):
+        self.view1 = View(0.5, 1.5, 1, 3)
+        self.view2 = View(1, 3, 5, 2)
+        self.full_view = View(0, pi, 0, 0)
+        self.pos0 = LocalCoord(1.5, 0, 0)
+        self.pos1 = LocalCoord(3, 0.5, 0)
+        self.pos2 = LocalCoord(5.5, 2, 0)
+        self.pos3 = LocalCoord(1.5, 1.4, 0)
+
+    def test_contains_returns_true_for_positions_it_does_contain(self):
+        self.assertTrue(self.view1.contains(self.pos1))
+        self.assertTrue(self.view2.contains(self.pos2))
+        self.assertTrue(self.view1.contains(self.pos3))
+        self.assertTrue(self.view2.contains(self.pos3))
+
+    def test_contains_returns_false_for_positions_it_does_not_contain(self):
+        self.assertFalse(self.view1.contains(self.pos2))
+        self.assertFalse(self.view2.contains(self.pos1))
+        self.assertFalse(self.view1.contains(self.pos0))
+        self.assertFalse(self.view1.contains(self.pos0))
+
+    def test_full_view_contains_everything(self):
+        self.assertTrue(self.full_view.contains(self.pos0))
+        self.assertTrue(self.full_view.contains(self.pos1))
+        self.assertTrue(self.full_view.contains(self.pos2))
+        self.assertTrue(self.full_view.contains(self.pos3))
 
 
 class CameraTests(unittest.TestCase):
@@ -44,6 +73,16 @@ class CameraTests(unittest.TestCase):
         self.assertAlmostEqual(pan2, 0)
         (pan3, _) = self.camera.to_servo(self.local_coord3)
         self.assertAlmostEqual(pan3, pi)
+
+    def test_can_see_correct_for_plane_in_view(self):
+        self.camera.view = View(0, pi, 0, pi)
+        self.camera.gps_position = GPSCoord(0, 0, 0)
+        plane_east = Airplane()
+        plane_east.append_position(0, GPSCoord(0, 10, 0))
+        plane_west = Airplane()
+        plane_west.append_position(0, GPSCoord(0, -10, 0))
+        self.assertTrue(self.camera.can_see(plane_east))
+        self.assertFalse(self.camera.can_see(plane_west))
 
 
 class AirplaneTests(unittest.TestCase):
