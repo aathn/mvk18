@@ -61,7 +61,7 @@ class Camera:
         stream_handler = FFmpegHandler()
         while True:
             self._search_for_airplane()
-            stream_handler.start_stream()
+            stream_handler.start_stream("192.168.43.131:8000")
             self._follow_tracked_plane()
             stream_handler.stop_stream()
 
@@ -107,8 +107,8 @@ class FFmpegHandler:
     def start_stream(
         self,
         url: str,
-        input_device: str = '"0"',  # TODO: should be "/dev/video0" on skysense
-        format: str = "avfoundation",  # TODO: should be "v4l2" on skysense
+        input_device: str = "/dev/video0",
+        format: str = "v4l2",
         resolution: str = "640x480",
         bitrate: str = "1000k",
     ):
