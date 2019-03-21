@@ -1,6 +1,5 @@
 """
 This module defines an object used to control the pan/tilt platform.
-Many parts of the code are currently subject to change.
 """
 import skysensestreamer.maestro
 import math
@@ -8,9 +7,9 @@ import math
 
 def _to_pan_value(angle: float, target_range: (int, int)) -> int:
     """
-    Converts an angle to a corresponding value read by the Maetstro.
+    Converts an angle to a corresponding value read by the Maestro.
 
-    :param angle: an angle in radians in range [0,π], 0 is left, π is right
+    :param angle: an angle in radians in range [0,π], 0 is right, π is left
     :param target_range: the range of values to map to
     :type angle: float
     :type target_range: (int, int)
