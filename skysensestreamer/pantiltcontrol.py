@@ -58,8 +58,8 @@ class Controller:
         self.servo = maestro.Controller()
         self.servo.setRange(0, self.pan_range[0], self.pan_range[1])
         self.servo.setRange(1, self.tilt_range[0], self.tilt_range[1])
-        self.servo.setSpeed(0, 0)
-        self.servo.setSpeed(1, 0)
+        self.servo.setSpeed(0, 25)
+        self.servo.setSpeed(1, 25)
 
     def set_position(self, pan_angle, tilt_angle):
         """ Sets the platform to the specified angles.
