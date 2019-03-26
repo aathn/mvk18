@@ -1,10 +1,9 @@
-from __future__ import annotations
 from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
 from skysensestreamer.dataproc import util
 from skysensestreamer.pantiltcontrol import Controller
 from time import time, sleep
 from collections import deque
-from typing import NewType, Tuple, Deque, Union, List
+from typing import NewType, Tuple, Union, List
 from threading import Lock
 from math import pi
 import signal
@@ -37,12 +36,12 @@ class Camera:
         self.airplanes = []
 
     @property
-    def airplanes(self) -> List[Airplane]:
+    def airplanes(self) -> List["Airplane"]:
         with self.airplane_lock:
             return self.__airplanes
 
     @airplanes.setter
-    def airplanes(self, planes: List[Airplanes]):
+    def airplanes(self, planes: List["Airplane"]):
         with self.airplane_lock:
             self.__airplanes = planes
 
@@ -61,15 +60,17 @@ class Camera:
         stream_handler = FFmpegHandler()
         while True:
             self._search_for_airplane()
-            stream_handler.start_stream("192.168.43.131:8000")
+            stream_handler.start_stream(
+                "http://192.168.1.28:8000/livestream/flygplanet"
+            )
             self._follow_tracked_plane()
             stream_handler.stop_stream()
 
     def _follow_tracked_plane(self):
         while self.can_see(self.tracked_airplane):
-            localcoord = self.gps_position.to_local(tracked_airplane.position)
             print("Following plane: ", self.tracked_airplane.id)
             print("Tracked pos: ", self.tracked_airplane.position)
+            localcoord = self.gps_position.to_local(self.tracked_airplane.position)
             print(
                 "Localcoord: ",
                 localcoord.azimuth,
@@ -93,10 +94,11 @@ class Camera:
     def _select_plane(self, planes: List["Airplane"]):
         planes.sort(key=lambda x: self.gps_position.to_local(x.position).distance)
         self.tracked_airplane = planes[0]
-    def _get_visible(self):
-        return filter(self.can_see, self.airplanes)
 
-    def can_see(self, plane: Airplane) -> bool:
+    def _get_visible(self):
+        return [plane for plane in self.airplanes if self.can_see(plane)]
+
+    def can_see(self, plane: "Airplane") -> bool:
         """Check if the camera can see a plane
 
         :param plane: The plane to check
@@ -175,10 +177,10 @@ class View:
         left_bound: Angle,
         right_bound: Angle,
     ):
-        self.upper_bound: Angle = upper_bound  # Should be less than lower_bound
-        self.lower_bound: Angle = lower_bound
-        self.left_bound: Angle = left_bound
-        self.right_bound: Angle = right_bound
+        self.upper_bound = upper_bound  # Should be less than lower_bound
+        self.lower_bound = lower_bound
+        self.left_bound = left_bound
+        self.right_bound = right_bound
 
     def contains(self, position: LocalCoord) -> bool:
         """Returns True if the position is within the view.
@@ -206,9 +208,7 @@ class Airplane:
         self.init_time = init_time
         """Time of initialization for the Airplane object"""
         self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
-        self.timestamped_positions: Deque[Tuple[Number, GPSCoord]] = deque(
-            [], self.max_timestamped_positions
-        )
+        self.timestamped_positions = deque([], self.max_timestamped_positions)
         """A deque of tuples which consists of a timestamp and a GPSCoord."""
 
     @property
