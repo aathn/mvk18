@@ -86,10 +86,13 @@ class Camera:
             visible = self._get_visible()
             print("Searching for planes. Visible: ", [plane.id for plane in visible])
             if len(visible) > 0:
-                self.tracked_airplane = visible[0]
+                self._select_plane(visible)
                 break
             sleep(CAMERA_SEARCH_DELAY)
 
+    def _select_plane(self, planes: List["Airplane"]):
+        planes.sort(key=lambda x: self.gps_position.to_local(x.position).distance)
+        self.tracked_airplane = planes[0]
     def _get_visible(self):
         return filter(self.can_see, self.airplanes)
 
