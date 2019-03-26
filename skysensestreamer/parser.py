@@ -98,5 +98,6 @@ def keep_planes_updated(
         new_time = stat(source_file).st_mtime
         if new_time != modified_time:
             modified_time = new_time
+            print("updating airplane list")
             update_airplanes(camera, source_file)
         sleep(update_interval)

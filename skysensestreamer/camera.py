@@ -68,13 +68,23 @@ class Camera:
     def _follow_tracked_plane(self):
         while self.can_see(self.tracked_airplane):
             localcoord = self.gps_position.to_local(tracked_airplane.position)
+            print("Following plane: ", self.tracked_airplane.id)
+            print("Tracked pos: ", self.tracked_airplane.position)
+            print(
+                "Localcoord: ",
+                localcoord.azimuth,
+                localcoord.altitude_angle,
+                localcoord.distance,
+            )
             pan_angle, tilt_angle = self._to_servo(localcoord)
+            print("Pan: ", pan_angle, "Tilt: ", tilt_angle)
             self.controller.set_position(pan_angle, tilt_angle)
             sleep(SERVO_UPDATE_DELAY)
 
     def _search_for_airplane(self):
         while True:
             visible = self._get_visible()
+            print("Searching for planes. Visible: ", [plane.id for plane in visible])
             if len(visible) > 0:
                 self.tracked_airplane = visible[0]
                 break
