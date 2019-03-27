@@ -104,11 +104,14 @@ class GPSCoord:
         north_proj = level_north.dot(delta) / la.norm(level_north)
         east_proj = level_east.dot(delta) / la.norm(level_east)
         if np.isclose(north_proj, 0):
-            horizontal = np.pi / 2
+            if east_proj < 0:
+                horizontal = -np.pi / 2
+            else:
+                horizontal = np.pi / 2
         else:
             horizontal = np.arctan(east_proj / north_proj)
 
-        if self.latitude > target.latitude:
+        if north_proj < 0:
             horizontal += np.pi
 
         return LocalCoord(horizontal, vertical, delta_norm)
