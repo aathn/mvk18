@@ -25,6 +25,18 @@ class Camera:
         self.direction = None
         """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
         self.airplanes = []
+        self.init_gps_position()
+        self.init_view()
+        self.init_direction()
+
+    def init_gps_position(self):
+        pass
+
+    def init_view(self):
+        pass
+
+    def init_direction(self):
+        pass
 
     def to_servo(self, lc: LocalCoord) -> (Angle, Angle):
         """Converts LocalCoords to angles for the servo controller
