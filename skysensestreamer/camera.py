@@ -24,7 +24,7 @@ class Camera:
         self.tracked_airplane = None
         self.view = self.init_view()
         self.direction = self.init_direction()
-        """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
+        """The compass angle (in radians) that the pan/tilt platform has its right side facing."""
         self.airplanes = []
 
     def init_gps_position(self):
@@ -47,6 +47,7 @@ class Camera:
 
         :param lc: The local coord to be converted.
         :returns: A tuple containing a pan and a tilt angle.
+
         """
         pan = (self.direction - lc.azimuth) % (2 * pi)
         tilt = pi / 2 - lc.altitude_angle
@@ -57,6 +58,7 @@ class Camera:
 
         :param plane: The plane to check
         :returns: True if plane is in view of the camera
+
         """
         plane_local = self.gps_position.to_local(plane.position)
         return self.view.contains(plane_local)
@@ -65,9 +67,10 @@ class Camera:
 class FFmpegHandler:
     """A class that handles ffmpeg streaming from a USB web cam.
 
-	The FFmpegHandler object can start and stop a stream to a certain url.
-	Always make sure to stop the previous stream before starting a new one.
-	"""
+    The FFmpegHandler object can start and stop a stream to a certain url.
+    Always make sure to stop the previous stream before starting a new one.
+
+    """
 
     def __init__(self):
         self.process = None
@@ -84,12 +87,13 @@ class FFmpegHandler:
         """
         Start a process that streams video from USB web cam to url specified.
 
-		:param url: The url or output where streaming data is sent to.
-		:param input_device: The USB-camera from which to stream. Default "0"
+        :param url: The url or output where streaming data is sent to.
+        :param input_device: The USB-camera from which to stream. Default "0"
         :param format: The input format, may differ on different operating systems. Default avfoundation.
-		:param resolution: The resolution of the streamed video. Default "640x480"
-		:param bitrate: The bitrate of the streamed video. Default "1000k"
-		"""
+        :param resolution: The resolution of the streamed video. Default "640x480"
+        :param bitrate: The bitrate of the streamed video. Default "1000k"
+
+        """
 
         if self.streaming:
             return  # Return if stream is already running
@@ -141,6 +145,7 @@ class View:
 
         :param position: The position to check
         :returns: Whether position is in view
+
         """
         position_in_view = False
         if self.upper_bound <= position.altitude_angle <= self.lower_bound:
@@ -183,6 +188,7 @@ class Airplane:
         If the number of timestamped_positions is one we update it with that position as a constant.
         :code:`self.init_time` is subtracted from the times in order to avoid handling huge numbers,
         which causes problems in the extrapolation function.
+
         """
         times = []
         positions = []
