@@ -30,12 +30,15 @@ class Camera:
         self.init_direction()
 
     def init_gps_position(self):
+        """Initializes gps_position from file"""
         pass # Read from position.txt and set self.gps_position
 
     def init_view(self):
+        """Initializes view from file"""
         pass # Read from camera_attributes/view.js and set self.view
-        
+
     def init_direction(self):
+        """Initializes direction from file"""
         pass # Read from camera_attributes/direction.js and set self.direction
 
     def to_servo(self, lc: LocalCoord) -> (Angle, Angle):
