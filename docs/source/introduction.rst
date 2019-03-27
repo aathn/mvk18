@@ -65,7 +65,7 @@ already have Skysense v2 equipment) put the device in their window and
 film planes during flight which will be livestreamed to the
 Flightradar24 platform.
 
-.. figure:: resources/UML-system-usecase.png
+.. figure:: ../resources/UML-system-usecase.png
 
    UML use case diagram showing an overview of the system and actors
 

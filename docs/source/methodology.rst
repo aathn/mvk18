@@ -2,7 +2,7 @@
  TIMELINE AND METHODOLOGY
 ==========================
 
-.. figure:: resources/gantt.png
+.. figure:: ../resources/gantt.png
 
    An overview of our waterfall project plan. The red dots indicate
    assignment milestones. Since we are using an agile workflow, specific
