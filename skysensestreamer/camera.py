@@ -1,6 +1,7 @@
 from __future__ import annotations
 from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
 from skysensestreamer.dataproc import util
+from skysensestreamer import conf
 from time import time
 from collections import deque
 from typing import NewType, Tuple, Deque, Union
@@ -19,27 +20,27 @@ class Camera:
     """A class that handles the camera and its pan/tilt device."""
 
     def __init__(self):
-        self.gps_position = None
+        self.gps_position = self.init_gps_position()
         self.tracked_airplane = None
-        self.view = None
-        self.direction = None
+        self.view = self.init_view()
+        self.direction = self.init_direction()
         """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
         self.airplanes = []
-        self.init_gps_position()
-        self.init_view()
-        self.init_direction()
 
     def init_gps_position(self):
         """Initializes gps_position from file"""
         pass # Read from position.txt and set self.gps_position
 
-    def init_view(self):
-        """Initializes view from file"""
-        pass # Read from camera_attributes/view.js and set self.view
+    @staticmethod
+    def init_direction():
+        """Initializes direction from conf.py file"""
+        return conf.camera_direction
 
-    def init_direction(self):
-        """Initializes direction from file"""
-        pass # Read from camera_attributes/direction.js and set self.direction
+    @staticmethod
+    def init_view():
+        """Initializes view from conf.py file"""
+        bound = conf.camera_view_bounds
+        return View(bound["upper"], bound["lower"], bound["left"], bound["right"])
 
     def to_servo(self, lc: LocalCoord) -> (Angle, Angle):
         """Converts LocalCoords to angles for the servo controller
