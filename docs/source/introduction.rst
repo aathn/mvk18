@@ -24,12 +24,18 @@ checkups and coordinating the workflow on Trello.
 Developers
 ----------
 
-Joakim Loxdal - Frontend responsibility
-Theo Puranen Åhfeldt - Testing responsibility
+Adam Wiker - Documentation responsibility
+
 Christian Stjernberg - Hardware responsibility
+
+Joakim Loxdal - Frontend responsibility
+
 Måns Andersson - Backend responsibility
-Philip Andersson
-Adam Wiker
+
+Philip Andersson - Cloud responsibility
+
+Theo Puranen Åhfeldt - Testing responsibility
+
 
 ==========
  THE NEED
