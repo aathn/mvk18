@@ -51,7 +51,7 @@ range of users.
  PROPOSED IDEA
 ===============
 
-The idea is to make a proof-of-concept product to ​automatically
+The idea is to make a proof-of-concept product to automatically
 live-stream airplane traffic (and takeoff/landing) using a pan-tilt
 camera connected with Flightradar24’s receiver unit called the
 Skysense v2 (See Skysense v2 for more info). This will give airplane
