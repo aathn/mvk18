@@ -30,13 +30,13 @@ class Camera:
         self.init_direction()
 
     def init_gps_position(self):
-        pass
+        pass # Read from position.txt and set self.gps_position
 
     def init_view(self):
-        pass
-
+        pass # Read from camera_attributes/view.js and set self.view
+        
     def init_direction(self):
-        pass
+        pass # Read from camera_attributes/direction.js and set self.direction
 
     def to_servo(self, lc: LocalCoord) -> (Angle, Angle):
         """Converts LocalCoords to angles for the servo controller
