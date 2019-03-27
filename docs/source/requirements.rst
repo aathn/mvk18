@@ -154,3 +154,7 @@
 .. req:: Ensure that streaming is scalable
    :id: REQ_22
    :tags: functional
+
+.. needtable::
+   :tags: functional
+   :style: table

@@ -136,7 +136,7 @@ latex_documents = [
     (
         master_doc,
         "mvk18-flightradar24.tex",
-        "mvk18-flightradar24 Documentation",
+        "MVK18 Flightradar24 Documentation",
         "Group 10",
         "manual",
     )
