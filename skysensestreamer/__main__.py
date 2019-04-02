@@ -1,7 +1,10 @@
 """This main file is responsible for starting the camera and also the flight data parsing in an additional thread.
 
-The module does the following:
-1.
+This module does the following:
+
+1. Parse the `config file <config.ini>`_.
+2. Create a Camera with settings parsed from the config file.
+3. Start a thread with a process that parses and updates flight airplane data.
 
 """
 
