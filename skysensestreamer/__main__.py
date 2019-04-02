@@ -14,7 +14,7 @@ parser_thread = Thread(
 
 camera.direction = 3 * pi / 2
 camera.gps_position = GPSCoord(59.477894166666665, 17.905329683333335, 33.720)
-camera.view = View(0, pi / 2, pi / 2, 3 * pi / 2)
+camera.view = View(0, pi / 2, pi / 2, 3 * pi / 2, 40000)
 
 parser_thread.start()
 camera.start()
