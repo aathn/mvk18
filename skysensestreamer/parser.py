@@ -35,6 +35,17 @@ def parse(source_file: str) -> Dict:
     return data
 
 
+def parseGPSCoord(source_file: str) -> GPSCoord:
+    """Parses GPS positions from file
+
+    :param source_file: The file with the GPS data.
+    :return: A GPSCoord object.
+    """
+    with open(source_file, "r") as file:
+        pos = [float(coord) for coord in file.readline().split(",")]
+    return GPSCoord(pos[0], pos[1], pos[2])
+
+
 def append_pos_to_plane(data: List, plane: Airplane):
     """Append a position to a plane using raw data
 
