@@ -3,7 +3,6 @@ from skysensestreamer import parser
 from skysensestreamer.camera import Camera
 from threading import Thread, Event, Lock
 from time import sleep
-from os import remove
 
 
 data_dir = "tests/parse_data"
@@ -379,7 +378,7 @@ class ParserTests(unittest.TestCase):
         lock = Lock()
         parser_thread = Thread(
             target=parser.keep_planes_updated,
-            args=(self.camera, filename, interval - 0.05, stop_flag, lock),
+            args=(self.camera, filename, interval - 0.05, stop_flag),
         )
         parser_thread.start()
 
@@ -400,7 +399,6 @@ class ParserTests(unittest.TestCase):
         stop_flag.set()
 
         parser_thread.join()
-        remove(filename)
 
 
 if __name__ == "__main__":

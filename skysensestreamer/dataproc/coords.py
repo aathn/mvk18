@@ -2,14 +2,13 @@
 This file contains functions for processing of coordinate data.
 """
 
-from __future__ import annotations
 import numpy as np
 import numpy.linalg as la
 
 
 # The radii of the Earth's major and minor axes, in feet
-equatorial_radius = 20925646.3
-polar_radius = 20855486.5
+equatorial_radius = 20925721.784777
+polar_radius = 20855567.585301
 
 
 class LocalCoord:
@@ -59,14 +58,14 @@ class GPSCoord:
         self.longitude = longitude
         self.altitude = altitude
 
-    def __eq__(self, other: GPSCoord):
+    def __eq__(self, other: "GPSCoord"):
         return (
             self.latitude == other.latitude
             and self.longitude == other.longitude
             and self.altitude == other.altitude
         )
 
-    def __ne__(self, other: GPSCoord):
+    def __ne__(self, other: "GPSCoord"):
         return not self.__eq__(other)
 
     def __repr__(self):
@@ -74,7 +73,7 @@ class GPSCoord:
             self.latitude, self.longitude, self.altitude
         )
 
-    def to_local(self, target: GPSCoord) -> LocalCoord:
+    def to_local(self, target: "GPSCoord") -> "LocalCoord":
         """Calculate the angles and distance from self to target.
 
         The implementation is based on this `post <https://gis.stackexchange.com/questions/58923/calculate-view-angle>`_, with modifications for the azimuth calculation.
@@ -123,13 +122,12 @@ class GPSCoord:
         """
         radian_lat = self.latitude * np.pi / 180
         radian_long = self.longitude * np.pi / 180
-        radian_alt = self.altitude * np.pi / 180
 
         n_phi = _prime_vertical_radius_of_curvature(radian_lat)
-        x = (n_phi + radian_alt) * np.cos(radian_lat) * np.cos(radian_long)
-        y = (n_phi + radian_alt) * np.cos(radian_lat) * np.sin(radian_long)
+        x = (n_phi + self.altitude) * np.cos(radian_lat) * np.cos(radian_long)
+        y = (n_phi + self.altitude) * np.cos(radian_lat) * np.sin(radian_long)
         z = (
-            (polar_radius ** 2 / equatorial_radius ** 2) * n_phi + radian_alt
+            (polar_radius ** 2 / equatorial_radius ** 2) * n_phi + self.altitude
         ) * np.sin(radian_lat)
         return np.array([x, y, z])
 
