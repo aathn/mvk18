@@ -6,9 +6,9 @@ from math import pi
 
 class ViewTests(unittest.TestCase):
     def setUp(self):
-        self.view1 = View(0.5, 1.5, 1, 3)
-        self.view2 = View(1, 3, 5, 2)
-        self.full_view = View(0, pi, 0, 0)
+        self.view1 = View(0.5, 1.5, 1, 3, 40000)
+        self.view2 = View(1, 3, 5, 2, 40000)
+        self.full_view = View(0, pi, 0, 0, 40000)
         self.pos0 = LocalCoord(1.5, 0, 0)
         self.pos1 = LocalCoord(3, 0.5, 0)
         self.pos2 = LocalCoord(5.5, 2, 0)
@@ -75,14 +75,19 @@ class CameraTests(unittest.TestCase):
         self.assertAlmostEqual(pan3, pi)
 
     def test_can_see_correct_for_plane_in_view(self):
-        self.camera.view = View(0, pi, 0, pi)
+        self.camera.view = View(0, pi, 0, pi, 40000)
         self.camera.gps_position = GPSCoord(0, 0, 0)
         plane_east = Airplane()
-        plane_east.append_position(0, GPSCoord(0, 10, 0))
+        plane_east.append_position(0, GPSCoord(0, 0.1, 0))
         plane_west = Airplane()
-        plane_west.append_position(0, GPSCoord(0, -10, 0))
+        # distance about 36000 feet
+        plane_west.append_position(0, GPSCoord(0, -0.1, 0))
+        plane_far = Airplane()
+        # distance about 360000 feet
+        plane_far.append_position(0, GPSCoord(0, -1, 0))
         self.assertTrue(self.camera.can_see(plane_east))
         self.assertFalse(self.camera.can_see(plane_west))
+        self.assertFalse(self.camera.can_see(plane_far))
 
 
 class AirplaneTests(unittest.TestCase):
