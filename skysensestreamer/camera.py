@@ -33,17 +33,33 @@ class Camera:
         view_left_bound: Angle,
         view_right_bound: Angle,
     ):
+        """
+        :param gps_position: The position of the Skysense and camera
+        :param direction: The compass angle (in radians) that the pan/tilt platform has its right side facing
+        :param view_upper_bound: The angle in radians which is the highest the camera can point to and still see the
+                                 sky (zero is straight up)
+        :param view_lower_bound: The angle in radians which is the lowest the camera can point to and still see the
+                                 sky (zero is straight up)
+        :param view_left_bound: The compass angle in radians which is the leftmost point the camera can point to and
+                                still see the sky (zero is north and increasing values represent clockwise rotation)
+        :param view_right_bound: The compass angle in radians which is the rightmost point the camera can point to and
+                                 still see the sky (zero is north and increasing values represent clockwise rotation)
+
+        """
         self.gps_position = gps_position
-        self.tracked_airplane = None
+        self.direction = direction
+        """The compass angle (in radians) that the pan/tilt platform has its right side facing"""
         self.view = View(
             view_upper_bound, view_lower_bound, view_left_bound, view_right_bound
         )
-        self.direction = direction
-        """The compass angle (in radians) that the pan/tilt platform has its right side facing."""
         self.airplane_lock = Lock()
         """Used to provide exclusive access to the airplanes list"""
         self.controller = Controller()
+        """The object used to control the servos in the pan/tilt platform"""
+        self.tracked_airplane = None
         self.airplanes = []
+        """A list of airplanes in the vicinity of the Skysense that is updated by the parser thread started in 
+        __main__.py"""
 
     @property
     def airplanes(self) -> List["Airplane"]:
