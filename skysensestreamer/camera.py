@@ -3,7 +3,7 @@ from skysensestreamer.dataproc import util
 from skysensestreamer.pantiltcontrol import Controller
 from time import time, sleep
 from collections import deque
-from typing import NewType, Tuple, Union, List
+from typing import NewType, Union, List
 from threading import Lock
 from math import pi
 import signal
