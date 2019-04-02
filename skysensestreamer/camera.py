@@ -72,7 +72,7 @@ class Camera:
         while True:
             self._search_for_airplane()
             stream_handler.start_stream(
-                "http://192.168.1.28:8000/livestream/flygplanet"
+                "http://192.168.1.28:8000/livestream/flygplanet"  # TODO: This should be in the conf.ini file
             )
             self._follow_tracked_plane()
             stream_handler.stop_stream()
@@ -192,7 +192,7 @@ class View:
         right_bound: Angle,
         distance: int,
     ):
-        self.upper_bound = upper_bound  # Should be less than lower_bound
+        self.upper_bound = upper_bound  # TODO: Should be less than lower_bound
         self.lower_bound = lower_bound
         self.left_bound = left_bound
         self.right_bound = right_bound
