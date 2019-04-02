@@ -1,9 +1,10 @@
-from __future__ import annotations
 from skysensestreamer.dataproc.coords import LocalCoord, GPSCoord
 from skysensestreamer.dataproc import util
-from time import time
+from skysensestreamer.pantiltcontrol import Controller
+from time import time, sleep
 from collections import deque
-from typing import NewType, Tuple, Deque, Union
+from typing import NewType, Tuple, Union, List
+from threading import Lock
 from math import pi
 import signal
 import subprocess
@@ -13,6 +14,11 @@ Angle = NewType("Angle", float)
 """Type definition mostly for simple documentation with type hints."""
 
 Number = Union[int, float]
+
+SERVO_UPDATE_DELAY = 0.5
+"""The delay between servo updates when tracking a plane"""
+CAMERA_SEARCH_DELAY = 1
+"""The delay between polls to the airplane list when waiting for a plane to track"""
 
 
 class Camera:
@@ -24,10 +30,23 @@ class Camera:
         self.view = None
         self.direction = None
         """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
+        self.airplane_lock = Lock()
+        """Used to provide exclusive access to the airplanes list"""
+        self.controller = Controller()
         self.airplanes = []
 
-    def to_servo(self, lc: LocalCoord) -> (Angle, Angle):
-        """Converts LocalCoords to angles for the servo controller
+    @property
+    def airplanes(self) -> List["Airplane"]:
+        with self.airplane_lock:
+            return self.__airplanes
+
+    @airplanes.setter
+    def airplanes(self, planes: List["Airplane"]):
+        with self.airplane_lock:
+            self.__airplanes = planes
+
+    def _to_servo(self, lc: LocalCoord) -> (Angle, Angle):
+        """Converts LocalCoords to angles for the servo controller.
 
         :param lc: The local coord to be converted.
         :returns: A tuple containing a pan and a tilt angle.
@@ -36,7 +55,50 @@ class Camera:
         tilt = pi / 2 - lc.altitude_angle
         return (pan, tilt)
 
-    def can_see(self, plane: Airplane) -> bool:
+    def start(self):
+        """Start tracking, filming and streaming airplanes."""
+        stream_handler = FFmpegHandler()
+        while True:
+            self._search_for_airplane()
+            stream_handler.start_stream(
+                "http://192.168.1.28:8000/livestream/flygplanet"
+            )
+            self._follow_tracked_plane()
+            stream_handler.stop_stream()
+
+    def _follow_tracked_plane(self):
+        while self.can_see(self.tracked_airplane):
+            print("Following plane: ", self.tracked_airplane.id)
+            print("Tracked pos: ", self.tracked_airplane.position)
+            localcoord = self.gps_position.to_local(self.tracked_airplane.position)
+            print(
+                "Localcoord: ",
+                localcoord.azimuth,
+                localcoord.altitude_angle,
+                localcoord.distance,
+            )
+            pan_angle, tilt_angle = self._to_servo(localcoord)
+            print("Pan: ", pan_angle, "Tilt: ", tilt_angle)
+            self.controller.set_position(pan_angle, tilt_angle)
+            sleep(SERVO_UPDATE_DELAY)
+
+    def _search_for_airplane(self):
+        while True:
+            visible = self._get_visible()
+            print("Searching for planes. Visible: ", [plane.id for plane in visible])
+            if len(visible) > 0:
+                self._select_plane(visible)
+                break
+            sleep(CAMERA_SEARCH_DELAY)
+
+    def _select_plane(self, planes: List["Airplane"]):
+        planes.sort(key=lambda x: self.gps_position.to_local(x.position).distance)
+        self.tracked_airplane = planes[0]
+
+    def _get_visible(self):
+        return [plane for plane in self.airplanes if self.can_see(plane)]
+
+    def can_see(self, plane: "Airplane") -> bool:
         """Check if the camera can see a plane
 
         :param plane: The plane to check
@@ -60,8 +122,8 @@ class FFmpegHandler:
     def start_stream(
         self,
         url: str,
-        input_device: str = '"0"',
-        format: str = "avfoundation",
+        input_device: str = "/dev/video0",
+        format: str = "v4l2",
         resolution: str = "640x480",
         bitrate: str = "1000k",
     ):
@@ -115,10 +177,10 @@ class View:
         left_bound: Angle,
         right_bound: Angle,
     ):
-        self.upper_bound: Angle = upper_bound  # Should be less than lower_bound
-        self.lower_bound: Angle = lower_bound
-        self.left_bound: Angle = left_bound
-        self.right_bound: Angle = right_bound
+        self.upper_bound = upper_bound  # Should be less than lower_bound
+        self.lower_bound = lower_bound
+        self.left_bound = left_bound
+        self.right_bound = right_bound
 
     def contains(self, position: LocalCoord) -> bool:
         """Returns True if the position is within the view.
@@ -146,9 +208,7 @@ class Airplane:
         self.init_time = init_time
         """Time of initialization for the Airplane object"""
         self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
-        self.timestamped_positions: Deque[Tuple[Number, GPSCoord]] = deque(
-            [], self.max_timestamped_positions
-        )
+        self.timestamped_positions = deque([], self.max_timestamped_positions)
         """A deque of tuples which consists of a timestamp and a GPSCoord."""
 
     @property

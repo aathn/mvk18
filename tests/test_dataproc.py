@@ -58,6 +58,12 @@ class CoordTests(unittest.TestCase):
         self.assertTrue(np.isclose(local_coord.altitude_angle, 2.09488))
         self.assertTrue(np.isclose(local_coord.distance, 20925520, rtol=0.01))
 
+    def test_to_local_vertical_angle(self):
+        self_pos = GPSCoord(59.47789, 17.90532, 32.8084)
+        target_pos = GPSCoord(59.47790, 17.90364, 875.9843)
+        local_coord = self_pos.to_local(target_pos)
+        self.assertTrue(np.isclose(local_coord.altitude_angle, 0.354899))
+
 
 if __name__ == "__main__":
     unittest.main()
