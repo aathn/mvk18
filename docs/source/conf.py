@@ -48,6 +48,10 @@ extensions = [
     "sphinxcontrib.needs",
 ]
 
+# Extra configuration for sphinxcontrib-needs
+needs_latex_visit = lambda self, node: self.body.append(r"\begin{tcolorbox}")
+needs_latex_depart = lambda self, node: self.body.append(r"\end{tcolorbox}")
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
