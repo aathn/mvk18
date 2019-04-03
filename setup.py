@@ -1,10 +1,10 @@
-from distutils.command.install import install
+from setuptools.command.develop import develop
 from setuptools import setup, find_packages
 import urllib.request
 import os
 
 
-class InstallWithMaestro(install):
+class InstallWithMaestro(develop):
     """Install and download maestro module"""
 
     def run(self):
@@ -23,7 +23,7 @@ class InstallWithMaestro(install):
         else:
             print("Maestro is already installed")
 
-        install.run(self)
+        develop.run(self)
 
 
 setup(
@@ -32,6 +32,6 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     python_requires=">=3.7",
-    cmdclass={"install": InstallWithMaestro},
+    cmdclass={"develop": InstallWithMaestro},
     install_requires=["pyserial==3.4", "numpy==1.16.1"],
 )
