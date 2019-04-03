@@ -1,6 +1,7 @@
 import unittest
 from skysensestreamer import parser
 from skysensestreamer.camera import Camera
+from skysensestreamer.dataproc.coords import GPSCoord
 from threading import Thread, Event, Lock
 from time import sleep
 
@@ -399,6 +400,11 @@ class ParserTests(unittest.TestCase):
         stop_flag.set()
 
         parser_thread.join()
+
+    def test_parse_gps(self):
+        real_coords = parser.GPSCoord(59.47796866666667, 17.905363266666665, 19.753)
+        coords = parser.parse_gps_coord("{}/test_parse_gps.txt".format(data_dir))
+        self.assertEqual(real_coords, coords)
 
 
 if __name__ == "__main__":
