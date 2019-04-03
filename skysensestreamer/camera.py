@@ -3,7 +3,7 @@ from skysensestreamer.dataproc import util
 from skysensestreamer.pantiltcontrol import Controller
 from time import time, sleep
 from collections import deque
-from typing import NewType, Tuple, Union, List
+from typing import NewType, Union, List
 from threading import Lock
 from math import pi
 import signal
@@ -24,16 +24,42 @@ CAMERA_SEARCH_DELAY = 1
 class Camera:
     """A class that handles the camera and its pan/tilt device."""
 
-    def __init__(self):
-        self.gps_position = None
-        self.tracked_airplane = None
-        self.view = None
-        self.direction = None
-        """The compass angle (in radians) that the pan/tilt plattform has its right side facing."""
+    def __init__(
+        self,
+        gps_position: GPSCoord,
+        direction: Angle,
+        view_upper_bound: Angle,
+        view_lower_bound: Angle,
+        view_left_bound: Angle,
+        view_right_bound: Angle,
+    ):
+        """
+        :param gps_position: The position of the Skysense and camera
+        :param direction: The compass angle (in radians) that the pan/tilt platform has its right side facing
+        :param view_upper_bound: The angle in radians which is the highest the camera can point to and still see the
+                                 sky (zero is straight up)
+        :param view_lower_bound: The angle in radians which is the lowest the camera can point to and still see the
+                                 sky (zero is straight up)
+        :param view_left_bound: The compass angle in radians which is the leftmost point the camera can point to and
+                                still see the sky (zero is north and increasing values represent clockwise rotation)
+        :param view_right_bound: The compass angle in radians which is the rightmost point the camera can point to and
+                                 still see the sky (zero is north and increasing values represent clockwise rotation)
+
+        """
+        self.gps_position = gps_position
+        self.direction = direction
+        """The compass angle (in radians) that the pan/tilt platform has its right side facing"""
+        self.view = View(
+            view_upper_bound, view_lower_bound, view_left_bound, view_right_bound
+        )
         self.airplane_lock = Lock()
         """Used to provide exclusive access to the airplanes list"""
         self.controller = Controller()
+        """The object used to control the servos in the pan/tilt platform"""
+        self.tracked_airplane = None
         self.airplanes = []
+        """A list of airplanes in the vicinity of the Skysense that is updated by the parser thread started in 
+        __main__.py"""
 
     @property
     def airplanes(self) -> List["Airplane"]:
@@ -50,10 +76,11 @@ class Camera:
 
         :param lc: The local coord to be converted.
         :returns: A tuple containing a pan and a tilt angle.
+
         """
         pan = (self.direction - lc.azimuth) % (2 * pi)
         tilt = pi / 2 - lc.altitude_angle
-        return (pan, tilt)
+        return pan, tilt
 
     def start(self):
         """Start tracking, filming and streaming airplanes."""
@@ -61,7 +88,7 @@ class Camera:
         while True:
             self._search_for_airplane()
             stream_handler.start_stream(
-                "http://192.168.1.28:8000/livestream/flygplanet"
+                "http://192.168.1.28:8000/livestream/flygplanet"  # TODO: This should be in the conf.ini file
             )
             self._follow_tracked_plane()
             stream_handler.stop_stream()
@@ -103,6 +130,7 @@ class Camera:
 
         :param plane: The plane to check
         :returns: True if plane is in view of the camera
+
         """
         plane_local = self.gps_position.to_local(plane.position)
         return self.view.contains(plane_local)
@@ -111,9 +139,10 @@ class Camera:
 class FFmpegHandler:
     """A class that handles ffmpeg streaming from a USB web cam.
 
-	The FFmpegHandler object can start and stop a stream to a certain url.
-	Always make sure to stop the previous stream before starting a new one.
-	"""
+    The FFmpegHandler object can start and stop a stream to a certain url.
+    Always make sure to stop the previous stream before starting a new one.
+
+    """
 
     def __init__(self):
         self.process = None
@@ -130,12 +159,13 @@ class FFmpegHandler:
         """
         Start a process that streams video from USB web cam to url specified.
 
-		:param url: The url or output where streaming data is sent to.
-		:param input_device: The USB-camera from which to stream. Default "0"
+        :param url: The url or output where streaming data is sent to.
+        :param input_device: The USB-camera from which to stream. Default "0"
         :param format: The input format, may differ on different operating systems. Default avfoundation.
-		:param resolution: The resolution of the streamed video. Default "640x480"
-		:param bitrate: The bitrate of the streamed video. Default "1000k"
-		"""
+        :param resolution: The resolution of the streamed video. Default "640x480"
+        :param bitrate: The bitrate of the streamed video. Default "1000k"
+
+        """
 
         if self.streaming:
             return  # Return if stream is already running
@@ -178,7 +208,7 @@ class View:
         right_bound: Angle,
         distance: int,
     ):
-        self.upper_bound = upper_bound  # Should be less than lower_bound
+        self.upper_bound = upper_bound  # TODO: Should be less than lower_bound
         self.lower_bound = lower_bound
         self.left_bound = left_bound
         self.right_bound = right_bound
@@ -189,6 +219,7 @@ class View:
 
         :param position: The position to check
         :returns: Whether position is in view
+
         """
         position_in_view = False
         if (
@@ -232,6 +263,7 @@ class Airplane:
         If the number of timestamped_positions is one we update it with that position as a constant.
         :code:`self.init_time` is subtracted from the times in order to avoid handling huge numbers,
         which causes problems in the extrapolation function.
+
         """
         times = []
         positions = []
