@@ -32,6 +32,7 @@ class Camera:
         view_lower_bound: Angle,
         view_left_bound: Angle,
         view_right_bound: Angle,
+        view_distance: int
     ):
         """
         :param gps_position: The position of the Skysense and camera
@@ -50,7 +51,7 @@ class Camera:
         self.direction = direction
         """The compass angle (in radians) that the pan/tilt platform has its right side facing"""
         self.view = View(
-            view_upper_bound, view_lower_bound, view_left_bound, view_right_bound
+            view_upper_bound, view_lower_bound, view_left_bound, view_right_bound, view_distance
         )
         self.airplane_lock = Lock()
         """Used to provide exclusive access to the airplanes list"""
@@ -113,6 +114,7 @@ class Camera:
         while True:
             visible = self._get_visible()
             print("Searching for planes. Visible: ", [plane.id for plane in visible])
+            #print("Show all dists: ", [self.gps_position.to_local(plane.position).distance for plane in self.airplanes])
             if len(visible) > 0:
                 self._select_plane(visible)
                 break
