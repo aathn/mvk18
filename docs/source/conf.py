@@ -15,7 +15,7 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-
+from docutils.parsers.rst import directives
 
 # -- Project information -----------------------------------------------------
 
@@ -49,6 +49,7 @@ extensions = [
 ]
 
 # Extra configuration for sphinxcontrib-needs
+needs_extra_options = {"priority": directives.unchanged}
 needs_latex_visit = lambda self, node: self.body.append(r"\begin{tcolorbox}")
 needs_latex_depart = lambda self, node: self.body.append(r"\end{tcolorbox}")
 
