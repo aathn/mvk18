@@ -35,7 +35,7 @@ def parse(source_file: str) -> Dict:
     return data
 
 
-def parseGPSCoord(source_file: str) -> GPSCoord:
+def parse_gps_coord(source_file: str) -> GPSCoord:
     """Parses GPS positions from file
 
     :param source_file: The file with the GPS data.
@@ -61,13 +61,13 @@ def append_pos_to_plane(data: List, plane: Airplane):
 
 def update_airplanes(camera: Camera, source_file: str):
     """Update a camera's airplane list
-    
+
     Replaces the current airplane list with an updated one based on
     source_file. Airplanes not present in source_file are
     removed. Airplanes present in source_file but not the existing
     list are created and added to the new list. Existing airplanes
     present in the source file are updated and added to the new list.
-    
+
     :param camera: The Camera object to be updated
     :param source_file: Source file to read data from
 
@@ -92,7 +92,7 @@ def keep_planes_updated(
     camera: Camera, source_file: str, update_interval: int, stop_flag: Event
 ):
     """Updates the planes in camera class when new information is available
-    
+
     Start this using something like:
     :code:`p = threading.Thread(target = keep_planes_updated, args = (camera, source_file, 1.0, stop_flag))`
 

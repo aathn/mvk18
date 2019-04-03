@@ -10,7 +10,7 @@ This module does the following:
 
 from skysensestreamer.camera import Camera
 from skysensestreamer.dataproc.coords import GPSCoord
-from skysensestreamer.parser import keep_planes_updated, parseGPSCoord
+from skysensestreamer.parser import keep_planes_updated, parse_gps_coord
 from threading import Thread, Event
 from configparser import ConfigParser
 

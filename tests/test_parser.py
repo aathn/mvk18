@@ -403,7 +403,7 @@ class ParserTests(unittest.TestCase):
 
     def test_parse_gps(self):
         real_coords = parser.GPSCoord(59.47796866666667, 17.905363266666665, 19.753)
-        coords = parser.parseGPSCoord("{}/test_parse_gps.txt".format(data_dir))
+        coords = parser.parse_gps_coord("{}/test_parse_gps.txt".format(data_dir))
         self.assertEqual(real_coords, coords)
 
 
