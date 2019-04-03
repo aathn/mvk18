@@ -1,0 +1,14 @@
+<h2>Streams</h2>
+<script type="text/javascript" src="js/jsmpeg.min.js"></script>
+<a href="/">Reload</a>
+{{#each streams}}
+
+  <h1>{{this.name}}</h1>
+  <canvas id="video-canvas-{{this.name}}"></canvas>
+  <script type="text/javascript">
+    var canvas = document.getElementById('video-canvas-{{this.name}}');
+    var url = 'ws://192.168.1.28:{{this.port}}/';
+    var player = new JSMpeg.Player(url, {canvas: canvas});
+  </script>
+
+{{/each}}
