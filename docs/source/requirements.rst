@@ -80,8 +80,7 @@
    :priority: 1
 
    The skysense shall automatically pick one airplane from the parsed
-   data, prioritizing airplanes that are within a specified range
-   (FYLL I NÄR VI VET)
+   data, prioritizing airplanes that are within 40,000 feet (~12 km)
 
 .. req:: Translate GPS-position to relative position to the camera
    :id: REQ_10
@@ -90,7 +89,8 @@
    :priority: 1
 
    Our software shall be able to translate the GPS-position of
-   airplanes to a position relative to the camera Unittesting
+   airplanes to a position relative to the camera using a horizontal coordinate
+   system
 
 .. req:: Convert relative airplane position to camera pan/tilt angles
    :id: REQ_11
@@ -109,7 +109,7 @@
    :priority: 1
 
    Our software should control the servo to keep the selected airplane
-   fully in frame when possible.
+   fully in frame when possible
 
 .. req:: Keep movements smooth
    :id: REQ_13
@@ -128,7 +128,7 @@
 
    As the airplane positions are provided in discrete chunks, the
    software needs to be able to predict flight paths to a certain
-   extent.
+   extent
 
 .. req:: Avoid sun damage
    :id: REQ_15
@@ -180,8 +180,8 @@
    :status: in progress
    :priority: 2
 
-   The user is able to set the direction the camera plattform is
-   facing. Perhaps using the buttons on the skysense.
+   The user is able to set the direction the camera platform is
+   facing. Perhaps using the buttons on the skysense
 
 .. req:: Non-dependability on hardware
    :id: REQ_21
@@ -191,13 +191,15 @@
 
    To make it easier for FR24 to keep developing the project the
    software we write should be as indepedent on the specific hardware
-   components as possible.
+   components as possible
 
 .. req:: Ensure that streaming is scalable
    :id: REQ_22
    :tags: functional
    :status: backlog
    :priority: 3
+
+   The stream should be able to keep up with a growing number of viewers
 
 .. needtable::
    :tags: functional
