@@ -97,7 +97,7 @@
    :priority: 1
 
    Our software should control the servo to keep the selected airplane
-   fully in frame when possible.
+   fully in frame when possible
 
 .. req:: Keep movements smooth
    :id: REQ_13
@@ -114,7 +114,7 @@
 
    As the airplane positions are provided in discrete chunks, the
    software needs to be able to predict flight paths to a certain
-   extent.
+   extent
 
 .. req:: Avoid sun damage
    :id: REQ_15
@@ -160,8 +160,8 @@
    :tags: functional
    :priority: 2
 
-   The user is able to set the direction the camera plattform is
-   facing. Perhaps using the buttons on the skysense.
+   The user is able to set the direction the camera platform is
+   facing. Perhaps using the buttons on the skysense
 
 .. req:: Non-dependability on hardware
    :id: REQ_21
@@ -170,7 +170,7 @@
 
    To make it easier for FR24 to keep developing the project the
    software we write should be as indepedent on the specific hardware
-   components as possible.
+   components as possible
 
 .. req:: Ensure that streaming is scalable
    :id: REQ_22
