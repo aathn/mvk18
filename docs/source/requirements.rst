@@ -62,7 +62,7 @@
    :priority: 1
 
    The servo shall take two input angles and move the camera to pan
-   and tilt in those angles with a maximum difference of 5°
+   and tilt in those angles.
 
 .. req:: Data parsing
    :id: REQ_8
