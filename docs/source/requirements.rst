@@ -71,8 +71,7 @@
    :priority: 1
 
    The skysense shall automatically pick one airplane from the parsed
-   data, prioritizing airplanes that are within a specified range
-   (FYLL I NÄR VI VET)
+   data, prioritizing airplanes that are within 40,000 feet (~12 km)
 
 .. req:: Translate GPS-position to relative position to the camera
    :id: REQ_10
@@ -80,7 +79,8 @@
    :priority: 1
 
    Our software shall be able to translate the GPS-position of
-   airplanes to a position relative to the camera Unittesting
+   airplanes to a position relative to the camera using a horizontal coordinate
+   system
 
 .. req:: Convert relative airplane position to camera pan/tilt angles
    :id: REQ_11
@@ -176,6 +176,8 @@
    :id: REQ_22
    :tags: functional
    :priority: 3
+
+   The stream should be able to keep up with a growing number of viewers
 
 .. needtable::
    :tags: functional
