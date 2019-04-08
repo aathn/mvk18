@@ -71,7 +71,7 @@
    flights on a web page.
 
 .. req:: Filter among previous recordings
-   :id: REQ_23
+   :id: REQ_21
    :tags: functional
    :status: backlog
    :priority: 4
@@ -95,7 +95,7 @@
 
    The pan/tilt servo should be calibrated in such a way that the
    difference between input angles and output angles is not greater
-   than 0.1 radians
+   than 0.05 radians
 
 .. req:: Data parsing
    :id: REQ_8
@@ -141,8 +141,14 @@
    :priority: 1
 
    The relative position shall be translated to camera pan/tilt angles
-   instructing the camera where to point. This shall be achieved with
-   a precision within 2°
+   instructing the camera where to point.
+
+.. req:: Conversion accuracy
+   :links: REQ_11
+   :tags: quality
+
+   The conversion of relative position to pan/tilt angle shall be
+   achieved with a precision within 0.05 radians.
 
 .. req:: Selected airplane in view
    :id: REQ_12
@@ -151,100 +157,105 @@
    :priority: 1
 
    Our software should control the servo to keep the selected airplane
-   fully in frame when possible
+   in the frame of view when possible
 
-.. req:: Keep movements smooth
-   :id: REQ_13
-   :tags: functional
-   :status: in progress
-   :priority: 2
+.. req:: Airplane tracking quality
+   :id: QUAL_1
+   :links: REQ_12
+   :tags: quality
 
    The servo position should be updated frequently enough to avoid
-   jagged movement
+   jagged movement. It should also keep the airplane centered in the
+   field of view.
 
 .. req:: Predict flight path by extrapolating
-   :id: REQ_14
+   :id: REQ_13
    :tags: functional
    :status: done
    :priority: 1
 
-   As the airplane positions are provided in discrete chunks, the
-   software needs to be able to predict flight paths to a certain
-   extent
+   The software shall to be able to predict flight paths to make up
+   for any lack of continuity in the received data.
+
+.. req:: Extrapolation accuracy
+   :links: REQ_13
+   :tags: quality
+
+   The extrapolation should be accurate for airplanes following a
+   linear trajectory. That is, requirement :need:`QUAL_1` should be
+   fulfilled for an airplane following such a trajectory even when new
+   data is not being received continuously.
 
 .. req:: Avoid sun damage
-   :id: REQ_15
+   :id: REQ_14
    :tags: functional
    :status: backlog
    :priority: 2
 
    The camera shall never point directly towards the sun to avoid
-   being damaged
+   being damaged.
 
 .. req:: Automatically start streaming
+   :id: REQ_15
+   :tags: functional
+   :status: done
+   :priority: 1
+
+   The software should automatically start a video stream when there
+   is a visible airplane in view.
+
+.. req:: Automatically stop streaming
    :id: REQ_16
    :tags: functional
    :status: done
    :priority: 1
 
-   Automatically start video stream when there is a visible airplane
-   in view
-
-.. req:: Automatically stop streaming
-   :id: REQ_17
-   :tags: functional
-   :status: done
-   :priority: 1
-
-   Automatically stop streaming when there no longer are any visible
-   airplanes in view
+   The software should automatically stop streaming when there no
+   longer are any visible airplanes in view.
 
 .. req:: Configurable view
-   :id: REQ_18
+   :id: REQ_17
    :tags: functional
    :status: in progress
    :priority: 1
 
-   The host shall be able to define the cameras view angle in a config
-   file
+   The host shall be able to define the camera's view angle, to enable
+   the camera to only track visible airplanes.
 
 .. req:: Abide view boundaries
-   :id: REQ_19
+   :id: REQ_18
    :tags: functional
    :status: done
    :priority: 1
 
-   The camera shall not move outside of the hosts defined view angle
+   The camera shall not move outside of the host's defined view angle.
 
 .. req:: Configuration process
-   :id: REQ_20
+   :id: REQ_19
    :tags: functional
    :status: in progress
    :priority: 2
 
-   The user is able to set the direction the camera platform is
-   facing. Perhaps using the buttons on the skysense
+   The host shall be able to set the direction and view angle of the
+   camera using a configuration file.
 
 .. req:: Non-dependability on hardware
-   :id: REQ_21
-   :tags: functional
-   :status: in progress
-   :priority: 2
+   :id: QUAL_2
+   :tags: quality
 
-   To make it easier for FR24 to keep developing the project the
-   software we write should be as indepedent on the specific hardware
-   components as possible
+   To make it easier for Flightradar24 to keep developing after the
+   course is finished, the software should be as indepedent on the
+   specific hardware components as possible.
 
 .. req:: Ensure that streaming is scalable
-   :id: REQ_22
-   :tags: functional
-   :status: backlog
-   :priority: 3
+   :id: QUAL_3
+   :tags: quality
 
-   The stream should be able to keep up with a growing number of viewers
+   The streaming setup should be scalable in order to able to keep up
+   with a growing number of viewers.
 
 .. needtable::
    :tags: functional
    :style: datatable
    :sort_by: priority
-   :columns: id;title;status;outgoing;priority;description
+   :columns: id;title;status;outgoing;incoming;priority
