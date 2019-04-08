@@ -8,8 +8,15 @@
    :links: TEST_2
    :priority: 1
 
-   The camera shall capture mpeg video in 1280x720 with at least 15
-   fps for at least 10 minutes continuously
+   The software shall be capable of receiving continuous video output from a camera.
+
+.. req:: Captured video quality
+   :links: REQ_1
+   :tags: quality
+
+   The software should be able to handle a video stream of 1280x720
+   mpeg video with at least 15 fps for at least 10 minutes
+   continuously.
 
 .. req:: Stream video
    :id: REQ_2
@@ -18,8 +25,15 @@
    :links: TEST_2
    :priority: 1
 
-   Our software shall send the captured video to an output URL / file
-   continuously at a bit rate of 1000kb/s
+   Our software shall send the captured video to an output URL / file.
+
+.. req:: Streamed video quality
+   :links: REQ_2
+   :tags: quality
+
+   The software should be able to output the video
+   stream received from the camera continuously at a bit rate of
+   1000kb/s
 
 .. req:: Send data to cloud
    :id: REQ_3
@@ -35,27 +49,35 @@
    :status: backlog
    :priority: 3
 
-   The video sent shall be stored in the cloud and organised in an
-   SQL-database. The storage space not yet specified. (Måste
-   specificera storage space)
+   The video sent shall be stored in the cloud and organised in a
+   database.
 
-.. req:: Display streams on Web page
+.. req:: Display streams on web page
    :id: REQ_5
    :tags: functional
    :status: in progress
    :priority: 2
 
-   The web user shall be able to see all current streams on a Web page
-   and the airplane numbers
+   The web user shall be able to see all current streams on a web page
+   along with relevant information.
 
-.. req:: Display stored video on Web page
+.. req:: Display stored video on web page
    :id: REQ_6
    :tags: functional
    :status: backlog
    :priority: 3
 
    The web user shall be able to see a list of previously recorded
-   flights and filter after flight number
+   flights on a web page.
+
+.. req:: Filter among previous recordings
+   :id: REQ_23
+   :tags: functional
+   :status: backlog
+   :priority: 4
+
+   The web user shall be able to filter previous recordings after
+   flight number and other information.
 
 .. req:: Control the pan/tilt servo
    :id: REQ_7
@@ -66,6 +88,14 @@
 
    The servo shall take two input angles and move the camera to pan
    and tilt in those angles.
+
+.. req:: Pan/tilt servo accuracy
+   :tags: quality
+   :links: REQ_7
+
+   The pan/tilt servo should be calibrated in such a way that the
+   difference between input angles and output angles is not greater
+   than 0.1 radians
 
 .. req:: Data parsing
    :id: REQ_8
@@ -84,7 +114,15 @@
    :priority: 1
 
    The skysense shall automatically pick one airplane from the parsed
-   data, prioritizing airplanes that are within 40,000 feet (~12 km)
+   data
+
+.. req:: Airplane selection criterions
+   :links: REQ_9
+   :tags: quality
+
+   The software shall prioritize airplanes that are within 40,000 feet
+   (~12 km), and avoid filming airplanes that are flying away from the
+   camera
 
 .. req:: Translate GPS-position to relative position to the camera
    :id: REQ_10
