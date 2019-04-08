@@ -11,7 +11,7 @@ data_dir = "tests/parse_data"
 
 class ParserTests(unittest.TestCase):
     def setUp(self):
-        self.camera = Camera()
+        self.camera = Camera(GPSCoord(0, 0, 0), 0.0, 0.0, 0.0, 0.0, 0.0, 0)
 
     def test_parse_many_flights(self):
         flights = {
