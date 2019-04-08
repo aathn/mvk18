@@ -79,15 +79,15 @@
    The web user shall be able to filter previous recordings after
    flight number and other information.
 
-.. req:: Control the pan/tilt servo
+.. req:: Control the servo
    :id: FREQ_7
    :tags: functional
    :status: done
    :links: TEST_1; QREQ_3
    :priority: 1
 
-   The servo shall take two input angles and move the camera to pan
-   and tilt in those angles.
+   The pan/tilt servo shall take two input angles and move the camera
+   to pan and tilt in those angles.
 
 .. req:: Pan/tilt servo accuracy
    :id: QREQ_3
@@ -125,7 +125,7 @@
    (~12 km), and avoid filming airplanes that are flying away from the
    camera
 
-.. req:: Translate GPS-position to relative position to the camera
+.. req:: Convert GPS coordinates to relative positions
    :id: FREQ_10
    :tags: functional
    :status: done
@@ -135,7 +135,7 @@
    airplanes to a position relative to the camera using a horizontal coordinate
    system
 
-.. req:: Convert relative airplane position to camera pan/tilt angles
+.. req:: Convert relative positions to angles
    :id: FREQ_11
    :tags: functional
    :status: done
@@ -152,7 +152,7 @@
    The conversion of relative position to pan/tilt angle shall be
    achieved with a precision within 0.05 radians.
 
-.. req:: Selected airplane in view
+.. req:: Keep selected airplane in view
    :id: FREQ_12
    :tags: functional
    :status: in progress
@@ -261,4 +261,4 @@
    :tags: functional
    :style: datatable
    :sort_by: priority
-   :columns: id;title;status;outgoing;priority
+   :columns: title;status;outgoing;priority;content
