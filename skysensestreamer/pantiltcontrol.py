@@ -2,46 +2,34 @@
 This module defines an object used to control the pan/tilt platform.
 """
 from skysensestreamer import maestro
-import math
+from math import pi
+
+PAN_ANGLE_RANGE = (0, pi)
+TILT_ANGLE_RANGE = (0, pi / 2)
 
 
-def _to_pan_value(angle: float, target_range: (int, int)) -> int:
+def _convert_angle(
+    angle: float, input_range: (float, float), target_range: (int, int)
+) -> int:
     """
     Converts an angle to a corresponding value read by the Maestro.
 
-    :param angle: an angle in radians in range [0,π], 0 is right, π is left
+    :param angle: an angle in radians in range specified by input_range.
+    :param input_range: the range of expected angles. With current hardware
+    it should be [0, π] for pan and [0, π/2] for tilt.
     :param target_range: the range of values to map to
     :type angle: float
+    :type input_range: (float, float)
     :type target_range: (int, int)
     :returns: a target value for the Maestro
     :rtype: int
 
     """
-    if angle > math.pi or angle < 0:
-        raise ValueError("Expected an angle within the pan range [0,π].")
+    if angle > input_range[1] or angle < input_range[0]:
+        raise ValueError("Expected an angle within the specified range.")
 
     delta_y = target_range[1] - target_range[0]
-    delta_x = math.pi
-    return int((delta_y / delta_x) * angle + target_range[0])
-
-
-def _to_tilt_value(angle: float, target_range: (int, int)) -> int:
-    """
-    Converts an angle to a corresponding value read by the Maetstro.
-
-    :param angle: an angle in range [0,π/2], 0 is horizontal, π/2 is vertical
-    :param target_range: the range of values to map to
-    :type angle: float
-    :type target_range: (int, int)
-    :returns: a target value for the Maestro
-    :rtype: int
-
-    """
-    if angle > math.pi / 2 or angle < 0:
-        raise ValueError("Expected an angle within the tilt range [0,π/2]")
-
-    delta_y = target_range[1] - target_range[0]
-    delta_x = math.pi / 2
+    delta_x = input_range[1] - input_range[0]
     return int((delta_y / delta_x) * angle + target_range[0])
 
 
@@ -67,8 +55,8 @@ class Controller:
         :param tilt_angle: an angle in the range [0,π/2]
 
         """
-        p = _to_pan_value(pan_angle, self.pan_range)
-        t = _to_tilt_value(tilt_angle, self.tilt_range)
+        p = _convert_angle(pan_angle, PAN_ANGLE_RANGE, self.pan_range)
+        t = _to_tilt_value(tilt_angle, TILT_ANGLE_RANGE, self.tilt_range)
         self.servo.setTarget(0, p)
         self.servo.setTarget(1, t)
 
