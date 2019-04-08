@@ -257,6 +257,16 @@
    The streaming setup should be scalable in order to able to keep up
    with a growing number of viewers.
 
+.. req:: Get own GPS position
+   :id: FREQ_22
+   :tags: functional
+   :status: done
+   :links: TEST_8
+   :priority: 1
+
+   The software shall be able to get its own GPS position from a file
+   on the skysense system.
+
 .. needtable::
    :tags: functional
    :style: datatable
