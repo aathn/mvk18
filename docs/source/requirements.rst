@@ -5,7 +5,7 @@
    :id: FREQ_1
    :tags: functional
    :status: done
-   :links: TEST_2; QREQ_1
+   :links: QREQ_1; TEST_3; TEST_7
    :priority: 1
 
    The software shall be capable of receiving continuous video output from a camera.
@@ -22,7 +22,7 @@
    :id: FREQ_2
    :tags: functional
    :status: done
-   :links: TEST_2; QREQ_2
+   :links: QREQ_2; TEST_3; TEST_7
    :priority: 1
 
    Our software shall send the captured video to an output URL / file.
@@ -56,6 +56,7 @@
    :id: FREQ_5
    :tags: functional
    :status: in progress
+   :links: TEST_3; TEST_7
    :priority: 2
 
    The web user shall be able to see all current streams on a web page
@@ -83,7 +84,7 @@
    :id: FREQ_7
    :tags: functional
    :status: done
-   :links: TEST_1; QREQ_3
+   :links: QREQ_3; TEST_2; TEST_7
    :priority: 1
 
    The pan/tilt servo shall take two input angles and move the camera
@@ -101,7 +102,7 @@
    :id: FREQ_8
    :tags: functional
    :status: done
-   :links: TEST_3
+   :links: TEST_4
    :priority: 1
 
    The Skysense shall parse (JSON) data from all flights into a format
@@ -111,13 +112,13 @@
    :id: FREQ_9
    :tags: functional
    :status: in progress
-   :links: QREQ_4
+   :links: QREQ_4; TEST_7
    :priority: 1
 
    The skysense shall automatically pick one airplane from the parsed
    data
 
-.. req:: Airplane selection criterions
+.. req:: Airplane selection criteria
    :id: QREQ_4
    :tags: quality
 
@@ -129,6 +130,7 @@
    :id: FREQ_10
    :tags: functional
    :status: done
+   :links: TEST_6; TEST_10
    :priority: 1
 
    Our software shall be able to translate the GPS-position of
@@ -139,7 +141,7 @@
    :id: FREQ_11
    :tags: functional
    :status: done
-   :links: QREQ_5
+   :links: QREQ_5; TEST_1; TEST_12
    :priority: 1
 
    The relative position shall be translated to camera pan/tilt angles
@@ -156,7 +158,7 @@
    :id: FREQ_12
    :tags: functional
    :status: in progress
-   :links: QREQ_6
+   :links: QREQ_6; TEST_9
    :priority: 1
 
    Our software should control the servo to keep the selected airplane
@@ -174,7 +176,7 @@
    :id: FREQ_13
    :tags: functional
    :status: done
-   :links: QREQ_7
+   :links: QREQ_7; TEST_5; TEST_12
    :priority: 1
 
    The software shall to be able to predict flight paths to make up
@@ -202,6 +204,7 @@
    :id: FREQ_15
    :tags: functional
    :status: done
+   :links: TEST_3; TEST_7
    :priority: 1
 
    The software should automatically start a video stream when there
@@ -211,6 +214,7 @@
    :id: FREQ_16
    :tags: functional
    :status: done
+   :links: TEST_3; TEST_7
    :priority: 1
 
    The software should automatically stop streaming when there no
@@ -220,6 +224,7 @@
    :id: FREQ_17
    :tags: functional
    :status: in progress
+   :links: TEST_11; TEST_12
    :priority: 1
 
    The host shall be able to define the camera's view angle, to enable
@@ -229,6 +234,7 @@
    :id: FREQ_18
    :tags: functional
    :status: done
+   :links: TEST_11; TEST_12
    :priority: 1
 
    The camera shall not move outside of the host's defined view angle.
@@ -269,6 +275,5 @@
 
 .. needtable::
    :tags: functional
-   :style: datatable
    :sort_by: priority
    :columns: title;status;outgoing;priority;content

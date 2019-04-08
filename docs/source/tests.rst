@@ -1,22 +1,24 @@
 ==============
  TESTS
 ==============
-.. test:: Radians to servo-angles test
+.. test:: Radians to servo values
     :id: TEST_1
     :tags: unittest
     :status: passing
 
-    A python class consisting of methods that convert radian angles to angles that can be understood by the servo.
-    Passed when values are converted to expected values.
+    A python class consisting of methods that convert radian angles to
+    values that can be understood by the servo. Deemed to pass when
+    angles are converted to the expected values.
 
 .. test:: Servo movement test
     :id: TEST_2
     :tags: manual
     :status: passing
 
-    A python program that moves the servo to its extreme angles.
-    The pan/tilt servo is observed and the test is passed if the servo moves as expected.
-    For accuracy a goniometer should be used.
+    A python program that moves the servo to its extreme angles. The
+    pan/tilt servo is observed and the test is passed if the servo
+    moves as expected. For accuracy measurements a protractor should
+    be used.
 
 .. test:: Video stream test
     :id: TEST_3
@@ -26,31 +28,89 @@
     Test is passed when we can observe the camera software (FFmpeg)
     processes the camera input and outputs a visible stream to our web server.
 
-.. test:: Parsing test
+.. test:: Basic airplane parsing
     :id: TEST_4
     :tags: unittest
     :status: passing
 
-    A python class (ParserTests) testing all sorts of parsing from JSON to Python dicts:
-    Parsing of single airplanes data, several airplanes data and of skysense position data.
+    A set of unit tests testing the basic parsing functionality from
+    JSON to Python dicts: Parsing of empty files, files with a single
+    airplane, and files with several airplanes.
 
-.. test:: Extrapolation of airplane coords test
+.. test:: Own position parsing
+    :id: TEST_8
+    :tags: unittest
+    :status: passing
+
+    A unit test ensuring that the software is able to parse its own
+    position correctly from a file.
+
+.. test:: Continuous updating of camera airplanes
+    :id: TEST_9
+    :tags: unittest
+    :status: passing
+
+    A unit test ensuring that the parsing functionality can be
+    continuously executed in a separate thread, keeping the camera's
+    airplane positions updated.
+
+.. test:: Extrapolation of airplane coordinates
     :id: TEST_5
     :tags: unittest
     :status: passing
 
-    A python class (AirplaneTests) testing if the extrapolation of airplane coords returns expected coords when time changes.
-    Passed when asserted values are same as actual values.
+    A unit test testing that the extrapolation of airplane coordinates
+    is exact for an airplane following a linear trajectory. Passed
+    when extrapolated function values are same as original function
+    values.
 
-.. test:: Conversion from GPS-coordinates to euclidian coordinates test
+.. test:: Conversion from GPS-coordinates to ECEF
     :id: TEST_6
     :tags: unittest
     :status: passing
 
-    A python class (CoordTests) with several tests:
-    testing if euclidian x, y, z are converted correctly from GPS-coordinates,
-    testing if the correct camera direction is returned.
+    A set of unit tests ensuring that the first step of conversion
+    from GPS coordinates to relative coordinate works correctly. In
+    this first step, GPS coordinates are converted to earth-centerd,
+    earth-fixed (ECEF) cartesian coordinates. Tests that values are
+    converted correctly for a wide range of inputs.
+
+.. test:: Conversion from GPS-coordinates to relative positions
+    :id: TEST_10
+    :tags: unittest
+    :status: passing
+
+    A set of unit tests testing the entire process of converting GPS
+    coordinates to relative positions. Tests that values are converted
+    to their corresponding relative camera positions (azimuth,
+    vertical angle, distance) for a wide range of values.
+
+.. test:: Main functionality
+    :id: TEST_7
+    :tags: manual
+    :status: passing
+
+    A program simulating an airplane passing overhead, testing that the
+    camera follows and streams it, verifying that all main pieces of
+    functionality work and communicate correctly.
+
+.. test:: Configurable view tests
+    :id: TEST_11
+    :tags: unittest
+    :status: passing
+
+    A suite of unit tests testing that planes inside or outside the
+    specified view range are identified as such.
+
+.. test:: Camera class tests
+    :id: TEST_12
+    :tags: unittest
+    :status: passing
+
+    A suite of unit tests making sure that coordinate conversion
+    functions and camera view configuration are correctly incorporated
+    into the object oriented Camera class.
 
 .. needtable::
     :types: test
-    :columns: title;status;incoming;tags
+    :columns: id;title;status;incoming;tags
