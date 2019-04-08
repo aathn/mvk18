@@ -2,16 +2,16 @@
  REQUIREMENTS
 ==============
 .. req:: Capture video
-   :id: REQ_1
+   :id: FREQ_1
    :tags: functional
    :status: done
-   :links: TEST_2
+   :links: TEST_2; QREQ_1
    :priority: 1
 
    The software shall be capable of receiving continuous video output from a camera.
 
 .. req:: Captured video quality
-   :links: REQ_1
+   :id: QREQ_1
    :tags: quality
 
    The software should be able to handle a video stream of 1280x720
@@ -19,16 +19,16 @@
    continuously.
 
 .. req:: Stream video
-   :id: REQ_2
+   :id: FREQ_2
    :tags: functional
    :status: done
-   :links: TEST_2
+   :links: TEST_2; QREQ_2
    :priority: 1
 
    Our software shall send the captured video to an output URL / file.
 
 .. req:: Streamed video quality
-   :links: REQ_2
+   :id: QREQ_2
    :tags: quality
 
    The software should be able to output the video
@@ -36,7 +36,7 @@
    1000kb/s
 
 .. req:: Send data to cloud
-   :id: REQ_3
+   :id: FREQ_3
    :tags: functional
    :status: backlog
    :priority: 2
@@ -44,7 +44,7 @@
    The video data of streamed flights shall be sent to a cloud service provider
 
 .. req:: Store video in cloud
-   :id: REQ_4
+   :id: FREQ_4
    :tags: functional
    :status: backlog
    :priority: 3
@@ -53,7 +53,7 @@
    database.
 
 .. req:: Display streams on web page
-   :id: REQ_5
+   :id: FREQ_5
    :tags: functional
    :status: in progress
    :priority: 2
@@ -62,7 +62,7 @@
    along with relevant information.
 
 .. req:: Display stored video on web page
-   :id: REQ_6
+   :id: FREQ_6
    :tags: functional
    :status: backlog
    :priority: 3
@@ -71,7 +71,7 @@
    flights on a web page.
 
 .. req:: Filter among previous recordings
-   :id: REQ_21
+   :id: FREQ_21
    :tags: functional
    :status: backlog
    :priority: 4
@@ -80,25 +80,25 @@
    flight number and other information.
 
 .. req:: Control the pan/tilt servo
-   :id: REQ_7
+   :id: FREQ_7
    :tags: functional
    :status: done
-   :links: TEST_1
+   :links: TEST_1; QREQ_3
    :priority: 1
 
    The servo shall take two input angles and move the camera to pan
    and tilt in those angles.
 
 .. req:: Pan/tilt servo accuracy
+   :id: QREQ_3
    :tags: quality
-   :links: REQ_7
 
    The pan/tilt servo should be calibrated in such a way that the
    difference between input angles and output angles is not greater
    than 0.05 radians
 
 .. req:: Data parsing
-   :id: REQ_8
+   :id: FREQ_8
    :tags: functional
    :status: done
    :links: TEST_3
@@ -108,16 +108,17 @@
    directly supported by the software
 
 .. req:: Airplane selection
-   :id: REQ_9
+   :id: FREQ_9
    :tags: functional
    :status: in progress
+   :links: QREQ_4
    :priority: 1
 
    The skysense shall automatically pick one airplane from the parsed
    data
 
 .. req:: Airplane selection criterions
-   :links: REQ_9
+   :id: QREQ_4
    :tags: quality
 
    The software shall prioritize airplanes that are within 40,000 feet
@@ -125,7 +126,7 @@
    camera
 
 .. req:: Translate GPS-position to relative position to the camera
-   :id: REQ_10
+   :id: FREQ_10
    :tags: functional
    :status: done
    :priority: 1
@@ -135,33 +136,34 @@
    system
 
 .. req:: Convert relative airplane position to camera pan/tilt angles
-   :id: REQ_11
+   :id: FREQ_11
    :tags: functional
    :status: done
+   :links: QREQ_5
    :priority: 1
 
    The relative position shall be translated to camera pan/tilt angles
    instructing the camera where to point.
 
 .. req:: Conversion accuracy
-   :links: REQ_11
+   :id: QREQ_5
    :tags: quality
 
    The conversion of relative position to pan/tilt angle shall be
    achieved with a precision within 0.05 radians.
 
 .. req:: Selected airplane in view
-   :id: REQ_12
+   :id: FREQ_12
    :tags: functional
    :status: in progress
+   :links: QREQ_6
    :priority: 1
 
    Our software should control the servo to keep the selected airplane
    in the frame of view when possible
 
 .. req:: Airplane tracking quality
-   :id: QUAL_1
-   :links: REQ_12
+   :id: QREQ_6
    :tags: quality
 
    The servo position should be updated frequently enough to avoid
@@ -169,25 +171,26 @@
    field of view.
 
 .. req:: Predict flight path by extrapolating
-   :id: REQ_13
+   :id: FREQ_13
    :tags: functional
    :status: done
+   :links: QREQ_7
    :priority: 1
 
    The software shall to be able to predict flight paths to make up
    for any lack of continuity in the received data.
 
 .. req:: Extrapolation accuracy
-   :links: REQ_13
+   :id: QREQ_7
    :tags: quality
 
    The extrapolation should be accurate for airplanes following a
-   linear trajectory. That is, requirement :need:`QUAL_1` should be
+   linear trajectory. That is, requirement :need:`QREQ_6` should be
    fulfilled for an airplane following such a trajectory even when new
    data is not being received continuously.
 
 .. req:: Avoid sun damage
-   :id: REQ_14
+   :id: FREQ_14
    :tags: functional
    :status: backlog
    :priority: 2
@@ -196,7 +199,7 @@
    being damaged.
 
 .. req:: Automatically start streaming
-   :id: REQ_15
+   :id: FREQ_15
    :tags: functional
    :status: done
    :priority: 1
@@ -205,7 +208,7 @@
    is a visible airplane in view.
 
 .. req:: Automatically stop streaming
-   :id: REQ_16
+   :id: FREQ_16
    :tags: functional
    :status: done
    :priority: 1
@@ -214,7 +217,7 @@
    longer are any visible airplanes in view.
 
 .. req:: Configurable view
-   :id: REQ_17
+   :id: FREQ_17
    :tags: functional
    :status: in progress
    :priority: 1
@@ -223,7 +226,7 @@
    the camera to only track visible airplanes.
 
 .. req:: Abide view boundaries
-   :id: REQ_18
+   :id: FREQ_18
    :tags: functional
    :status: done
    :priority: 1
@@ -231,7 +234,7 @@
    The camera shall not move outside of the host's defined view angle.
 
 .. req:: Configuration process
-   :id: REQ_19
+   :id: FREQ_19
    :tags: functional
    :status: in progress
    :priority: 2
@@ -240,7 +243,7 @@
    camera using a configuration file.
 
 .. req:: Non-dependability on hardware
-   :id: QUAL_2
+   :id: QREQ_8
    :tags: quality
 
    To make it easier for Flightradar24 to keep developing after the
@@ -248,7 +251,7 @@
    specific hardware components as possible.
 
 .. req:: Ensure that streaming is scalable
-   :id: QUAL_3
+   :id: QREQ_9
    :tags: quality
 
    The streaming setup should be scalable in order to able to keep up
@@ -258,4 +261,4 @@
    :tags: functional
    :style: datatable
    :sort_by: priority
-   :columns: id;title;status;outgoing;incoming;priority
+   :columns: id;title;status;outgoing;priority
