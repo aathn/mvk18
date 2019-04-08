@@ -12,6 +12,7 @@ Welcome to mvk18-flightradar24's documentation!
 
    introduction
    requirements
+   tests
    material
    methodology
    deliverables

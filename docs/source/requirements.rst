@@ -5,6 +5,7 @@
    :id: REQ_1
    :tags: functional
    :status: done
+   :links: TEST_2
    :priority: 1
 
    The camera shall capture mpeg video in 1280x720 with at least 15
@@ -14,6 +15,7 @@
    :id: REQ_2
    :tags: functional
    :status: done
+   :links: TEST_2
    :priority: 1
 
    Our software shall send the captured video to an output URL / file
@@ -59,6 +61,7 @@
    :id: REQ_7
    :tags: functional
    :status: done
+   :links: TEST_1
    :priority: 1
 
    The servo shall take two input angles and move the camera to pan
@@ -68,6 +71,7 @@
    :id: REQ_8
    :tags: functional
    :status: done
+   :links: TEST_3
    :priority: 1
 
    The Skysense shall parse (JSON) data from all flights into a format
@@ -205,4 +209,4 @@
    :tags: functional
    :style: datatable
    :sort_by: priority
-   :columns: id;title;status;outgoing;priority
+   :columns: id;title;status;outgoing;priority;description
