@@ -2,8 +2,29 @@
  THE TEAM
 ==========
 
-Local product owner - Markus Wesslén
-------------------------------------
+Developers
+----------
+
+* Markus Wesslén - Local product owner
+
+* Anders Thuné - Scrum master
+
+* Adam Wiker - Documentation responsibility
+
+* Christian Stjernberg - Hardware responsibility
+
+* Joakim Loxdal - Frontend responsibility
+
+* Måns Andersson - Backend responsibility
+
+* Philip Andersson - Cloud responsibility
+
+* Theo Puranen Åhfeldt - Testing responsibility
+
+Roles
+-----
+
+* Local product owner
 
 The product owner is responsible for managing the project backlog,
 defining the product in parts and prioritizing them based on
@@ -12,30 +33,18 @@ is visible and easy to understand for everyone involved. This includes
 communicating the development process and status with Flightradar24 to
 ensure that the development is in line with their expectations.
 
-Scrum master - Anders Thuné
----------------------------
+* Scrum master
 
 The Scrum master is responsible for the project’s process and
 directing the biweekly sprint meetings. They coach the team and make
 sure the members work productively and follow the practices of
-scrum. In practice, this primarily means performing bidaily slack
+scrum. In practice, this primarily means performing bidaily Slack
 checkups and coordinating the workflow on Trello.
 
-Developers
-----------
-
-Adam Wiker - Documentation responsibility
-
-Christian Stjernberg - Hardware responsibility
-
-Joakim Loxdal - Frontend responsibility
-
-Måns Andersson - Backend responsibility
-
-Philip Andersson - Cloud responsibility
-
-Theo Puranen Åhfeldt - Testing responsibility
-
+The remaining roles each entail a responsibility within a certain area
+of the project. While all members cooperate to perform the tasks
+needed, the member responsible for a given area is expected to pay
+extra attention to that part of the project.
 
 ==========
  THE NEED
