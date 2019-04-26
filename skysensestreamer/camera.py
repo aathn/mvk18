@@ -33,6 +33,7 @@ class Camera:
         view_left_bound: Angle,
         view_right_bound: Angle,
         view_distance: int,
+        blacklisted_flights: List[str] = [],
     ):
         """
         :param gps_position: The position of the Skysense and camera
@@ -45,6 +46,8 @@ class Camera:
                                 still see the sky (zero is north and increasing values represent clockwise rotation)
         :param view_right_bound: The compass angle in radians which is the rightmost point the camera can point to and
                                  still see the sky (zero is north and increasing values represent clockwise rotation)
+        :param view_distance: The camera's view distance in feet
+        :param blacklisted_flights: Flight numbers containing any string in this list will be ignored when searching for planes to stream
 
         """
         self.gps_position = gps_position
@@ -65,6 +68,7 @@ class Camera:
         self.airplanes = []
         """A list of airplanes in the vicinity of the Skysense that is updated by the parser thread started in 
         __main__.py"""
+        self.blacklisted_flights = blacklisted_flights
 
     @property
     def airplanes(self) -> List["Airplane"]:
@@ -129,7 +133,11 @@ class Camera:
         self.tracked_airplane = planes[0]
 
     def _get_visible(self):
-        return [plane for plane in self.airplanes if self.can_see(plane)]
+        return [
+            plane
+            for plane in self.airplanes
+            if self.can_see(plane) and not plane.flight_nr in self.blacklisted_flights
+        ]
 
     def can_see(self, plane: "Airplane") -> bool:
         """Check if the camera can see a plane
