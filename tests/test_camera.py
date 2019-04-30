@@ -35,7 +35,7 @@ class ViewTests(unittest.TestCase):
 
 class CameraTests(unittest.TestCase):
     def setUp(self):
-        self.camera = Camera()
+        self.camera = Camera(GPSCoord(0, 0, 0), 0.0, 0.0, 0.0, 0.0, 0.0, 0)
         self.local_coord1 = LocalCoord(0, 0, 0)
         self.local_coord2 = LocalCoord(pi / 2, pi / 2, 0)
         self.local_coord3 = LocalCoord(3 * pi / 2, pi / 6, 0)
