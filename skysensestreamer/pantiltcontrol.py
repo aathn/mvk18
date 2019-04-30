@@ -45,7 +45,7 @@ class Controller:
         self.pan_range = (475 * 4, 2250 * 4)
         self.tilt_range = (1400 * 4, 2100 * 4)
 
-        self.servo = maestro.Controller("/dev/ttyACM1")
+        self.servo = maestro.Controller()
         self.servo.setRange(0, self.pan_range[0], self.pan_range[1])
         self.servo.setRange(1, self.tilt_range[0], self.tilt_range[1])
         self.servo.setSpeed(0, 25)
