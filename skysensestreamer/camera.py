@@ -15,7 +15,7 @@ Angle = NewType("Angle", float)
 
 Number = Union[int, float]
 
-SERVO_UPDATE_DELAY = 0.5
+SERVO_UPDATE_DELAY = 0.05
 """The delay between servo updates when tracking a plane"""
 CAMERA_SEARCH_DELAY = 1
 """The delay between polls to the airplane list when waiting for a plane to track"""

@@ -15,8 +15,8 @@ from threading import Thread, Event
 from configparser import ConfigParser
 
 CONFIG_FILE_PATH = "skysensestreamer/conf.ini"
-FLIGHT_DATA_FILE_PATH = "/tmp/flights.js"
-GPS_POS_FILE_PATH = "/var/tmp/position.txt"
+FLIGHT_DATA_FILE_PATH = "tests/demotest/flights.js"
+GPS_POS_FILE_PATH = "tests/demotest/position.txt"
 
 config_parser = ConfigParser()
 config_parser.read(CONFIG_FILE_PATH)
