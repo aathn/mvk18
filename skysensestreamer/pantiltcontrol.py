@@ -40,7 +40,7 @@ class Controller:
         """
         # The ranges for the servos. Change these to calibrate the servos.
         self.pan_range = (480, 2240)
-        self.tilt_range = (480, 1424)
+        self.tilt_range = (1424, 2368)
 
         self.servo = maestro.Controller()
         self.servo.setRange(0, self.pan_range[0], self.pan_range[1])
