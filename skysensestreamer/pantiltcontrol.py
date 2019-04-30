@@ -1,11 +1,11 @@
 """
 This module defines an object used to control the pan/tilt platform.
 """
-from skysensestreamer import maestro
+import maestro
 from math import pi
 
 PAN_ANGLE_RANGE = (0, pi)
-TILT_ANGLE_RANGE = (0, pi / 2)
+TILT_ANGLE_RANGE = (0, 1.19682)
 
 
 def _convert_angle(
@@ -39,8 +39,9 @@ class Controller:
         configures the range and the speed.
         """
         # The ranges for the servos. Change these to calibrate the servos.
-        self.pan_range = (480, 2240)
-        self.tilt_range = (1424, 2368)
+        # Multiplying by 4 to get values in fourths, as required by maestro
+        self.pan_range = (475 * 4, 2250 * 4)
+        self.tilt_range = (1400 * 4, 2100 * 4)
 
         self.servo = maestro.Controller()
         self.servo.setRange(0, self.pan_range[0], self.pan_range[1])
