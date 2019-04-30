@@ -26,7 +26,7 @@ def _convert_angle(
 
     """
     if angle > input_range[1] or angle < input_range[0]:
-        raise ValueError("Expected an angle within the specified range.")
+        raise ValueError("Expected an angle within the specified range, got angle: " + str(angle))
 
     delta_y = target_range[1] - target_range[0]
     delta_x = input_range[1] - input_range[0]
@@ -43,7 +43,7 @@ class Controller:
         self.pan_range = (475 * 4, 2250 * 4)
         self.tilt_range = (1400 * 4, 2100 * 4)
 
-        self.servo = maestro.Controller()
+        self.servo = maestro.Controller("/dev/tty.usbmodem00242167")
         self.servo.setRange(0, self.pan_range[0], self.pan_range[1])
         self.servo.setRange(1, self.tilt_range[0], self.tilt_range[1])
         self.servo.setSpeed(0, 25)

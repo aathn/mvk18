@@ -1,9 +1,12 @@
 from time import sleep, time
+import math
+
+longitude_limit = 0.04 # The limit for how far to the left/right the airplane is
 
 latitude = 0.01
-longitude = -0.1
-longitude_speed = 0.01
-altitude = 10000
+longitude = -longitude_limit
+longitude_speed = 0.02
+altitude = 1000
 
 while True:
     demoaircraft = (
@@ -19,7 +22,8 @@ while True:
     )
     with open("flights.js", "w+") as file:
         file.write(demoaircraft)
-    if abs(longitude) > 0.1:
+    if abs(longitude) > longitude_limit:
         longitude_speed = -longitude_speed
     longitude = round(longitude + longitude_speed, 4)
+    print(demoaircraft)
     sleep(5)

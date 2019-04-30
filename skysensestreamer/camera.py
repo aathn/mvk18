@@ -15,7 +15,7 @@ Angle = NewType("Angle", float)
 
 Number = Union[int, float]
 
-SERVO_UPDATE_DELAY = 0.05
+SERVO_UPDATE_DELAY = 0
 """The delay between servo updates when tracking a plane"""
 CAMERA_SEARCH_DELAY = 1
 """The delay between polls to the airplane list when waiting for a plane to track"""
@@ -63,7 +63,7 @@ class Camera:
         """The object used to control the servos in the pan/tilt platform"""
         self.tracked_airplane = None
         self.airplanes = []
-        """A list of airplanes in the vicinity of the Skysense that is updated by the parser thread started in 
+        """A list of airplanes in the vicinity of the Skysense that is updated by the parser thread started in
         __main__.py"""
 
     @property
