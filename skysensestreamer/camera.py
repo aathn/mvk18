@@ -141,11 +141,7 @@ class Camera:
         self.tracked_airplane = planes[0]
 
     def _get_visible(self):
-        return [
-            plane
-            for plane in self.airplanes
-            if self.can_see(plane) and not plane.flight_nr in self.blacklisted_flights
-        ]
+        return [plane for plane in self.airplanes if self.can_see(plane)]
 
     def can_see(self, plane: "Airplane") -> bool:
         """Check if the camera can see a plane
@@ -154,6 +150,11 @@ class Camera:
         :returns: True if plane is in view of the camera
 
         """
+        # Check if plane is blacklisted
+        for flight_nr in self.blacklisted_flights:
+            if flight_nr in plane.flight_nr:
+                return False
+
         plane_local = self.gps_position.to_local(plane.position)
         return self.view.contains(plane_local)
 
