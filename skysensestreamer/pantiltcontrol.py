@@ -39,8 +39,8 @@ class Controller:
         configures the range and the speed.
         """
         # The ranges for the servos. Change these to calibrate the servos.
-        self.pan_range = (2060, 9250)
-        self.tilt_range = (7500, 12000)
+        self.pan_range = (480, 2240)
+        self.tilt_range = (480, 1424)
 
         self.servo = maestro.Controller()
         self.servo.setRange(0, self.pan_range[0], self.pan_range[1])
