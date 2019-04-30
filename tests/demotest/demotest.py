@@ -1,11 +1,11 @@
 from time import sleep, time
 import math
 
-longitude_limit = 0.04 # The limit for how far to the left/right the airplane is
+longitude_limit = 0.04  # The limit for how far to the left/right the airplane is
 
 latitude = 0.01
 longitude = -longitude_limit
-longitude_speed = 0.02
+longitude_speed = 0.01
 altitude = 1000
 
 while True:
