@@ -56,7 +56,7 @@ class Controller:
 
         """
         p = _convert_angle(pan_angle, PAN_ANGLE_RANGE, self.pan_range)
-        t = _to_tilt_value(tilt_angle, TILT_ANGLE_RANGE, self.tilt_range)
+        t = _convert_angle(tilt_angle, TILT_ANGLE_RANGE, self.tilt_range)
         self.servo.setTarget(0, p)
         self.servo.setTarget(1, t)
 
