@@ -113,4 +113,4 @@
 
 .. needtable::
     :types: test
-    :columns: id;title;status;incoming;tags
+    :columns: title;status;incoming;tags;content
