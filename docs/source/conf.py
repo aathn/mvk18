@@ -6,6 +6,11 @@
 # full list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
+# För att få till najs tables:
+# \settowidth\tymin{Outgoing}
+# \setlength\extrarowheight{2pt}
+# \begin{tabulary}{\linewidth}[t]{|L|T|T|T|T|}
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -131,6 +136,8 @@ latex_elements = {
     "preamble": r"\usepackage{tcolorbox}",
     "extraclassoptions": "openany",
 }
+
+latex_logo = "flygplan.png"
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
