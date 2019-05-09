@@ -6,11 +6,6 @@
 # full list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
-# För att få till najs tables:
-# \settowidth\tymin{Outgoing}
-# \setlength\extrarowheight{2pt}
-# \begin{tabulary}{\linewidth}[t]{|L|T|T|T|T|}
-
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -133,7 +128,29 @@ latex_elements = {
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
-    "preamble": r"\usepackage{tcolorbox}",
+    "preamble": r"""\usepackage{tcolorbox}
+\usepackage{longtable}
+\makeatletter
+\def\ltabulary{%
+  \def\endfirsthead{\\}%
+  \def\endhead{\\}%
+  \def\endfoot{\\}%
+  \def\endlastfoot{\\}%
+  \def\tabulary{%
+    \def\TY@final{%
+      \def\endfirsthead{\LT@end@hd@ft\LT@firsthead}%
+      \def\endhead{\LT@end@hd@ft\LT@head}%
+      \def\endfoot{\LT@end@hd@ft\LT@foot}%
+      \def\endlastfoot{\LT@end@hd@ft\LT@lastfoot}%
+      \longtable}%
+    \let\endTY@final\endlongtable
+    \TY@tabular}%
+  \dimen@\columnwidth
+  \advance\dimen@-\LTleft
+  \advance\dimen@-\LTright
+  \tabulary\dimen@}
+\def\endltabulary{\endtabulary}
+\makeatother""",
     "extraclassoptions": "openany",
 }
 
