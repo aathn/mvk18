@@ -130,6 +130,7 @@ latex_elements = {
     # 'figure_align': 'htbp',
     "preamble": r"""\usepackage{tcolorbox}
 \usepackage{longtable}
+\usepackage{colortbl}
 \makeatletter
 \def\ltabulary{%
   \def\endfirsthead{\\}%
