@@ -84,8 +84,9 @@ Hardware
 --------
 During the first sprint the camera was decided based on price, size and ability to film in a quality that is good enough for our requirements.
 The initial servos were chosen because we thought they would be strong enough and the price was low.
-The first servos proved to be too weak to efficiently handle the weight of the camera, so new servos were ordered and mounted.
-They were of a stronger model and solved the problems with previous servos.
+The first servos proved to be too weak to efficiently handle the weight of the camera, so new servos and a new plattform were ordered and mounted.
+They were of a stronger model and partially solved the problems with previous servos. The new servos gave us less shaky video footage but
+it was still a bit shaky when tilting up and down.
 The servo controller was chosen to make sure that it would be compatible with any servo hardware and work on the Skysense Linux system.
 
 Software
@@ -94,7 +95,9 @@ Python was chosen for writing the main program, since that was suggested by FR24
 
 Initially there was a focus on streaming video to a local server instead of streaming to a cloud service provider (AWS).
 That resulted in a lot of time spent on researching things that weren't really relevant to the final product.
-It would have been wiser to study AWS services from the beginning, since time was very limited in the end of the project.
+It would have been wiser to study AWS services from the beginning, since time was very limited at the end of the project.
+The result was that we decided to stick with streaming to a local web server since it was considered to be good enough for our proof of concept.
+
 
 #############
 REQUIREMENT VERIFICATION
@@ -105,7 +108,7 @@ Some of the lower priority requirements were not satisfied for various reasons.
 
 The following requirements were partially changed during development:
 - Airplane selection: FREQ_9
-  Initially the plan was to not film airplanes that were going away from the camera, and instead focus on the ones approaching the camera. However, after discussing it with Flightradar24 we came to the conclusion that it would be effective enough to just film airplanes while they're within a certain radius.
+  Initially the plan was to not film airplanes that were moving away from the camera, and instead focus on the ones approaching the camera. However, after discussing it with Flightradar24 we came to the conclusion that it would be effective enough to just film airplanes while they're within a certain radius.
 - Keep selected airplane in view: FREQ_12
 - Configurable view: FREQ_17
 - Configuration process: FREQ_19
@@ -116,7 +119,9 @@ The following lower priority requirements were not satisfied:
   Some effort was put in to reseraching the use of Amazon Kinesis (a video streaming service provided by AWS) to distribute the video stream. The process of streaming video footage to with Kinesis turned out to be quite complicated. It definitely appeared to be duable but due to time constraints we focused on other things.
 - Store video in cloud: FREQ_4
   This requirement was dependent on the Send data to cloud-requirement.
+- Display stored video on web page: FREQ_6
+  This requirement was dependent on the Send data to cloud-requirement.
+- Filter among previous recordings: FREQ_21
+  This requirement was dependent on the Send data to cloud-requirement.
 - Avoid sun damage: FREQ_14
   We were unable to find a good way of doing this in the available time. We considered the option of reading the pixles on the screen to measure light level, but the streaming feature we used did not allow to do this easily.
-- Display stored video on web page: FREQ_6
-- Filter among previous recordings: FREQ_21
