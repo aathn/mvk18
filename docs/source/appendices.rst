@@ -133,8 +133,7 @@ Requirements
    :tags: quality
 
    The software shall prioritize airplanes that are within 40,000 feet
-   (~12 km), and avoid filming airplanes that are flying away from the
-   camera
+   (~12 km)
 
 .. req:: Convert GPS coordinates to relative positions
    :id: FREQ_10
@@ -285,7 +284,7 @@ Requirements
 
 Tests
 -----
-   
+
 .. test:: Radians to servo values
     :id: TEST_1
     :tags: unittest
