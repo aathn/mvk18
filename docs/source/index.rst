@@ -12,8 +12,8 @@ Welcome to mvk18-flightradar24's documentation!
 
    introduction
    requirements
-   material
    methodology
    development
+   solution
    deliverables
    appendices
