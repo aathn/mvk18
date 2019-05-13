@@ -21,7 +21,7 @@ Hardware
 - Pololu Micro Maestro 6-Channel USB Servo Controller
 
   The Maestro is used to control the servos in the pan/tilt-platform
-  over USB. We will be using an open source python-library to
+  over USB. An open source python-library is used to
   communicate with the Maestro from the Raspberry Pi.
 
 - ELP 5-50mm Varifocal Lens 1080P
@@ -54,8 +54,7 @@ Software
 - Python Module Maestro
 
   Maestro is used to control the micro servo controller from Python. The
-  source code is under MIT-license which means we can use it without many
-  restrictions.
+  source code is under MIT-license which means it can be used without any restrictions.
 
 - NodeJS Web Server
 
@@ -79,6 +78,10 @@ limits the angles the camera can turn. When running, the software constantly
 receives positional data from nearby airplanes via the antennas. The Skysense
 can receive data from multiple airplanes simultaneously. Airplanes that are out
 of view, (outside the bounds defined by the user), are filtered out. Out of the
+
+.. figure:: ../resources/UML-skysense-activitydiagram.png
+
+   An activity diagram explaining the software running on the Skysense
 
 
 Interface Description
