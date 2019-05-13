@@ -1,5 +1,8 @@
+INTRODUCTION
+############
+
 ==========
- THE TEAM
+ The Team
 ==========
 
 Developers
@@ -47,7 +50,7 @@ needed, the member responsible for a given area is expected to pay
 extra attention to that part of the project.
 
 ==========
- THE NEED
+ The Need
 ==========
 
 Different services allow consumers to obtain information about traffic
@@ -63,7 +66,7 @@ and landing, the service could be made even more engaging for a wide
 range of users.
 
 ===============
- PROPOSED IDEA
+ Proposed Idea
 ===============
 
 The idea is to make a proof-of-concept product to automatically
@@ -82,10 +85,10 @@ Flightradar24 platform.
 
 .. figure:: ../resources/UML-system-usecase.png
 
-   UML use case diagram showing an overview of the system and actors
+   Use case diagram showing an overview of the system and actors
 
 =================
- PROJECT SUMMARY
+ Project Summary
 =================
 
 This is a project within the course Software Engineering for the
