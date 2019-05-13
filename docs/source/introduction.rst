@@ -87,19 +87,3 @@ Flightradar24 platform.
 
    Use case diagram showing an overview of the system and actors
 
-=================
- Project Summary
-=================
-
-This is a project within the course Software Engineering for the
-client Flightradar24 AB. The primary project goal is to create a
-prototype automatically capturing airplane footage, with a connected
-web interface that the prototype can stream video to. If Flightradar24
-is pleased with the prototype and its functionality they may want to
-continue the development and create a final product which can be
-delivered to customers. This means that our requirements need to be
-applicable to a final product even though the primary goal of the
-project is to deliver a prototype. We may only fulfill a subset of the
-requirements for our prototype but we need to keep in mind that no
-requirement shall be unsatisfiable, allowing further development to
-take place.
