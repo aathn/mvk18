@@ -6,14 +6,14 @@
 Changelog
 #############
 
-The changelog briefly summarizes all the development on our product,
-when requirements were satisfied and when changes were made in our requirements.
+The changelog briefly summarizes all the development on the product,
+when requirements were satisfied and when changes were made in the requirements.
 
 Sprint 1 (15/1 - 22/1)
 --------
-- Researched viable hardware to see what options we had
+- Researched viable hardware to see what options were available
 - Ordered hardware (two servos, a servo controller and a camera)
-- Put up our Trello board and Slack channel
+- Put up a Trello board and a Slack channel
 
 Sprint 2 (22/1 - 4/2)
 --------
@@ -42,7 +42,7 @@ Sprint 3 (4/2 - 15/2)
 Sprint 4 (15/2 - 4/3)
 --------
 - Researched software that would be able to stream webcam footage to a web server
-- Wrote code to parse the airplane data file to usable data within our program
+- Wrote code to parse the airplane data file to usable data within the program
 - Made improvement to the code converting coordinates
 - Managed to control the pan/tilt-servos directly from the Skysense hardware
 
@@ -58,7 +58,7 @@ Sprint 5 (4/3 - 19/3)
 - Made a simple interface to show the video that was being streamed
 	- Satisfied :need:`FREQ_5`
 - Wrote tests for all of the finished code
-- Split our program to work in multiple threads
+- Split the program to work in multiple threads
 
 .. figure:: ../resources/setup1.jpg
 
@@ -90,14 +90,14 @@ Sprint 7 (4/4 - 5/9)
 Development decisions
 #############
 
-Explanations and critique of our development decisions.
+Explanations and critique of the development decisions.
 
 Hardware
 --------
 During the first sprint the camera was decided based on price,
-size and ability to film in a quality that is good enough for our requirements.
+size and ability to film in a quality that is good enough for the requirements.
 
-The initial servos were chosen because we thought they would be strong enough and the price was low.
+The initial servos were chosen because they were thought to be strong enough and the price was low.
 The first servos proved to be too weak to efficiently handle the weight of the camera,
 so new servos and a new platform were ordered and mounted. They were of a stronger model and partially
 solved the problems with previous servos. The new servos gave us less shaky video footage but
@@ -116,8 +116,8 @@ to a cloud service provider (AWS) to quickly have a working Proof of Concept.
 That resulted in a lot of time spent on researching different web streaming technologies
 that weren't really what Flightradar24 requested. It would have been wiser to study
 AWS services from the start, since time was very limited at the end of the project.
-In the end we decided to stick with streaming to a local web server since it was
-considered to be good enough for our proof of concept.
+In the end it was decided to stick with streaming to a local web server since it was
+considered to be good enough for the proof of concept.
 
 
 #############
@@ -134,20 +134,20 @@ The following requirements were partially changed during development:
 
   Initially the plan was to not film airplanes that were moving away from the camera,
   and instead focus on the ones approaching the camera. However, after discussing it with
-  Flightradar24 we came to the conclusion that it would be effective enough to just film
+  Flightradar24 it was decided that it would be effective enough to just film
   airplanes while they're within a certain radius.
 
 - :need:`FREQ_17`:
 
-  The idea of how the view would be configurable was initially more focused ease of use,
-  and we wanted to avoid the need of access to files on the Skysense.
-  However, after discussing it with Flightradar24, we settled for it being configurable
+  The idea of how the view would be configurable was initially more focused on ease of use,
+  and to avoid the need of access to files on the Skysense.
+  However, after discussing it with Flightradar24, it was settled to be configurable
   through a config file on the Skysense.
 
 - :need:`FREQ_19`:
 
   Initially the plan was to have a way of configuring through some more sophisticated process,
-  such as configuring the settings through a website. We later changed the requirement to accept
+  such as configuring the settings through a website. The requirement was later changed to accept
   that the process was simply to edit a config file.
 
 
@@ -157,21 +157,21 @@ The following lower priority requirements were not satisfied:
 
   Some effort was put in to researching the use of Amazon Kinesis (a video streaming service provided by AWS)
   to distribute the video stream. The process of streaming video footage to with Kinesis turned out to be
-  quite complicated. It definitely appeared to be doable but due to time constraints we focused on other things.
+  quite complicated. It definitely appeared to be doable but due to time constraints other things were prioritized.
 
 - :need:`FREQ_4`:
 
-  This requirement was dependent on the Send data to cloud-requirement.
+  This requirement was dependent on :need:`FREQ_3`.
 
 - :need:`FREQ_6`:
 
-  This requirement was dependent on the Send data to cloud-requirement.
+  This requirement was dependent on :need:`FREQ_3`.
 
 - :need:`FREQ_21`:
 
-  This requirement was dependent on the Send data to cloud-requirement.
+  This requirement was dependent on :need:`FREQ_3`.
 
 - :need:`FREQ_14`:
 
-  We were unable to find a good way of doing this in the available time. We considered the option of
-  reading the pixels on the screen to measure light level, but the streaming feature we used did not allow to do this easily.
+  No good way of doing this was found in the available time. An option that was considered was
+  reading the pixels on the screen to measure light level, but the streaming feature used did not allow to do this easily.

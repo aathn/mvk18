@@ -23,13 +23,18 @@ deliver a prototype. As such, a subset of the requirements for the
 prototype were not fulfilled, but the group made sure to keep all
 requirements satisfiable, allowing further development to take place.
 
-Requirements
+Functional Requirements
 ============
 
 .. needtable::
    :tags: functional
    :sort_by: priority
    :columns: title;id;status;priority;content
+
+Quality Requirements
+============
+
+
 
 Tests
 =====
