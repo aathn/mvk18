@@ -29,14 +29,14 @@ Sprint 2 (22/1 - 4/2)
 
 Sprint 3 (4/2 - 15/2)
 --------
-- Worked on methods to handle multiple aircraft and calculate which aircraft was in view in an abstract manner
+- Worked abstractly on methods to handle multiple aircraft and calculate which aircraft was in view
 	- Partly satisfied :need:`QREQ_6`
 - Wrote code to extrapolate upcoming positions of an aircraft based on previous positions
 	- Satisfied :need:`FREQ_13``
 - Wrote code to convert from coordinates to a direction to point the camera
 	- Satisfied :need:`FREQ_10`, :need:`FREQ_11`
 - Learned how to control the pan/tilt-servos using an open source python library
-	- Satisfied :need:`QREQ_8`, :need:`FREQ_7`
+	- Satisfied :need:`QREQ_8`
 - Discussed software license with Flightradar24
 
 Sprint 4 (15/2 - 4/3)
@@ -52,8 +52,9 @@ Sprint 5 (4/3 - 19/3)
 - Made a program to stream video from the camera
 	- Satisfied :need:`FREQ_2`
 - Made a program to control the pan/tilt-servos
+   - Satisfied :need:`FREQ_7`
 - Made a program to control the camera filming
-	- :need:`FREQ_15`, :need:`FREQ_16`
+	- Satisfied :need:`FREQ_15`, :need:`FREQ_16`
 - Made a simple interface to show the video that was being streamed
 	- Satisfied :need:`FREQ_5`
 - Wrote tests for all of the finished code
@@ -66,9 +67,9 @@ Sprint 5 (4/3 - 19/3)
 
 Sprint 6 (19/3 - 4/4)
 --------
-- Created a basic configuration file which held the directional angle for the camera and the accepted view angles
+- Created a basic config file which held the directional angle for the camera and the accepted view angles
 	- Satisfied :need:`FREQ_18`, :need:`FREQ_19`
-- Researched stream services.
+- Researched stream services
 - Changed FREQ_17 and FREQ_19
 
 Sprint 7 (4/4 - 5/9)
