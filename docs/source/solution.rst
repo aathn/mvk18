@@ -77,8 +77,15 @@ that the camera is facing, as well as bounds that define a virtual view which
 limits the angles the camera can turn. When running, the software constantly
 receives positional data from nearby airplanes via the antennas. The Skysense
 can receive data from multiple airplanes simultaneously. Airplanes that are out
-of view, (outside the bounds defined by the user), are filtered out. Out of the
-remaining airplanes, an arbitrary one is selected.
+of view, (outside the bounds defined by the user), are filtered out. If there are any
+remaining airplanes, an arbitrary one is selected and the stream is started.
+A more sophisticated approach could be to rank the airplanes based on different
+attributes, and pick the best one. The selected airplane's position is
+thereafter continually processed and translated to angles, which are sent to
+control the servo and aim the camera at the airplane. Once the airplane goes out
+of view the stream is stopped, and the software waits for an airplane to enter
+the view again before starting another stream again. This process is illustrated
+in the following diagram.
 
 .. figure:: ../resources/UML-skysense-activitydiagram.png
 

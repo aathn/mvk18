@@ -11,10 +11,13 @@ Business Requirements
 =====================
 
 The client who provided the project was Flightradar24 AB. The primary
-project goal was to create a camera prototype receiving positional
-data of airplanes and automatically capturing airplane footage, with a
-connected web interface that the prototype can stream video to. The
-client had indicated that depending on the level of completion of the
+project goal was to create a proof of concept running on their hardware (Skysense 2).
+The proof of concept would consist of a camera and a program controlling the camera
+and some way to move the camera. The program would receive data of airplanes and
+automatically capturing airplane footagera.
+
+The goal was also to create a web interface that the prototype can stream video to.
+Flightradar24 had indicated that depending on the level of completion of the
 prototype and its functionality they may want to continue the
 development and create a final product which could be delivered to
 customers. This meant that the requirements needed to be applicable to
