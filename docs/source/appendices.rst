@@ -1,3 +1,5 @@
+.. _appendix-a:
+
 ============
  APPENDICES
 ============
