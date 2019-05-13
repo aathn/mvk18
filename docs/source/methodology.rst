@@ -50,7 +50,7 @@ manner. Bitbucket is the repository management website used by
 Flightradar24, which was used in conjunction with git to perform
 version control.
 
-Development guidelines
+Development Guidelines
 ----------------------
 
 In order to enable a smooth development process, a
