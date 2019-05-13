@@ -7,9 +7,8 @@ as the tests intended to ensure they are fulfilled. For a full
 description of both functional and nonfunctional requirements, see
 Appendix A.
 
-=================
- Business Requirements
-=================
+Business Requirements
+=====================
 
 The client who provided the project was Flightradar24 AB. The primary
 project goal was to create a camera prototype receiving positional
