@@ -43,7 +43,7 @@ Software
 
 - Python
 
-  The backend, control-flow and data processing is done in Python 3.
+  The backend, control-flow and data processing is done in Python 3.5.
 
 - Python Module Numpy
   trigonometric functions, least squares solvers and many other useful
@@ -78,6 +78,7 @@ limits the angles the camera can turn. When running, the software constantly
 receives positional data from nearby airplanes via the antennas. The Skysense
 can receive data from multiple airplanes simultaneously. Airplanes that are out
 of view, (outside the bounds defined by the user), are filtered out. Out of the
+remaining airplanes, an arbitrary one is selected.
 
 .. figure:: ../resources/UML-skysense-activitydiagram.png
 
