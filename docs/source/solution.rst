@@ -64,7 +64,7 @@ Software
 
 - Camera Streaming Software FFmpeg
 
-  The camera streaming software is FFmpeg and ffserver. It's an open source
+  The camera streaming software is FFmpeg. It's an open source
   library for simple camera control and streaming.
 
 Solution Design
