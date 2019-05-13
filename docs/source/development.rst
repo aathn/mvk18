@@ -69,7 +69,7 @@ Sprint 6 (19/3 - 4/4)
 - Created a basic configuration file which held the directional angle for the camera and the accepted view angles
 	- Satisfied :need:`FREQ_18`, :need:`FREQ_19`
 - Researched stream services.
-- Changed FREQ_17, Configurable view and FREQ_19, Configuration process
+- Changed FREQ_17 and FREQ_19
 
 Sprint 7 (4/4 - 5/9)
 --------
@@ -79,7 +79,7 @@ Sprint 7 (4/4 - 5/9)
 - Installed the new hardware and calibrated the software to work with the new servos
 - Made improvements to the configuration file to include stream settings
 - Implemented a feature to display the aircraft id with the video stream on the web interface
-- Changed :need:`QREQ_4`, Airplane selection criteria
+- Changed :need:`QREQ_4`
 
 .. figure:: ../resources/setup2.jpg
 
@@ -129,21 +129,21 @@ requirements were not satisfied for various reasons.
 
 The following requirements were partially changed during development:
 
-- Airplane selection criteria: :need:`QREQ_4`
+- :need:`QREQ_4`:
 
   Initially the plan was to not film airplanes that were moving away from the camera,
   and instead focus on the ones approaching the camera. However, after discussing it with
   Flightradar24 we came to the conclusion that it would be effective enough to just film
   airplanes while they're within a certain radius.
 
-- Configurable view: :need:`FREQ_17`
+- :need:`FREQ_17`:
 
   The idea of how the view would be configurable was initially more focused ease of use,
   and we wanted to avoid the need of access to files on the Skysense.
   However, after discussing it with Flightradar24, we settled for it being configurable
   through a config file on the Skysense.
 
-- Configuration process: :need:`FREQ_19`
+- :need:`FREQ_19`:
 
   Initially the plan was to have a way of configuring through some more sophisticated process,
   such as configuring the settings through a website. We later changed the requirement to accept
@@ -152,25 +152,25 @@ The following requirements were partially changed during development:
 
 The following lower priority requirements were not satisfied:
 
-- Send data to cloud: :need:`FREQ_3`
+- :need:`FREQ_3`:
 
   Some effort was put in to researching the use of Amazon Kinesis (a video streaming service provided by AWS)
   to distribute the video stream. The process of streaming video footage to with Kinesis turned out to be
   quite complicated. It definitely appeared to be doable but due to time constraints we focused on other things.
 
-- Store video in cloud: :need:`FREQ_4`
+- :need:`FREQ_4`:
 
   This requirement was dependent on the Send data to cloud-requirement.
 
-- Display stored video on web page: :need:`FREQ_6`
+- :need:`FREQ_6`:
 
   This requirement was dependent on the Send data to cloud-requirement.
 
-- Filter among previous recordings: :need:`FREQ_21`
+- :need:`FREQ_21`:
 
   This requirement was dependent on the Send data to cloud-requirement.
 
-- Avoid sun damage: :need:`FREQ_14`
+- :need:`FREQ_14`:
 
   We were unable to find a good way of doing this in the available time. We considered the option of
   reading the pixels on the screen to measure light level, but the streaming feature we used did not allow to do this easily.
