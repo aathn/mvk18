@@ -1,5 +1,8 @@
+INTRODUCTION
+############
+
 ==========
- THE TEAM
+ The Team
 ==========
 
 Developers
@@ -47,7 +50,7 @@ needed, the member responsible for a given area is expected to pay
 extra attention to that part of the project.
 
 ==========
- THE NEED
+ The Need
 ==========
 
 Different services allow consumers to obtain information about traffic
@@ -63,7 +66,7 @@ and landing, the service could be made even more engaging for a wide
 range of users.
 
 ===============
- PROPOSED IDEA
+ Proposed Idea
 ===============
 
 The idea is to make a proof-of-concept product to automatically
@@ -82,21 +85,5 @@ Flightradar24 platform.
 
 .. figure:: ../resources/UML-system-usecase.png
 
-   UML use case diagram showing an overview of the system and actors
+   Use case diagram showing an overview of the system and actors
 
-=================
- PROJECT SUMMARY
-=================
-
-This is a project within the course Software Engineering for the
-client Flightradar24 AB. The primary project goal is to create a
-prototype automatically capturing airplane footage, with a connected
-web interface that the prototype can stream video to. If Flightradar24
-is pleased with the prototype and its functionality they may want to
-continue the development and create a final product which can be
-delivered to customers. This means that our requirements need to be
-applicable to a final product even though the primary goal of the
-project is to deliver a prototype. We may only fulfill a subset of the
-requirements for our prototype but we need to keep in mind that no
-requirement shall be unsatisfiable, allowing further development to
-take place.

@@ -7,6 +7,23 @@ as the tests intended to ensure they are fulfilled. For a full
 description of both functional and nonfunctional requirements, see
 Appendix A.
 
+=================
+ Business Requirements
+=================
+
+The client who provided the project was Flightradar24 AB. The primary
+project goal was to create a camera prototype receiving positional
+data of airplanes and automatically capturing airplane footage, with a
+connected web interface that the prototype can stream video to. The
+client had indicated that depending on the level of completion of the
+prototype and its functionality they may want to continue the
+development and create a final product which could be delivered to
+customers. This meant that the requirements needed to be applicable to
+a final product even though the primary goal of the project was to
+deliver a prototype. As such, a subset of the requirements for the
+prototype were not fulfilled, but the group made sure to keep all
+requirements satisfiable, allowing further development to take place.
+
 Requirements
 ============
 
