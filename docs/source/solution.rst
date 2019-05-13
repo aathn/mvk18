@@ -9,63 +9,75 @@ entire system.
 Hardware
 --------
 
-- Skysense v2
+Skysense v2
+~~~~~~~~~~~
 
-  The Skysense v2 is a custom receiver with an industrial grade
-  Raspberry Pi under the hood. It is the newest receiver used by
-  Flightradar24. It has 4 IO-connectors: Ethernet, USB, GPS and ADS-B antenna.
-  GPS and ADS-B data are received through the antennas.
-  The Ethernet port is used for communication between the Skysense v2 and
-  Flightradar24’s network.
+The Skysense v2 is a custom receiver with an industrial grade
+Raspberry Pi under the hood. It is the newest receiver used by
+Flightradar24. It has 4 IO-connectors: Ethernet, USB, GPS and ADS-B antenna.
+GPS and ADS-B data are received through the antennas.
+The Ethernet port is used for communication between the Skysense v2 and
+Flightradar24’s network.
 
-- Pololu Micro Maestro 6-Channel USB Servo Controller
+Pololu Micro Maestro 6-Channel USB Servo Controller
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  The Maestro is used to control the servos in the pan/tilt-platform
-  over USB. We will be using an open source python-library to
-  communicate with the Maestro from the Raspberry Pi.
+The Maestro is used to control the servos in the pan/tilt-platform
+over USB. We will be using an open source python-library to
+communicate with the Maestro from the Raspberry Pi.
 
-- ELP 5-50mm Varifocal Lens 1080P
+ELP 5-50mm Varifocal Lens 1080P
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  This is the webcam used in the product. It has a manual zoom
-  capability.
+This is the webcam used in the product. It has a manual zoom
+capability.
 
-- 2 DOF Pan Tilt Platform
+2 DOF Pan Tilt Platform
+~~~~~~~~~~~~~~~~~~~~~~~
 
-  This is a pan-tilt platform assembled with two MG996 servos.
+This is a pan-tilt platform assembled with two MG996 servos.
 
-- UGREEN USB Hub Super Speed 4
+UGREEN USB Hub Super Speed 4
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  This is a USB Hub used to for communication between the Skysense and the
-  camera and pan-tilt platform.
+This is a USB Hub used to for communication between the Skysense and the
+camera and pan-tilt platform.
 
 Software
 --------
 
-- Python
+Python
+~~~~~~
 
-  The backend, control-flow and data processing is done in Python 3.
+The backend, control-flow and data processing is done in Python 3.
 
-- Python Module Numpy
-  trigonometric functions, least squares solvers and many other useful
-  functions. The module is open source, under a license permitting
-  modification and commercial use. The module is used for the calculations and
-  data processing in the backend of the product.
+Python Module Numpy
+~~~~~~~~~~~~~~~~~~~
 
-- Python Module Maestro
+Numpy is a module for computations and linear algebra providing vector types,
+trigonometric functions, least squares solvers and many other useful
+functions. The module is open source, under a license permitting
+modification and commercial use. The module is used for the calculations and
+data processing in the backend of the product.
 
-  Maestro is used to control the micro servo controller from Python. The
-  source code is under MIT-license which means we can use it without many
-  restrictions.
+Python Module Maestro
+~~~~~~~~~~~~~~~~~~~~~
 
-- NodeJS Web Server
+Maestro is used to control the micro servo controller from Python. The
+source code is under MIT-license which means we can use it without many
+restrictions.
 
-  To host the frontend live stream page a NodeJS web server with some common web
-  technology (HTML/CSS/JavaScript) is used.
+NodeJS Web Server
+~~~~~~~~~~~~~~~~~
 
-- Camera Streaming Software FFmpeg
+To host the frontend live stream page a NodeJS web server with some common web
+technology (HTML/CSS/JavaScript) is used.
 
-  The camera streaming software is FFmpeg and ffserver. It's an open source
-  library for simple camera control and streaming.
+Camera Streaming Software FFmpeg
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The camera streaming software is FFmpeg and ffserver. It's an open source
+library for simple camera control and streaming.
 
 Solution Design
 ---------------
