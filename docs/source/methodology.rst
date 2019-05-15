@@ -5,8 +5,9 @@
 .. figure:: ../resources/gantt.png
 
    An overview of our waterfall project plan. The red dots indicate
-   assignment milestones. Since an agile workflow was used, specific
-   tasks are not specified in this chart.
+   assignment milestones, orange indicates school semesters and blue
+   and yellow indicate project phases. Since an agile workflow was
+   used, specific tasks are not specified in this chart.
 
 A hybrid methodology was adapted combining the waterfall model
 with an agile workflow, specifically the model SCRUM. Specifically, a
@@ -49,7 +50,7 @@ manner. Bitbucket is the repository management website used by
 Flightradar24, which was used in conjunction with git to perform
 version control.
 
-Development guidelines
+Development Guidelines
 ----------------------
 
 In order to enable a smooth development process, a
@@ -60,7 +61,7 @@ guidelines for code formatting, documentation and unit testing.
 Gitflow
 ~~~~~~~
 
-Firstly, the git model employed is the gitflow model. In this model,
+Firstly, the git model employed was the gitflow model. In this model,
 the master branch is used as a platform for stable versions, in
 principle ready for shipping, while a development branch is used for
 the current version of the code. The code on the development branch is

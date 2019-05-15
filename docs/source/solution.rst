@@ -6,10 +6,13 @@ This section begins with a description of the hardware and the software
 used in the final solution. This is followed by a complete overview of the
 entire system.
 
-Hardware
+Material
 --------
 
-- Skysense v2
+Hardware
+~~~~~~~~
+
+- **Skysense v2**
 
   The Skysense v2 is a custom receiver with an industrial grade
   Raspberry Pi under the hood. It is the newest receiver used by
@@ -18,50 +21,51 @@ Hardware
   The Ethernet port is used for communication between the Skysense v2 and
   Flightradar24’s network.
 
-- Pololu Micro Maestro 6-Channel USB Servo Controller
+- **Pololu Micro Maestro 6-Channel USB Servo Controller**
 
   The Maestro is used to control the servos in the pan/tilt-platform
   over USB. An open source python-library is used to
   communicate with the Maestro from the Raspberry Pi.
 
-- ELP 5-50mm Varifocal Lens 1080P
+- **ELP 5-50mm Varifocal Lens 1080P**
 
   This is the webcam used in the product. It has a manual zoom
   capability.
 
-- 2 DOF Pan Tilt Platform
+- **2 DOF Pan Tilt Platform**
 
   This is a pan-tilt platform assembled with two MG996 servos.
 
-- UGREEN USB Hub Super Speed 4
+- **UGREEN USB Hub Super Speed 4**
 
   This is a USB Hub used to for communication between the Skysense and the
   camera and pan-tilt platform.
 
 Software
---------
+~~~~~~~~
 
-- Python
+- **Python**
 
   The backend, control-flow and data processing is done in Python 3.5.
 
-- Python Module Numpy
-  trigonometric functions, least squares solvers and many other useful
+- **Python Module Numpy**
+  
+  Trigonometric functions, least squares solvers and many other useful
   functions. The module is open source, under a license permitting
   modification and commercial use. The module is used for the calculations and
   data processing in the backend of the product.
 
-- Python Module Maestro
+- **Python Module Maestro**
 
   Maestro is used to control the micro servo controller from Python. The
   source code is under MIT-license which means it can be used without any restrictions.
 
-- NodeJS Web Server
+- **NodeJS Web Server**
 
   To host the frontend live stream page a NodeJS web server with some common web
   technology (HTML/CSS/JavaScript) is used.
 
-- Camera Streaming Software FFmpeg
+- **Camera Streaming Software FFmpeg**
 
   The camera streaming software is FFmpeg. It's an open source
   library for simple camera control and streaming.

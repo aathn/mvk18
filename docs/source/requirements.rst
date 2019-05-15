@@ -53,7 +53,7 @@ Tests
 
    \clearpage
 
-Traceability matrix
+Traceability Matrix
 ===================
 
 .. role:: latex(raw)

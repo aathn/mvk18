@@ -87,7 +87,7 @@ Sprint 7 (4/4 - 5/9)
    The final hardware setup
 
 #############
-Development decisions
+Development Decisions
 #############
 
 Explanations and critique of the development decisions.
@@ -121,7 +121,7 @@ considered to be good enough for the proof of concept.
 
 
 #############
-Requirement verification
+Requirement Verification
 #############
 
 All requirements of the highest priority were satisfied, however, some of them were

@@ -17,7 +17,7 @@ latexpdf:
 	$(SPHINXBUILD) -b latex $(SOURCEDIR) $(BUILDDIR)/latex $(SPHINXOPTS) $(O)
 	sed -i'' -e 's/\\begin{tabulary}{\\linewidth}\[t\]{|T|\(.*\)}/\\begin{ltabulary}[t]{|L|\1}/' $(BUILDDIR)/latex/*.tex
 	sed -i'' -e 's/\\end{tabulary}/\\end{ltabulary}/' $(BUILDDIR)/latex/*.tex
-	sed -i'' -e '/\\begin{ltabulary}/ i\\n\\settowidth\\tymin{Outgoing}\\setlength\\extrarowheight{2pt}' $(BUILDDIR)/latex/*.tex
+	sed -i'' -e '/\\begin{ltabulary}/ i\\n\\settowidth\\tymin{Incomplete}\\setlength\\extrarowheight{2pt}' $(BUILDDIR)/latex/*.tex
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."

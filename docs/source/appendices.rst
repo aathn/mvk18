@@ -16,7 +16,7 @@ Requirements
 .. req:: Capture video
    :id: FREQ_1
    :tags: functional
-   :status: done
+   :status: done 2019-04-03
    :links: QREQ_1; TEST_3; TEST_7
    :priority: 1
 
@@ -33,7 +33,7 @@ Requirements
 .. req:: Stream video
    :id: FREQ_2
    :tags: functional
-   :status: done
+   :status: done 2019-04-03
    :links: QREQ_2; TEST_3; TEST_7
    :priority: 1
 
@@ -50,7 +50,7 @@ Requirements
 .. req:: Send data to cloud
    :id: FREQ_3
    :tags: functional
-   :status: backlog
+   :status: incomplete
    :priority: 2
 
    The video data of streamed flights shall be sent to a cloud service provider
@@ -58,7 +58,7 @@ Requirements
 .. req:: Store video in cloud
    :id: FREQ_4
    :tags: functional
-   :status: backlog
+   :status: incomplete
    :priority: 3
 
    The video sent shall be stored in the cloud and organised in a
@@ -67,7 +67,7 @@ Requirements
 .. req:: Display streams on web page
    :id: FREQ_5
    :tags: functional
-   :status: in progress
+   :status: done 2019-04-03
    :links: TEST_3; TEST_7
    :priority: 2
 
@@ -77,7 +77,7 @@ Requirements
 .. req:: Display stored video on web page
    :id: FREQ_6
    :tags: functional
-   :status: backlog
+   :status: incomplete
    :priority: 3
 
    The web user shall be able to see a list of previously recorded
@@ -86,7 +86,7 @@ Requirements
 .. req:: Filter among previous recordings
    :id: FREQ_21
    :tags: functional
-   :status: backlog
+   :status: incomplete
    :priority: 4
 
    The web user shall be able to filter previous recordings after
@@ -95,7 +95,7 @@ Requirements
 .. req:: Control the servo
    :id: FREQ_7
    :tags: functional
-   :status: done
+   :status: done 2019-02-13
    :links: QREQ_3; TEST_2; TEST_7
    :priority: 1
 
@@ -113,7 +113,7 @@ Requirements
 .. req:: Data parsing
    :id: FREQ_8
    :tags: functional
-   :status: done
+   :status: done 2019-02-28
    :links: TEST_4
    :priority: 1
 
@@ -123,7 +123,7 @@ Requirements
 .. req:: Airplane selection
    :id: FREQ_9
    :tags: functional
-   :status: in progress
+   :status: done 2019-03-26
    :links: QREQ_4; TEST_7
    :priority: 1
 
@@ -140,7 +140,7 @@ Requirements
 .. req:: Convert GPS coordinates to relative positions
    :id: FREQ_10
    :tags: functional
-   :status: done
+   :status: done 2019-03-26
    :links: TEST_6; TEST_10
    :priority: 1
 
@@ -151,7 +151,7 @@ Requirements
 .. req:: Convert relative positions to angles
    :id: FREQ_11
    :tags: functional
-   :status: done
+   :status: done 2019-03-13
    :links: QREQ_5; TEST_1; TEST_12
    :priority: 1
 
@@ -168,7 +168,7 @@ Requirements
 .. req:: Keep selected airplane in view
    :id: FREQ_12
    :tags: functional
-   :status: in progress
+   :status: done 2019-03-26
    :links: QREQ_6; TEST_9
    :priority: 1
 
@@ -186,7 +186,7 @@ Requirements
 .. req:: Predict flight path by extrapolating
    :id: FREQ_13
    :tags: functional
-   :status: done
+   :status: done 2019-03-13
    :links: QREQ_7; TEST_5; TEST_12
    :priority: 1
 
@@ -205,7 +205,7 @@ Requirements
 .. req:: Avoid sun damage
    :id: FREQ_14
    :tags: functional
-   :status: backlog
+   :status: incomplete
    :priority: 2
 
    The camera shall never point directly towards the sun to avoid
@@ -214,7 +214,7 @@ Requirements
 .. req:: Automatically start streaming
    :id: FREQ_15
    :tags: functional
-   :status: done
+   :status: done 2019-04-03
    :links: TEST_3; TEST_7
    :priority: 1
 
@@ -224,7 +224,7 @@ Requirements
 .. req:: Automatically stop streaming
    :id: FREQ_16
    :tags: functional
-   :status: done
+   :status: done 2019-04-03
    :links: TEST_3; TEST_7
    :priority: 1
 
@@ -234,7 +234,7 @@ Requirements
 .. req:: Configurable view
    :id: FREQ_17
    :tags: functional
-   :status: in progress
+   :status: done 2019-04-02
    :links: TEST_11; TEST_12
    :priority: 1
 
@@ -244,7 +244,7 @@ Requirements
 .. req:: Abide view boundaries
    :id: FREQ_18
    :tags: functional
-   :status: done
+   :status: done 2019-04-02
    :links: TEST_11; TEST_12
    :priority: 1
 
@@ -253,7 +253,7 @@ Requirements
 .. req:: Configuration process
    :id: FREQ_19
    :tags: functional
-   :status: in progress
+   :status: done 2019-04-02
    :priority: 2
 
    The host shall be able to set the direction and view angle of the
@@ -277,7 +277,7 @@ Requirements
 .. req:: Get own GPS position
    :id: FREQ_22
    :tags: functional
-   :status: done
+   :status: done 2019-04-02
    :links: TEST_8
    :priority: 1
 
