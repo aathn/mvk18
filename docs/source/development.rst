@@ -70,7 +70,7 @@ Sprint 6 (19/3 - 4/4)
 - Created a basic config file which held the directional angle for the camera and the accepted view angles
 	- Satisfied :need:`FREQ_18`, :need:`FREQ_19`
 - Researched stream services
-- Changed FREQ_17 and FREQ_19
+- Changed :need:`FREQ_17` and :need:`FREQ_19`
 
 Sprint 7 (4/4 - 5/9)
 --------
