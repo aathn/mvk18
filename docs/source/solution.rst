@@ -49,7 +49,7 @@ Software
   The backend, control-flow and data processing is done in Python 3.5.
 
 - **Python Module Numpy**
-  
+
   Trigonometric functions, least squares solvers and many other useful
   functions. The module is open source, under a license permitting
   modification and commercial use. The module is used for the calculations and
@@ -89,7 +89,7 @@ thereafter continually processed and translated to angles, which are sent to
 control the servo and aim the camera at the airplane. Once the airplane goes out
 of view the stream is stopped, and the software waits for an airplane to enter
 the view again before starting another stream again. This process is illustrated
-in the following diagram.
+in the diagram.
 
 .. figure:: ../resources/UML-skysense-activitydiagram.png
 
@@ -111,3 +111,7 @@ as well as view distance and direction.
 The web page will display a stream when an airplane is
 "visible" for it. I.e. when an airplane is within the viewing
 range chosen in the configuration process.
+
+.. figure:: ../resources/web_interface.png
+
+   Our web page interface
