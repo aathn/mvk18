@@ -87,3 +87,28 @@ Flightradar24 platform.
 
    Use case diagram showing an overview of the system and actors
 
+==========
+User scenarios
+==========
+Our user scenarios explain how all different users will interact with our proof of concept.
+
+Web user scenario
+---------------
+The web user is a Flightradar24 end consumer, interested in live data about flights.
+They will visit a streaming site via a url to view live footage of all current streaming flights.
+
+Skysense host scenario
+------------
+The Skysense host is the person hosting the Skysense receiver and camera setup.
+All of the required software for the camera setup is already on the Skysense.
+The owner needs to access the Skysense remotely and edit the config file.
+They will have to set the compass angle based on the orientation in which they placed their
+camera setup. If is also possible to limit the maximum view angles for privacy
+or other reasons. 
+
+Flightradar24 administrator scenario
+------------
+The Flightradar24 administrator is an employee at Flightradar24 working with Skysense hosts.
+He or she will easily install software on the Skysense before it is sent to a Skysense host.
+The process of installing software is documented in a README-file and includes connecting to the
+Skysense remotely and running a Python script that installs dependecies.
