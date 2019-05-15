@@ -2,12 +2,15 @@
 DOCUMENTATION CHANGELOG
 ==============
 
+#############
+Changelog
+#############
+
 The changelog briefly summarizes all the changes and additions to the documentation.
 
 Initiation (1/12 - 14/12)
 --------
-- Started writing on the project scope
-- Defined the project goal after discussion with Flightradar24
+- Defined the project goal in our documentation after discussion with Flightradar24
 
 Planning (15/12 - 30/12)
 --------
@@ -20,7 +23,7 @@ Planning (15/12 - 30/12)
 
 Sprint 1 (15/1 - 22/1)
 --------
-- No changes to the documentation
+No changes to the documentation
 
 Sprint 2 (22/1 - 4/2)
 --------
@@ -28,20 +31,19 @@ Sprint 2 (22/1 - 4/2)
 
 Sprint 3 (4/2 - 15/2)
 --------
-- Added a lot of requirements
-- Split up our requirements in different parts (Functional, Dependability, Data, Maintainability, Security, etc.)
+- Added 20 quality requirements
+- Split up our quality requirements in different parts (Dependability, Data, Maintainability, Security, etc.)
 - Documented the hardware and software that we had started working with
 
 Sprint 4 (15/2 - 4/3)
 --------
 - Clarified material specifications
 - Added UML diagrams to documentation
-- Fleshed out all parts with more descriptive text
 - Added documentation on testing
 
 Sprint 5 (4/3 - 19/3)
 --------
-- No changes to documentation
+No changes to documentation
 
 Sprint 6 (19/3 - 4/4)
 --------
@@ -50,7 +52,7 @@ Sprint 6 (19/3 - 4/4)
 
 Sprint 7 (4/4 - 9/5)
 --------
-- Defined more functional and quality requirements for our documentation
+- Redefined and defined more functional and quality requirements for our documentation after feedback
 
 Sprint 8 (10/5 - 17/5, end of course)
 --------
