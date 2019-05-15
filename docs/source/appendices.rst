@@ -238,7 +238,7 @@ Requirements
    :links: TEST_11; TEST_12
    :priority: 1
 
-   The host shall be able to define the camera's view angle, to enable
+   The Skysense host shall be able to define the camera's view angle, to enable
    the camera to only track visible airplanes.
 
 .. req:: Abide view boundaries
@@ -248,7 +248,7 @@ Requirements
    :links: TEST_11; TEST_12
    :priority: 1
 
-   The camera shall not move outside of the host's defined view angle.
+   The camera shall not move outside of the Skysense host's defined view angle.
 
 .. req:: Configuration process
    :id: FREQ_19
@@ -256,7 +256,7 @@ Requirements
    :status: done 2019-04-02
    :priority: 2
 
-   The host shall be able to set the direction and view angle of the
+   The Skysense host shall be able to set the direction and view angle of the
    camera using a configuration file.
 
 .. req:: Non-dependability on hardware
