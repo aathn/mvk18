@@ -15,4 +15,5 @@ Welcome to mvk18-flightradar24's documentation!
    methodology
    development
    solution
+   documentation_changelog
    appendices
