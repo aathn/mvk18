@@ -72,7 +72,7 @@ Sprint 6 (19/3 - 4/4)
 - Researched stream services
 - Changed :need:`FREQ_17` and :need:`FREQ_19`
 
-Sprint 7 (4/4 - 5/9)
+Sprint 7 (4/4 - 9/5)
 --------
 - Tweaked plane selection to only select planes when they are within a certain distance
 	- Satisfied :need:`QREQ_6`, :need:`FREQ_12`
