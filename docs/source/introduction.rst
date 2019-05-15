@@ -77,9 +77,9 @@ enthusiasts the ability to watch their favorite aircrafts live from
 the comfort of their home. The project will use positional information
 that is sent from the aircraft, received through an antenna, (this
 data gathering is already implemented in the software of the Skysense
-v2) in order to know where to aim the camera. We will not track
-take-offs and landings initially, but instead let volunteers (that
-already have Skysense v2 equipment) put the device in their window and
+v2) in order to know where to aim the camera. Take-offs and landings
+will not be tracked initially. Instead volunteers (that
+already have Skysense v2 equipment) will put the device in their window and
 film planes during flight which will be livestreamed to the
 Flightradar24 platform.
 
@@ -88,11 +88,11 @@ Flightradar24 platform.
    Use case diagram showing an overview of the system and actors
 
 ==========
-User scenarios
+User Scenarios
 ==========
 Our user scenarios explain how all different users will interact with our proof of concept.
 
-Web user scenario
+Web User Scenario
 ---------------
 The web user is a Flightradar24 end consumer, interested in live data about flights.
 They will visit a streaming site via a url to view live footage of all current streaming flights.
@@ -104,11 +104,34 @@ All of the required software for the camera setup is already on the Skysense.
 The owner needs to access the Skysense remotely and edit the config file.
 They will have to set the compass angle based on the orientation in which they placed their
 camera setup. If is also possible to limit the maximum view angles for privacy
-or other reasons. 
+or other reasons.
 
-Flightradar24 administrator scenario
+Flightradar24 Administrator Scenario
 ------------
 The Flightradar24 administrator is an employee at Flightradar24 working with Skysense hosts.
 He or she will easily install software on the Skysense before it is sent to a Skysense host.
 The process of installing software is documented in a README-file and includes connecting to the
 Skysense remotely and running a Python script that installs dependecies.
+
+==========
+Risk Analysis
+==========
+
+Risks are continously analysed in different parts of the
+development process and a few risks were identified:
+
+- Hardware
+A potential risk would be that hardware ordered didn't
+meet the criterias of the product. Another risk could be that
+our different hardware components wouldn't be compatible with each other.
+To cope with this, all hardware that would be ordered had to be thoroughly researched.
+
+- Streaming solution
+A risk would be not being able to find a working streaming solution
+fitting the request from Flightradar24. To handle that time
+had to be planned well and a backup PoC streaming solution should be researched.
+
+- Lack of time
+Since all members of the team have courses running in parallell with the
+software project, the time constraints may lead to certain parts of the project not succeeding.
+The solution to this problem would be planned meetings and working group communication.

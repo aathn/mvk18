@@ -121,6 +121,27 @@ considered to be good enough for the proof of concept.
 
 
 #############
+Risk Evaulation
+#############
+- Hardware
+Overall the experience with the hardware components were smooth and we
+were able to make both of our hardware setup functional without too much hassle.
+The second hardware setup mostly met our requirements but the end result could
+have been better which is described in more detail under Development Decisions.
+
+- Streaming solution
+A PoC streaming setup was created but not a working cloud solution, although it was researched.
+The focus on the PoC streaming setup may have taken important time from the reasearch of
+a working cloud solution, but it provided us with a working PoC.
+
+- Lack of time
+Time management worked quite well despite other demanding courses running in
+parallel. This is mostly due to the fact that all team members showed a lot
+of dedication to this project and this course was prioritized due to the fact
+that working on the project was a very rewarding experience.
+
+
+#############
 Requirement Verification
 #############
 
