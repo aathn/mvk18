@@ -157,7 +157,7 @@ latex_elements = {
     "extraclassoptions": "openany",
 }
 
-latex_logo = "../resources/flygplan.png"
+latex_logo = "../resources/logo.png"
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
