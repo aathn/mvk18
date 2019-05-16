@@ -9,6 +9,8 @@ entire system.
 Material
 --------
 
+.. _hardware:
+
 Hardware
 ~~~~~~~~
 

@@ -1,10 +1,10 @@
-.. _appendix-a:
-
 ============
  APPENDICES
 ============
 
-A: Requirements and Tests
+.. _appendix-a:
+
+Appendix A: Requirements and Tests
 =========================
 
 This section provides detailed descriptions of all tests and

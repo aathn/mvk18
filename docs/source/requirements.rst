@@ -11,7 +11,7 @@ Business Requirements
 =====================
 
 The client who provided the project was Flightradar24 AB. The primary
-project goal was to create a proof of concept running on their hardware (Skysense 2).
+project goal was to create a proof of concept running on their hardware (Skysense v2).
 The proof of concept would consist of a camera and a program controlling the camera
 and some way to move the camera. The program would receive data of airplanes and
 automatically capturing airplane footagera.
@@ -40,7 +40,7 @@ Quality Requirements
 The quality requirements are mostly focused on user experience. These include
 requirements on the streamed video's resolution and frame-rate, smooth and precise
 camera movement, and more.
-All requirements (functional and non-functional) are listed in :ref:`appendix-a`
+All requirements (functional and non-functional) are listed in :ref:`appendix-a`.
 
 Tests
 =====
