@@ -83,14 +83,14 @@ already have Skysense v2 equipment) will put the device in their window and
 film planes during flight which will be livestreamed to the
 Flightradar24 platform.
 
-.. figure:: ../resources/UML-system-usecase.png
-
-   Use case diagram showing an overview of the system and actors
-
 ==========
 User Scenarios
 ==========
 Our user scenarios explain how all different users will interact with our proof of concept.
+
+.. figure:: ../resources/UML-use-case.png
+
+   Use case diagram showing an overview of the actors and their respective use cases
 
 Web User Scenario
 ---------------
