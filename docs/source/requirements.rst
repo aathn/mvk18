@@ -40,7 +40,7 @@ Quality Requirements
 The quality requirements are mostly focused on user experience. These include
 requirements on the streamed video's resolution and frame-rate, smooth and precise
 camera movement, and more.
-All requirements (functional and non-functional) are listed in :ref:`appendix-a`
+All requirements (functional and non-functional) are listed in :ref:`appendix-a`.
 
 Tests
 =====

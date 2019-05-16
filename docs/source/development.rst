@@ -32,7 +32,7 @@ Sprint 3 (4/2 - 15/2)
 - Worked abstractly on methods to handle multiple aircraft and calculate which aircraft was in view
 	- Partly satisfied :need:`QREQ_6`
 - Wrote code to extrapolate upcoming positions of an aircraft based on previous positions
-	- Satisfied :need:`FREQ_13``
+	- Satisfied :need:`FREQ_13`
 - Wrote code to convert from coordinates to a direction to point the camera
 	- Satisfied :need:`FREQ_10`, :need:`FREQ_11`
 - Learned how to control the pan/tilt-servos using an open source python library
