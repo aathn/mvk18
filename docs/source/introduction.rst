@@ -111,7 +111,8 @@ Flightradar24 Administrator Scenario
 The Flightradar24 administrator is an employee at Flightradar24 working with Skysense hosts.
 They will easily install software on the Skysense before it is sent to a Skysense host.
 The process of installing software is documented in a README-file and includes connecting to the
-Skysense remotely and running a Python script that installs dependecies.
+Skysense remotely and running a Python script that installs dependecies. The administrator also
+configures the stream settings and manages the web server receiving the video data.
 
 ==========
 Risk Analysis
