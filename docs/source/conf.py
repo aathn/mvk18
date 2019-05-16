@@ -127,10 +127,11 @@ latex_elements = {
     # 'pointsize': '10pt',
     # Latex figure (float) alignment
     #
-    # 'figure_align': 'htbp',
+    "figure_align": "H",
     "preamble": r"""\usepackage{tcolorbox}
 \usepackage{longtable}
 \usepackage{colortbl}
+\usepackage{chngcntr}
 \makeatletter
 \def\ltabulary{%
   \def\endfirsthead{\\}%
@@ -151,7 +152,8 @@ latex_elements = {
   \advance\dimen@-\LTright
   \tabulary\dimen@}
 \def\endltabulary{\endtabulary}
-\makeatother""",
+\makeatother
+\counterwithout{figure}{chapter}""",
     "extraclassoptions": "openany",
 }
 

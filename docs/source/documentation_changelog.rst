@@ -60,7 +60,3 @@ Sprint 8 (10/5 - 17/5, end of course)
 - Added Documentation changelog,
 - Added User scenarios and interface views to the documentation
 - Added more system models showed with UML to the documentation
-
-.. figure:: ../resources/setup2.jpg
-
-   The final hardware setup
