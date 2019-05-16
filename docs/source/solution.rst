@@ -78,6 +78,8 @@ Solution Design
 In short, the product takes input from the antennas and will, if an airplane
 is visible, produce a video stream.
 
+The following link demonstrates the product in action: `<https://youtu.be/s-X5VY6oqHE>`_
+
 Before running the software the Flightradar24 administrator configures
 the stream settings of the device, and the user manually enters the
 compass angle that the camera is facing, as well as bounds that define
