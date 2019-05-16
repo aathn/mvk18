@@ -103,12 +103,12 @@ The interface to the product consists of two things:
 
 * The configuration file
 
-The config file is used for setting up upper, lower, left and right angle bounds
-as well as view distance and direction.
+The config file is used for setting up camera bounds, view distance and
+direction as well as stream settings and blacklisted flight numbers.
 
 * The web page receiving the stream
 
-The web page will display a stream when an airplane is
+The web page will display a video stream when an airplane is
 "visible" for it. I.e. when an airplane is within the viewing
 range chosen in the configuration process.
 
