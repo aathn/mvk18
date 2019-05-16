@@ -112,6 +112,10 @@ The web page will display a stream when an airplane is
 "visible" for it. I.e. when an airplane is within the viewing
 range chosen in the configuration process.
 
+.. figure:: ../resources/config.png
+
+   The configuration file
+
 .. figure:: ../resources/web_interface.png
 
    Our web page interface
