@@ -9,14 +9,14 @@ Changelog
 The changelog briefly summarizes all the development on the product,
 when requirements were satisfied and when changes were made in the requirements.
 
-Sprint 1 (15/1 - 22/1)
---------
+Sprint 1 (19-01-15 - 19-01-22)
+------------------------------
 - Researched viable hardware to see what options were available
 - Ordered hardware (two servos, a servo controller and a camera)
 - Put up a Trello board and a Slack channel
 
-Sprint 2 (22/1 - 4/2)
---------
+Sprint 2 (19-01-22 - 19-02-04)
+------------------------------
 - Decided on a git workflow
 - Researched the preexisting Skysense software
 - Made a coordinate converter to convert the coordinates in the Skysense to a usable format
@@ -27,8 +27,8 @@ Sprint 2 (22/1 - 4/2)
 
    Our first setup using the pan/tilt-platform, the servo and the camera
 
-Sprint 3 (4/2 - 15/2)
---------
+Sprint 3 (19-02-04 - 19-02-15)
+------------------------------
 - Worked abstractly on methods to handle multiple aircraft and calculate which aircraft was in view
 	- Partly satisfied :need:`QREQ_6`
 - Wrote code to extrapolate upcoming positions of an aircraft based on previous positions
@@ -39,15 +39,15 @@ Sprint 3 (4/2 - 15/2)
 	- Satisfied :need:`QREQ_8`
 - Discussed software license with Flightradar24
 
-Sprint 4 (15/2 - 4/3)
---------
+Sprint 4 (19-02-15 - 19-03-04)
+------------------------------
 - Researched software that would be able to stream webcam footage to a web server
 - Wrote code to parse the airplane data file to usable data within the program
 - Made improvement to the code converting coordinates
 - Managed to control the pan/tilt-servos directly from the Skysense hardware
 
-Sprint 5 (4/3 - 19/3)
---------
+Sprint 5 (19-03-04 - 19-03-19)
+------------------------------
 - Mounted the camera onto the platform
 - Made a program to stream video from the camera
 	- Satisfied :need:`FREQ_2`
@@ -65,15 +65,15 @@ Sprint 5 (4/3 - 19/3)
    The first functional setup in action filming actual airplanes
 
 
-Sprint 6 (19/3 - 4/4)
---------
+Sprint 6 (19-03-19 - 19-04-04)
+------------------------------
 - Created a basic config file which held the directional angle for the camera and the accepted view angles
 	- Satisfied :need:`FREQ_18`, :need:`FREQ_19`
 - Researched stream services
 - Changed :need:`FREQ_17` and :need:`FREQ_19`
 
-Sprint 7 (4/4 - 9/5)
---------
+Sprint 7 (19-04-04 - 19-05-09)
+------------------------------
 - Tweaked plane selection to only select planes when they are within a certain distance
 	- Satisfied :need:`QREQ_6`, :need:`FREQ_12`
 - Ordered some new hardware (platform and servos) in an attempt to get less shaky and more precise video output
