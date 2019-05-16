@@ -78,20 +78,28 @@ Solution Design
 In short, the product takes input from the antennas and will, if an airplane
 is visible, produce a video stream.
 
-Before running the software, the user has to manually enter the compass angle
-that the camera is facing, as well as bounds that define a virtual view which
-limits the angles the camera can turn. When running, the software constantly
-receives positional data from nearby airplanes via the antennas. The Skysense
-can receive data from multiple airplanes simultaneously. Airplanes that are out
-of view, (outside the bounds defined by the user), are filtered out. If there are any
-remaining airplanes, an arbitrary one is selected and the stream is started.
-A more sophisticated approach could be to rank the airplanes based on different
-attributes, and pick the best one. The selected airplane's position is
-thereafter continually processed and translated to angles, which are sent to
-control the servo and aim the camera at the airplane. Once the airplane goes out
-of view the stream is stopped, and the software waits for an airplane to enter
-the view again before starting another stream again. This process is illustrated
-in the diagram.
+Before running the software the Flightradar24 administrator configures
+the stream settings of the device, and the user manually enters the
+compass angle that the camera is facing, as well as bounds that define
+a virtual view which limits the angles the camera can turn. When
+running, the software constantly receives positional data from nearby
+airplanes via the antennas. The Skysense can receive data from
+multiple airplanes simultaneously. Airplanes that are out of view,
+(outside the bounds defined by the user), are filtered out. If there
+are any remaining airplanes, the closest one one is selected, the
+stream is started. A more sophisticated approach could be to rank the
+airplanes based on different attributes, and pick the best one, but
+this one generates a solid candidate. The selected airplane's position
+is thereafter continually processed and translated to angles, which
+are sent to control the servos and aim the camera at the
+airplane. Once the airplane goes out of view the stream is stopped,
+and the software waits for an airplane to enter the view again before
+starting another stream again. This process is illustrated in the
+following two diagrams.
+
+.. figure:: ../resources/system-model.png
+
+   A diagram describing the structure of the system
 
 .. figure:: ../resources/UML-skysense-activitydiagram.png
 
