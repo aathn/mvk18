@@ -127,7 +127,7 @@ latex_elements = {
     # 'pointsize': '10pt',
     # Latex figure (float) alignment
     #
-    # 'figure_align': 'htbp',
+    "figure_align": "H",
     "preamble": r"""\usepackage{tcolorbox}
 \usepackage{longtable}
 \usepackage{colortbl}
