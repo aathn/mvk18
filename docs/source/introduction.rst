@@ -2,6 +2,22 @@ INTRODUCTION
 ############
 
 ==========
+ The Need
+==========
+
+Different services allow consumers to obtain information about traffic
+jams, train time tables, flights, et cetera, to an ever growing
+extent. One such service is Flightradar24’s flight tracking service,
+which allows users to track airplanes on a map updated in real
+time. The service provides positional data, flight numbers and similar
+statistics and is popular among flight enthusiasts around the
+world. However, one potential feature which the company has yet to
+implement is to show footage of the airplanes along with the other
+statistics. By providing footage of the airplanes passing by, lifting
+and landing, the service could be made even more engaging for a wide
+range of users.
+
+==========
  The Team
 ==========
 
@@ -48,22 +64,6 @@ The remaining roles each entail a responsibility within a certain area
 of the project. While all members cooperate to perform the tasks
 needed, the member responsible for a given area is expected to pay
 extra attention to that part of the project.
-
-==========
- The Need
-==========
-
-Different services allow consumers to obtain information about traffic
-jams, train time tables, flights, et cetera, to an ever growing
-extent. One such service is Flightradar24’s flight tracking service,
-which allows users to track airplanes on a map updated in real
-time. The service provides positional data, flight numbers and similar
-statistics and is popular among flight enthusiasts around the
-world. However, one potential feature which the company has yet to
-implement is to show footage of the airplanes along with the other
-statistics. By providing footage of the airplanes passing by, lifting
-and landing, the service could be made even more engaging for a wide
-range of users.
 
 ===============
  Proposed Idea
