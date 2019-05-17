@@ -3,18 +3,20 @@
 ==========================
 
 .. figure:: ../resources/gantt.png
+   :name: gantt
 
    An overview of our waterfall project plan. The red dots indicate
    assignment milestones, orange indicates school semesters and blue
    and yellow indicate project phases. Since an agile workflow was
    used, specific tasks are not specified in this chart.
 
-A hybrid methodology was adapted combining the waterfall model
-with an agile workflow, specifically the model SCRUM. Specifically, a
+A hybrid methodology was adapted combining the waterfall model with an
+agile workflow, specifically the model SCRUM. Specifically, a
 waterfall model was used to outline the main parts of the project,
 including initialization, planning, execution and closure phases (see
-figure 1). During the execution phase the waterfall model was temporarily left,
-instead working in an agile manner using SCRUM.
+:numref:`Fig. %s <gantt>`). During the execution phase the waterfall
+model was temporarily left, instead working in an agile manner using
+SCRUM.
 
 The decision was made to keep the phase involving only planning rather short in
 favor of the execution phase which involves a lot of planning,

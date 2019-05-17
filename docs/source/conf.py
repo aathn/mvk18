@@ -48,6 +48,9 @@ extensions = [
     "sphinxcontrib.needs",
 ]
 
+# Enable numbered figures
+numfig = True
+
 # Extra configuration for sphinxcontrib-needs
 needs_extra_options = {"priority": directives.unchanged}
 needs_latex_visit = lambda self, node: self.body.append(r"\begin{tcolorbox}")
@@ -131,7 +134,6 @@ latex_elements = {
     "preamble": r"""\usepackage{tcolorbox}
 \usepackage{longtable}
 \usepackage{colortbl}
-\usepackage{chngcntr}
 \makeatletter
 \def\ltabulary{%
   \def\endfirsthead{\\}%
@@ -153,7 +155,7 @@ latex_elements = {
   \tabulary\dimen@}
 \def\endltabulary{\endtabulary}
 \makeatother
-\counterwithout{figure}{chapter}""",
+""",
     "extraclassoptions": "openany",
 }
 
