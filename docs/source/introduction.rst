@@ -123,14 +123,17 @@ development process and a few risks were identified:
 
 - Hardware
 A potential risk would be that hardware ordered didn't
-meet the criterias of the product. Another risk could be that
-our different hardware components wouldn't be compatible with each other.
-To cope with this, all hardware that would be ordered had to be thoroughly researched.
+meet the criterias of the product.
+That could be if the servo would not be able to hold the camera,
+or if ordered parts were missing in the received package.
+Another risk could be that our different hardware components wouldn't be compatible with each other.
+That could be if the camera or servo controller wouldn't be accepted by the Skysense.
+To cope with these risks, all hardware that would be ordered had to be thoroughly researched.
 
 - Streaming solution
 A risk would be not being able to find a working streaming solution
 fitting the request from Flightradar24. To handle that time
-had to be planned well and a backup PoC streaming solution should be researched.
+had to be planned well and a backup PoC streaming solution (not on cloud platform) should be researched.
 
 - Lack of time
 Since all members of the team have courses running in parallell with the
