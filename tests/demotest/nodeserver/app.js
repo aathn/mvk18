@@ -6,7 +6,7 @@ var hbs = require("express-handlebars");
 const express = require("express");
 const os = require("os");
 
-const WEB_SERVER_PORT = 80;
+const WEB_SERVER_PORT = 8000;
 const WEB_SERVER_HOST = os.hostname();
 
 /* Create the stream handler object, keeping track of all streams */
@@ -24,7 +24,7 @@ app.set("view engine", "handlebars");
 
 /* Render front page */
 app.get("/", function(req, res) {
-  res.render("frontpage", { streams: streamHandler.allStreams, ip: req.get('host') });
+  res.render("frontpage", { streams: streamHandler.allStreams, ip: req.connection.remoteAddress.substr(7) });
 });
 
 /* Get a JSON object of all streams */
