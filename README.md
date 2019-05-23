@@ -1,5 +1,22 @@
 *Temporary project documentation*
 
+# Run Demo
+Install the software on the skysense.
+
+To start the skysensestreamer:
+- Go to main directory
+- sudo -E python3 -m skysensestreamer
+
+To start the web server:
+- go to tests/demotest/nodeserver
+- npm start
+
+To start the demo flights
+- go to tests/demotest
+- sudo python3 demotest.py
+
+You can now visit the website on the same network as the skysense on port 8000.
+
 # MVK FR24 #
 A project within the course Software Engineering for the client Flightradar24 AB (FR24).
 
