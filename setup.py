@@ -1,37 +1,29 @@
-from setuptools.command.develop import develop
 from setuptools import setup, find_packages
-import urllib.request
-import os
+from os import path
 
+here = path.abspath(path.dirname(__file__))
 
-class InstallWithMaestro(develop):
-    """Install and download maestro module"""
-
-    def run(self):
-        if not os.path.isfile("./skysensestreamer/maestro.py"):
-            try:
-                print("Attempting to download maestro")
-                maestro_url = "https://raw.githubusercontent.com/FRC4564/maestro/master/maestro.py"
-                urllib.request.urlretrieve(
-                    maestro_url, filename="./skysensestreamer/maestro.py"
-                )
-                print("Successfully downloaded maestro")
-            except:
-                print(
-                    'Failed to download maestro, manual download from "https://github.com/FRC4564/Maestro" required'
-                )
-        else:
-            print("Maestro is already installed")
-
-        develop.run(self)
-
+with open(path.join(here, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
 
 setup(
     name="skysensestreamer",
-    description="Stream video of aircrafts",
-    packages=find_packages(),
+    version="0.1.0",
+    description="Stream video of passing aircrafts with camera module connected to Skysense v2",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    author="MVK Group 10",
+    author_email="mwesslen@kth.se",
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+    ],
+    packages=find_packages("skysensestreamer"),
+    python_requires=">=3.5",
+    install_requires=["numpy", "maestro>=0.1.0"],
+    dependency_links=["git+https://github.com/m4reko/maestro#egg=maestro-0.1.0"],
     include_package_data=True,
-    python_requires=">=3.7",
-    cmdclass={"develop": InstallWithMaestro},
-    install_requires=["pyserial==3.4", "numpy==1.16.1"],
+    package_data={"": ["conf.ini"]},
 )
