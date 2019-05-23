@@ -13,8 +13,9 @@ server = Popen(["npm", "start"])
 streamer = Popen(
     [
         "sudo",
-        "-H",
+        "-E",
         "python3",
+        "-m",
         "../../skysensestreamer",
         "../tests/demotest/flights.js",
         "../tests/demotest/position.txt",
