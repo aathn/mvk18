@@ -1,8 +1,8 @@
 # Configuration for camera direction and stream quality.
 # All directions and angles should be given in radians.
 [file_locations]
-flight_data = "/tmp/flights.js"
-gps_pos = "/tmp/position.txt"
+flight_data = /tmp/flights.js
+gps_pos = /tmp/position.txt
 
 [camera_settings]
 direction = 0
