@@ -11,7 +11,9 @@ data_dir = "tests/parse_data"
 
 class ParserTests(unittest.TestCase):
     def setUp(self):
-        self.camera = Camera(GPSCoord(0, 0, 0), 0.0, 0.0, 0.0, 0.0, 0.0, 0)
+        self.camera = Camera(
+            GPSCoord(0, 0, 0), 0.0, 0.0, 0.0, 0.0, 0.0, 0, "/dev/ttys002"
+        )
 
     def test_parse_many_flights(self):
         flights = {
@@ -301,10 +303,10 @@ class ParserTests(unittest.TestCase):
                 "TWY977",
             ],
         }
-        self.assertEqual(parser.parse("{}/test_flights.js".format(data_dir)), flights)
+        self.assertEqual(parser.parse("{}/data_flights.js".format(data_dir)), flights)
 
     def test_parse_empty_json(self):
-        self.assertEqual(parser.parse("{}/test_empty.js".format(data_dir)), {})
+        self.assertEqual(parser.parse("{}/data_empty.js".format(data_dir)), {})
 
     def test_parse_one_flight(self):
         flight = {
@@ -328,10 +330,10 @@ class ParserTests(unittest.TestCase):
                 "",
             ]
         }
-        self.assertEqual(parser.parse("{}/test_one_flight.js".format(data_dir)), flight)
+        self.assertEqual(parser.parse("{}/data_one_flight.js".format(data_dir)), flight)
 
     def test_update_one_flight(self):
-        parser.update_airplanes(self.camera, "{}/test_one_flight.js".format(data_dir))
+        parser.update_airplanes(self.camera, "{}/data_one_flight.js".format(data_dir))
         self.assertEqual(len(self.camera.airplanes), 1)
         plane = self.camera.airplanes[0]
         self.assertEqual(plane.id, "x47956b")
@@ -344,8 +346,8 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(position.altitude, 4975)
 
     def test_update_flights_twice(self):
-        parser.update_airplanes(self.camera, "{}/test_one_flight.js".format(data_dir))
-        parser.update_airplanes(self.camera, "{}/test_two_flights.js".format(data_dir))
+        parser.update_airplanes(self.camera, "{}/data_one_flight.js".format(data_dir))
+        parser.update_airplanes(self.camera, "{}/data_two_flights.js".format(data_dir))
         self.assertEqual(len(self.camera.airplanes), 2)
         updated_plane = self.camera.airplanes[0]
         new_plane = self.camera.airplanes[1]
@@ -359,16 +361,16 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(position.longitude, 18.0763)
 
     def test_update_remove_flights(self):
-        parser.update_airplanes(self.camera, "{}/test_one_flight.js".format(data_dir))
-        parser.update_airplanes(self.camera, "{}/test_two_flights.js".format(data_dir))
-        parser.update_airplanes(self.camera, "{}/test_empty.js".format(data_dir))
+        parser.update_airplanes(self.camera, "{}/data_one_flight.js".format(data_dir))
+        parser.update_airplanes(self.camera, "{}/data_two_flights.js".format(data_dir))
+        parser.update_airplanes(self.camera, "{}/data_empty.js".format(data_dir))
         self.assertEqual(len(self.camera.airplanes), 0)
 
     def test_keep_planes_updated(self):
-        filename = "{}/test_keep_planes_updated.js".format(data_dir)
-        with open("{}/test_one_flight.js".format(data_dir), "r") as file:
+        filename = "{}/data_keep_planes_updated.js".format(data_dir)
+        with open("{}/data_one_flight.js".format(data_dir), "r") as file:
             one_flight_string = file.read()
-        with open("{}/test_two_flights.js".format(data_dir), "r") as file:
+        with open("{}/data_two_flights.js".format(data_dir), "r") as file:
             two_flights_string = file.read()
 
         with open(filename, "w+") as file:
@@ -403,7 +405,7 @@ class ParserTests(unittest.TestCase):
 
     def test_parse_gps(self):
         real_coords = parser.GPSCoord(59.47796866666667, 17.905363266666665, 19.753)
-        coords = parser.parse_gps_coord("{}/test_parse_gps.txt".format(data_dir))
+        coords = parser.parse_gps_coord("{}/data_gps.txt".format(data_dir))
         self.assertEqual(real_coords, coords)
 
 

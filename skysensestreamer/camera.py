@@ -33,6 +33,7 @@ class Camera:
         view_left_bound: Angle,
         view_right_bound: Angle,
         view_distance: int,
+        serial_port: str = "/dev/ttyACM0",
         blacklisted_flights: List[str] = [],
         blacklisted_ids: List[str] = [],
     ):
@@ -47,6 +48,7 @@ class Camera:
                                 still see the sky (zero is north and increasing values represent clockwise rotation)
         :param view_right_bound: The compass angle in radians which is the rightmost point the camera can point to and
                                  still see the sky (zero is north and increasing values represent clockwise rotation)
+        :param serial_port: The name of the serial port of the pan/tilt controller.
         :param view_distance: The camera's view distance in feet
         :param blacklisted_flights: Flight numbers containing any string in this list will be ignored when searching for planes to stream
 
@@ -63,7 +65,7 @@ class Camera:
         )
         self.airplane_lock = Lock()
         """Used to provide exclusive access to the airplanes list"""
-        self.controller = Controller()
+        self.controller = Controller(serial_port)
         """The object used to control the servos in the pan/tilt platform"""
         self.tracked_airplane = None
         self.airplanes = []
