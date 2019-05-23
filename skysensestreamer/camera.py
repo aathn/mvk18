@@ -93,13 +93,21 @@ class Camera:
         tilt = pi / 2 - lc.altitude_angle
         return pan, tilt
 
-    def start(self):
-        """Start tracking, filming and streaming airplanes."""
-        stream_handler = FFmpegHandler()
+    def start(self, input_device, format, resolution, bitrate, base_url):
+        """Start tracking, filming and streaming airplanes.
+
+        :param input_device: The USB-camera from which to stream. Default '0'
+        :param format: The input format, may differ on different operating systems. Default avfoundation.
+        :param resolution: The resolution of the streamed video. Default '640x480'
+        :param bitrate: The bitrate of the streamed video. Default '1000k'
+        :param base_url: The url to output the streams to.
+
+        """
+        stream_handler = FFmpegHandler(input_device, format, resolution, bitrate)
         while True:
             self._search_for_airplane()
             stream_handler.start_stream(
-                "http://192.168.1.28:8000/livestream/flygplanet"  # TODO: This should be in the conf.ini file
+                "{}/{}".format(base_url, self.tracked_airplane.id)
             )
             self._follow_tracked_plane()
             stream_handler.stop_stream()
@@ -166,26 +174,18 @@ class FFmpegHandler:
 
     """
 
-    def __init__(self):
+    def __init__(self, input_device, format, resolution, bitrate):
         self.process = None
         self.streaming = False
+        self.input_device = input_device
+        self.format = format
+        self.resolution = resolution
+        self.bitrate = bitrate
 
-    def start_stream(
-        self,
-        url: str,
-        input_device: str = "/dev/video0",
-        format: str = "v4l2",
-        resolution: str = "640x480",
-        bitrate: str = "1000k",
-    ):
-        """
-        Start a process that streams video from USB web cam to url specified.
+    def start_stream(self, url: str):
+        """Start a process that streams video from USB web cam to url specified.
 
         :param url: The url or output where streaming data is sent to.
-        :param input_device: The USB-camera from which to stream. Default "0"
-        :param format: The input format, may differ on different operating systems. Default avfoundation.
-        :param resolution: The resolution of the streamed video. Default "640x480"
-        :param bitrate: The bitrate of the streamed video. Default "1000k"
 
         """
 
@@ -194,16 +194,16 @@ class FFmpegHandler:
 
         cmd = (
             "ffmpeg -f "
-            + format
+            + self.format
             + " -framerate 30 -video_size "
-            + resolution
+            + self.resolution
             + " -pix_fmt uyvy422"
             + " -i "
-            + input_device
+            + self.input_device
             + " -f mpegts -codec:v mpeg1video -s "
-            + resolution
+            + self.resolution
             + " -b:v "
-            + bitrate
+            + self.bitrate
             + " -bf 0 "
             + url
         )

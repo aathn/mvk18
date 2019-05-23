@@ -9,7 +9,6 @@ This module does the following:
 """
 
 from skysensestreamer.camera import Camera
-from skysensestreamer.dataproc.coords import GPSCoord
 from skysensestreamer.parser import keep_planes_updated, parse_gps_coord
 from threading import Thread, Event
 from configparser import ConfigParser
@@ -21,6 +20,7 @@ GPS_POS_FILE_PATH = "/var/tmp/position.txt"
 config_parser = ConfigParser()
 config_parser.read(CONFIG_FILE_PATH)
 camera_settings = config_parser["camera_settings"]
+stream_settings = config_parser["stream_settings"]
 blacklist = config_parser["blacklist"]
 
 camera = Camera(
@@ -41,4 +41,10 @@ parser_thread = Thread(
 )
 
 parser_thread.start()
-camera.start()
+camera.start(
+    stream_settings["input_device"],
+    stream_settings["format"],
+    stream_settings["resolution"],
+    stream_settings["bitrate"],
+    stream_settings["base_url"],
+)
