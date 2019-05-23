@@ -46,7 +46,7 @@ def _to_tilt_value(angle: float, target_range: (int, int)) -> int:
 
 
 class Controller:
-    def __init__(self):
+    def __init__(self, serial_port):
         """Creates the controller object from the maestro module and
         configures the range and the speed.
         """
@@ -54,7 +54,7 @@ class Controller:
         self.pan_range = (2060, 9250)
         self.tilt_range = (7500, 12000)
 
-        self.servo = maestro.Controller()
+        self.servo = maestro.Controller(serial_port)
         self.servo.setRange(0, self.pan_range[0], self.pan_range[1])
         self.servo.setRange(1, self.tilt_range[0], self.tilt_range[1])
         self.servo.setSpeed(0, 25)
