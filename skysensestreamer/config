@@ -13,7 +13,7 @@ view_right_bound = 0
 view_distance = 40000
 
 [stream_settings]
-base_url = http://192.168.1.28:8000/livestream
+base_url = http://localhost:8000/livestream
 input_device = /dev/video0
 format = v4l2
 resolution = 640x480
