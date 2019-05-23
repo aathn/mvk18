@@ -9,18 +9,18 @@ longitude = -longitude_limit
 longitude_speed = 0.01
 altitude = 1000
 
-server = Popen(["npm", "start"])
-streamer = Popen(
-    [
-        "sudo",
-        "-E",
-        "python3",
-        "-m",
-        "../../skysensestreamer",
-        "../tests/demotest/flights.js",
-        "../tests/demotest/position.txt",
-    ]
-)
+# server = Popen(["npm", "start"])
+# streamer = Popen(
+#     [
+#         "sudo",
+#         "-E",
+#         "python3",
+#         "-m",
+#         "../../skysensestreamer",
+#         "../tests/demotest/flights.js",
+#         "../tests/demotest/position.txt",
+#     ]
+# )
 
 while True:
     demoaircraft = (
