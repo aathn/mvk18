@@ -4,8 +4,10 @@ var fs = require("fs"),
   StreamHandler = require("./StreamHandler");
 var hbs = require("express-handlebars");
 const express = require("express");
+const os = require("os");
 
 const WEB_SERVER_PORT = 8000;
+const WEB_SERVER_HOST = os.hostname();
 
 /* Create the stream handler object, keeping track of all streams */
 let streamHandler = new StreamHandler();
@@ -22,7 +24,7 @@ app.set("view engine", "handlebars");
 
 /* Render front page */
 app.get("/", function(req, res) {
-  res.render("frontpage", { streams: streamHandler.allStreams });
+  res.render("frontpage", { streams: streamHandler.allStreams, ip: req.get('host') });
 });
 
 /* Get a JSON object of all streams */
@@ -36,7 +38,7 @@ app.post("/livestream/:name", receiveStream);
 
 /* Start stream */
 app.listen(WEB_SERVER_PORT, () =>
-  console.log(`Web Server listening on port ${WEB_SERVER_PORT}!`)
+  console.log(`Web Server listening on ${WEB_SERVER_HOST}:${WEB_SERVER_PORT}!`)
 );
 
 /** Function used to receive streams from ffmpeg to the express server

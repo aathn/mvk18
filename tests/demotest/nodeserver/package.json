@@ -6,6 +6,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
+    "internal-ip": "^4.3.0",
     "ws": "^6.1.4"
   },
   "devDependencies": {},
