@@ -25,5 +25,5 @@ setup(
     install_requires=["numpy", "maestro>=0.1.0"],
     dependency_links=["git+https://github.com/m4reko/maestro#egg=maestro-0.1.0"],
     include_package_data=True,
-    package_data={"": ["conf.ini"]},
+    package_data={"skysensestreamer": ["conf.ini"]},
 )
