@@ -13,18 +13,17 @@ from skysensestreamer.parser import keep_planes_updated, parse_gps_coord
 from threading import Thread, Event
 from configparser import ConfigParser
 
-CONFIG_FILE_PATH = "skysensestreamer/conf.ini"
-FLIGHT_DATA_FILE_PATH = "/tmp/flights.js"
-GPS_POS_FILE_PATH = "/var/tmp/position.txt"
+CONFIG_FILE_PATH = "skysensestreamer/config"
 
 config_parser = ConfigParser()
 config_parser.read(CONFIG_FILE_PATH)
+file_locations = config_parser["file_locations"]
 camera_settings = config_parser["camera_settings"]
 stream_settings = config_parser["stream_settings"]
 blacklist = config_parser["blacklist"]
 
 camera = Camera(
-    gps_position=parse_gps_coord(GPS_POS_FILE_PATH),
+    gps_position=parse_gps_coord(file_locations["gps_pos"]),
     direction=camera_settings.getfloat("direction"),
     view_upper_bound=camera_settings.getfloat("view_upper_bound"),
     view_lower_bound=camera_settings.getfloat("view_lower_bound"),
@@ -37,7 +36,8 @@ camera = Camera(
 
 stop_flag = Event()
 parser_thread = Thread(
-    target=keep_planes_updated, args=(camera, FLIGHT_DATA_FILE_PATH, 2.0, stop_flag)
+    target=keep_planes_updated,
+    args=(camera, file_locations["flight_data"], 2.0, stop_flag),
 )
 
 parser_thread.start()
