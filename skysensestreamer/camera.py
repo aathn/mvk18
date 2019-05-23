@@ -33,6 +33,8 @@ class Camera:
         view_left_bound: Angle,
         view_right_bound: Angle,
         view_distance: int,
+        blacklisted_flights: List[str] = [],
+        blacklisted_ids: List[str] = [],
     ):
         """
         :param gps_position: The position of the Skysense and camera
@@ -45,6 +47,8 @@ class Camera:
                                 still see the sky (zero is north and increasing values represent clockwise rotation)
         :param view_right_bound: The compass angle in radians which is the rightmost point the camera can point to and
                                  still see the sky (zero is north and increasing values represent clockwise rotation)
+        :param view_distance: The camera's view distance in feet
+        :param blacklisted_flights: Flight numbers containing any string in this list will be ignored when searching for planes to stream
 
         """
         self.gps_position = gps_position
@@ -65,6 +69,8 @@ class Camera:
         self.airplanes = []
         """A list of airplanes in the vicinity of the Skysense that is updated by the parser thread started in 
         __main__.py"""
+        self.blacklisted_flights = blacklisted_flights
+        self.blacklisted_ids = blacklisted_ids
 
     @property
     def airplanes(self) -> List["Airplane"]:
@@ -146,6 +152,16 @@ class Camera:
         :returns: True if plane is in view of the camera
 
         """
+        # Check if flight is blacklisted
+        for flight_nr in self.blacklisted_flights:
+            if flight_nr in plane.flight_nr:
+                return False
+
+        # Check if plane is blacklisted
+        for id_num in self.blacklisted_ids:
+            if id_num == plane.id:
+                return False
+
         plane_local = self.gps_position.to_local(plane.position)
         return self.view.contains(plane_local)
 
@@ -245,8 +261,9 @@ class View:
 class Airplane:
     max_timestamped_positions = 3
 
-    def __init__(self, plane_id=None, init_time: Number = time()):
+    def __init__(self, plane_id=None, init_time: Number = time(), flight_nr: str = ""):
         self.id = plane_id
+        self.flight_nr = flight_nr
         self.init_time = init_time
         """Time of initialization for the Airplane object"""
         self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)
