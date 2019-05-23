@@ -24,7 +24,7 @@ app.set("view engine", "handlebars");
 
 /* Render front page */
 app.get("/", function(req, res) {
-  res.render("frontpage", { streams: streamHandler.allStreams, ip: req.connection.remoteAddress.substr(7) });
+  res.render("frontpage", { streams: streamHandler.allStreams, ip: req.connection.localAddress.substr(7) });
 });
 
 /* Get a JSON object of all streams */
