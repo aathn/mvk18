@@ -6,7 +6,7 @@ var hbs = require("express-handlebars");
 const express = require("express");
 const os = require("os");
 
-const WEB_SERVER_PORT = 8000;
+const WEB_SERVER_PORT = 80;
 const WEB_SERVER_HOST = os.hostname();
 
 /* Create the stream handler object, keeping track of all streams */

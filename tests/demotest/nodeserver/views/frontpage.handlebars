@@ -7,7 +7,7 @@
   <canvas id="video-canvas-{{this.name}}"></canvas>
   <script type="text/javascript">
     var canvas = document.getElementById('video-canvas-{{this.name}}');
-    var url = 'ws://localhost:{{this.port}}/';
+    var url = 'ws://{{../ip}}:{{this.port}}/';
     var player = new JSMpeg.Player(url, {canvas: canvas});
   </script>
 
