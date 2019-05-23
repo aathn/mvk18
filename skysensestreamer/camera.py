@@ -34,6 +34,7 @@ class Camera:
         view_right_bound: Angle,
         view_distance: int,
         blacklisted_flights: List[str] = [],
+        blacklisted_ids: List[str] = [],
     ):
         """
         :param gps_position: The position of the Skysense and camera
@@ -69,6 +70,7 @@ class Camera:
         """A list of airplanes in the vicinity of the Skysense that is updated by the parser thread started in 
         __main__.py"""
         self.blacklisted_flights = blacklisted_flights
+        self.blacklisted_ids = blacklisted_ids
 
     @property
     def airplanes(self) -> List["Airplane"]:
@@ -142,9 +144,14 @@ class Camera:
         :returns: True if plane is in view of the camera
 
         """
-        # Check if plane is blacklisted
+        # Check if flight is blacklisted
         for flight_nr in self.blacklisted_flights:
             if flight_nr in plane.flight_nr:
+                return False
+
+        # Check if plane is blacklisted
+        for id_num in self.blacklisted_ids:
+            if id_num == plane.id:
                 return False
 
         plane_local = self.gps_position.to_local(plane.position)

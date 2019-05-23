@@ -32,6 +32,7 @@ camera = Camera(
     view_right_bound=camera_settings.getfloat("view_right_bound"),
     view_distance=camera_settings.getint("view_distance"),
     blacklisted_flights=blacklist["blacklisted_flight_numbers"].split(","),
+    blacklisted_ids=blacklist["blacklisted_ids"].split(","),
 )
 
 stop_flag = Event()
