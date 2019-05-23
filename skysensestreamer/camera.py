@@ -34,6 +34,8 @@ class Camera:
         view_right_bound: Angle,
         view_distance: int,
         serial_port: str = "/dev/ttyACM0",
+        blacklisted_flights: List[str] = [],
+        blacklisted_ids: List[str] = [],
     ):
         """
         :param gps_position: The position of the Skysense and camera
@@ -47,6 +49,8 @@ class Camera:
         :param view_right_bound: The compass angle in radians which is the rightmost point the camera can point to and
                                  still see the sky (zero is north and increasing values represent clockwise rotation)
         :param serial_port: The name of the serial port of the pan/tilt controller.
+        :param view_distance: The camera's view distance in feet
+        :param blacklisted_flights: Flight numbers containing any string in this list will be ignored when searching for planes to stream
 
         """
         self.gps_position = gps_position
@@ -67,6 +71,8 @@ class Camera:
         self.airplanes = []
         """A list of airplanes in the vicinity of the Skysense that is updated by the parser thread started in 
         __main__.py"""
+        self.blacklisted_flights = blacklisted_flights
+        self.blacklisted_ids = blacklisted_ids
 
     @property
     def airplanes(self) -> List["Airplane"]:
@@ -89,13 +95,21 @@ class Camera:
         tilt = pi / 2 - lc.altitude_angle
         return pan, tilt
 
-    def start(self):
-        """Start tracking, filming and streaming airplanes."""
-        stream_handler = FFmpegHandler()
+    def start(self, input_device, format, resolution, bitrate, base_url):
+        """Start tracking, filming and streaming airplanes.
+
+        :param input_device: The USB-camera from which to stream. Default '0'
+        :param format: The input format, may differ on different operating systems. Default avfoundation.
+        :param resolution: The resolution of the streamed video. Default '640x480'
+        :param bitrate: The bitrate of the streamed video. Default '1000k'
+        :param base_url: The url to output the streams to.
+
+        """
+        stream_handler = FFmpegHandler(input_device, format, resolution, bitrate)
         while True:
             self._search_for_airplane()
             stream_handler.start_stream(
-                "http://192.168.1.28:8000/livestream/flygplanet"  # TODO: This should be in the conf.ini file
+                "{}/{}".format(base_url, self.tracked_airplane.id)
             )
             self._follow_tracked_plane()
             stream_handler.stop_stream()
@@ -140,6 +154,16 @@ class Camera:
         :returns: True if plane is in view of the camera
 
         """
+        # Check if flight is blacklisted
+        for flight_nr in self.blacklisted_flights:
+            if flight_nr in plane.flight_nr:
+                return False
+
+        # Check if plane is blacklisted
+        for id_num in self.blacklisted_ids:
+            if id_num == plane.id:
+                return False
+
         plane_local = self.gps_position.to_local(plane.position)
         return self.view.contains(plane_local)
 
@@ -152,26 +176,18 @@ class FFmpegHandler:
 
     """
 
-    def __init__(self):
+    def __init__(self, input_device, format, resolution, bitrate):
         self.process = None
         self.streaming = False
+        self.input_device = input_device
+        self.format = format
+        self.resolution = resolution
+        self.bitrate = bitrate
 
-    def start_stream(
-        self,
-        url: str,
-        input_device: str = "/dev/video0",
-        format: str = "v4l2",
-        resolution: str = "640x480",
-        bitrate: str = "1000k",
-    ):
-        """
-        Start a process that streams video from USB web cam to url specified.
+    def start_stream(self, url: str):
+        """Start a process that streams video from USB web cam to url specified.
 
         :param url: The url or output where streaming data is sent to.
-        :param input_device: The USB-camera from which to stream. Default "0"
-        :param format: The input format, may differ on different operating systems. Default avfoundation.
-        :param resolution: The resolution of the streamed video. Default "640x480"
-        :param bitrate: The bitrate of the streamed video. Default "1000k"
 
         """
 
@@ -180,16 +196,16 @@ class FFmpegHandler:
 
         cmd = (
             "ffmpeg -f "
-            + format
+            + self.format
             + " -framerate 30 -video_size "
-            + resolution
+            + self.resolution
             + " -pix_fmt uyvy422"
             + " -i "
-            + input_device
+            + self.input_device
             + " -f mpegts -codec:v mpeg1video -s "
-            + resolution
+            + self.resolution
             + " -b:v "
-            + bitrate
+            + self.bitrate
             + " -bf 0 "
             + url
         )
@@ -247,8 +263,9 @@ class View:
 class Airplane:
     max_timestamped_positions = 3
 
-    def __init__(self, plane_id=None, init_time: Number = time()):
+    def __init__(self, plane_id=None, init_time: Number = time(), flight_nr: str = ""):
         self.id = plane_id
+        self.flight_nr = flight_nr
         self.init_time = init_time
         """Time of initialization for the Airplane object"""
         self.extrapolation = lambda x: GPSCoord(0.0, 0.0, 0.0)

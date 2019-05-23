@@ -18,6 +18,7 @@ class DataIndices(IntEnum):
     LONG = 2
     ALT = 4
     TIME = 10
+    FLIGHT_NR = 16
 
 
 def parse(source_file: str) -> Dict:
@@ -81,7 +82,9 @@ def update_airplanes(camera: Camera, source_file: str):
             new_planes.append(plane)
 
     for plane_id in new_data:
-        new_plane = Airplane(plane_id)
+        new_plane = Airplane(
+            plane_id, flight_nr=new_data[plane_id][DataIndices.FLIGHT_NR]
+        )
         append_pos_to_plane(new_data[plane_id], new_plane)
         new_planes.append(new_plane)
 
