@@ -12,13 +12,16 @@ from skysensestreamer.camera import Camera
 from skysensestreamer.parser import keep_planes_updated, parse_gps_coord
 from threading import Thread, Event
 from configparser import ConfigParser
+import pkg_resources
 
-CONFIG_FILE_PATH = "skysensestreamer/conf.ini"
+CONFIG_FILE_NAME = "conf.ini"
 FLIGHT_DATA_FILE_PATH = "/tmp/flights.js"
 GPS_POS_FILE_PATH = "/var/tmp/position.txt"
 
 config_parser = ConfigParser()
-config_parser.read(CONFIG_FILE_PATH)
+config_parser.read_string(
+    pkg_resources.resource_string(__name__, CONFIG_FILE_NAME).decode("utf-8")
+)
 camera_settings = config_parser["camera_settings"]
 stream_settings = config_parser["stream_settings"]
 blacklist = config_parser["blacklist"]
