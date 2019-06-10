@@ -4,20 +4,22 @@ import atexit
 
 longitude_limit = 0.04  # The limit for how far to the left/right the airplane is
 
-latitude = 0.01
+latitude = 0.007
 longitude = -longitude_limit
 longitude_speed = 0.01
 altitude = 1000
 
-server = Popen(["npm", "start"])
+server = Popen(["sudo", "npm", "start"], cwd="nodeserver")
+sleep(10)
 streamer = Popen(
     [
         "sudo",
         "-E",
         "python3",
-        "../../skysensestreamer",
-        "tests/demotest/flights.js",
-        "tests/demotest/position.txt",
+        "-m",
+        "skysensestreamer",
+        "/home/kth/src/skysensestreamer/tests/demotest/flights.js",
+        "/home/kth/src/skysensestreamer/tests/demotest/position.txt",
     ]
 )
 
